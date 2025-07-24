@@ -1,0 +1,165 @@
+### Query Transformation Reference Examples
+1. Example 1
+# Natural Language Query
+- `Show the names and levels of membership for those visitors whose membership is higher than 4, and order the list by age, starting with the oldest.`
+# MongoDB Collections Used in MongoDB Query
+   - visitor
+# MongoDB Fields Used in MongoDB Query
+   - Level_of_membership, Name
+# Renamed Fields Used in MongoDB Query
+   - _id
+# Fields shown in Execution Document
+   - Level_of_membership, Name, _id
+# MongoDB Query
+```javascript
+db.visitor.find({
+  "Level_of_membership": { $gt: 4 }
+}, { "Name": 1, "Level_of_membership": 1, "_id": 0 }).sort({ "Age": -1 });
+```
+
+2. Example 2
+# Natural Language Query
+- `List each grade along with the corresponding number of classrooms and the total student enrollment for that grade.`
+# MongoDB Collections Used in MongoDB Query
+   - list
+# MongoDB Fields Used in MongoDB Query
+   - Classroom, Grade
+# Renamed Fields Used in MongoDB Query
+   - _id, count, count_DISTINCT_classroom
+# Fields shown in Execution Document
+   - Grade, _id, count, count_DISTINCT_classroom
+# MongoDB Query
+```javascript
+db.list.aggregate([
+  {
+    $group: {
+      _id: "$Grade",
+      count_DISTINCT_classroom: { $addToSet: "$Classroom" },
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Grade: "$_id",
+      count_DISTINCT_classroom: { $size: "$count_DISTINCT_classroom" },
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+```
+
+###  MongoDB collections and their fields
+Error: Schema file for database 'ship_1' not found at d:/Machine_Learning/Deep_Learning/Project/MongoDB/mongodb_schema/ship_1.json
+
+### Natural Language Query
+   - `Provide the total number of captains grouped by their rank.`
+
+### Original MongoDB Query
+```javascript
+db.Ship.aggregate([
+  {
+    $unwind: "$captain"
+  },
+  {
+    $group: {
+      _id: "$captain.Rank",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Rank: "$_id",
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+```
+
+### MongoDB Collections may be Used in MongoDB Query
+   - Ship
+### MongoDB Fields may be Used in MongoDB Query
+   - captain.Rank
+### Renamed Fields may be Used in MongoDB Query
+   - Rank, _id, captain, count
+### Fields may be shown in Execution Document
+   - Rank, _id, count
+
+#### Given MongoDB collections and their fields, a natural language query, query transformation reference examples, and the original MongoDB query, please perform the following actions:
+1. Analyze whether the original MongoDB query needs adjustment based on the natural language query and the MongoDB collections and their fields:
+   - If adjustments are needed, analyze the natural language query based on the MongoDB collections and their fields (only adjust if necessary);
+   - If no adjustments are needed, retain the original MongoDB query and proceed directly to step three for output;
+2. Adjust the original MongoDB query based on the query transformation reference examples and the analysis from step one, then proceed to step three for output;
+3. Output the final MongoDB query in the following format:
+```javascript
+db.collection.aggregate([pipeline]); / db.collection.find({[filter]}, {[projection]});
+```
+
+A: Let’s think step by step! 
+
+To determine if the original MongoDB query needs adjustment, let's analyze the natural language query and the provided MongoDB query:
+
+### Natural Language Query
+- `Provide the total number of captains grouped by their rank.`
+
+### Original MongoDB Query
+```javascript
+db.Ship.aggregate([
+  {
+    $unwind: "$captain"
+  },
+  {
+    $group: {
+      _id: "$captain.Rank",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Rank: "$_id",
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+```
+
+### Analysis
+1. **Natural Language Query Requirements:**
+   - The query asks for the total number of captains, grouped by their rank.
+   - This implies that we need to count the number of captains for each rank.
+
+2. **Original MongoDB Query:**
+   - The query uses `$unwind` on the `captain` field, which is necessary if `captain` is an array and we want to count each captain individually.
+   - It groups the documents by `captain.Rank` and counts the number of documents in each group, which aligns with the requirement to group by rank and count the captains.
+   - The `$project` stage renames `_id` to `Rank` and includes the count, which matches the expected output format.
+
+3. **Fields and Collections:**
+   - The collection used is `Ship`, and the field `captain.Rank` is correctly referenced.
+   - The query correctly uses the fields and operations needed to fulfill the natural language query.
+
+### Conclusion
+The original MongoDB query correctly implements the requirements of the natural language query. It unwinds the `captain` array, groups by `captain.Rank`, and counts the number of captains per rank. Therefore, no adjustments are needed.
+
+### Final MongoDB Query
+```javascript
+db.Ship.aggregate([
+  {
+    $unwind: "$captain"
+  },
+  {
+    $group: {
+      _id: "$captain.Rank",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Rank: "$_id",
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+```

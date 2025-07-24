@@ -1,0 +1,7 @@
+.env
+_pycache__/
+*.pkl
+*.zip
+*.log
+vector_store/
+SLM_data_cross_domain/

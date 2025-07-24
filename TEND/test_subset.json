@@ -1,0 +1,37 @@
+[
+    {
+        "record_id": 1861,
+        "db_id": "school_bus",
+        "nlq": "Show the school name and driver name for all school buses.",
+        "ref_sql": "SELECT T2.school , T3.name FROM school_bus AS T1 JOIN school AS T2 ON T1.school_id = T2.school_id JOIN driver AS T3 ON T1.driver_id = T3.driver_id",
+        "MQL": "db.school.aggregate([\n  {\n    $lookup: {\n      from: \"driver\",\n      localField: \"School_ID\",\n      foreignField: \"school_bus.School_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $project: {\n      \"School\": 1,\n      \"Name\": \"$Docs1.Name\",\n      \"_id\": 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3537,
+        "db_id": "cinema",
+        "nlq": "Provide the opening year, name, and capacity for each cinema available.",
+        "ref_sql": "SELECT name , openning_year , capacity FROM cinema",
+        "MQL": "db.cinema.find({}, { \"Name\": 1, \"Openning_year\": 1, \"Capacity\": 1, \"_id\": 0 });\n"
+    },
+    {
+        "record_id": 765,
+        "db_id": "pilot_record",
+        "nlq": "What is the nationality that most pilots belong to?",
+        "ref_sql": "SELECT Nationality FROM pilot GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1",
+        "MQL": "db.pilot.aggregate([\n  {\n    $group: {\n      _id: \"$Nationality\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { count: -1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      Nationality: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 210,
+        "db_id": "college_3",
+        "nlq": "What are the first names for students who have an \"a\" in their first name?",
+        "ref_sql": "SELECT DISTINCT Fname FROM STUDENT WHERE Fname LIKE '%a%'",
+        "MQL": "db.Student.find(\n  {\n    Fname: { $regex: \"a\", $options: \"i\" }\n  },\n  {\n    Fname: 1,\n    _id: 0\n  }\n);\n"
+    },
+    {
+        "record_id": 22,
+        "db_id": "hr_1",
+        "nlq": "Retrieve all relevant data about employees with no job history at all.",
+        "ref_sql": "SELECT * FROM employees WHERE employee_id NOT IN (SELECT employee_id FROM job_history)",
+        "MQL": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $lookup: {\n      from: \"departments\",\n      localField: \"employees.EMPLOYEE_ID\",\n      foreignField: \"employees.EMPLOYEE_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      employee: {\n        $cond: [\n          {\n            $eq: [{ $size: \"$employees.job_history\" }, 0]\n          },\n          \"$employees\",\n          {\n            $cond: [\n              {\n                $eq: [{ $size: \"$Docs1.employees.job_history\" }, 0]\n              },\n              \"$Docs1.employees\",\n              false\n            ]\n          }\n        ]\n      }\n    }\n  },\n  {\n    $match: {\n      employee: { $ne: false }\n    }\n  },\n  {\n    $project: {\n      EMPLOYEE_ID: \"$employee.EMPLOYEE_ID\",\n      FIRST_NAME: \"$employee.FIRST_NAME\",\n      LAST_NAME: \"$employee.LAST_NAME\",\n      EMAIL: \"$employee.EMAIL\",\n      PHONE_NUMBER: \"$employee.PHONE_NUMBER\",\n      HIRE_DATE: \"$employee.HIRE_DATE\",\n      JOB_ID: \"$employee.JOB_ID\",\n      SALARY: \"$employee.SALARY\",\n      COMMISSION_PCT: \"$employee.COMMISSION_PCT\",\n      MANAGER_ID: \"$employee.MANAGER_ID\",\n      DEPARTMENT_ID: \"$employee.DEPARTMENT_ID\",\n      _id: 0\n    }\n  }\n]);\n"
+    }
+]

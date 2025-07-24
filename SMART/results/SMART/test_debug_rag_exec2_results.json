@@ -1,0 +1,352 @@
+[
+    {
+        "index": 0,
+        "nlq": "Show the school name and driver name for all school buses.",
+        "db_id": "school_bus",
+        "query": "db.school.aggregate([\n  {\n    $lookup: {\n      from: \"driver\",\n      localField: \"School_ID\",\n      foreignField: \"school_bus.School_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $project: {\n      \"School\": 1,\n      \"Name\": \"$Docs1.Name\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 1,
+        "nlq": "List the names of schools along with the names of their drivers for all school buses.",
+        "db_id": "school_bus",
+        "query": "db.school.aggregate([\n  {\n    $lookup: {\n      from: \"driver\",\n      localField: \"School_ID\",\n      foreignField: \"school_bus.School_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $project: {\n      \"School\": 1,\n      \"Name\": \"$Docs1.Name\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 2,
+        "nlq": "Provide the driver names alongside the names of the schools for each school bus.",
+        "db_id": "school_bus",
+        "query": "db.school.aggregate([\n  {\n    $lookup: {\n      from: \"driver\",\n      localField: \"School_ID\",\n      foreignField: \"school_bus.School_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $project: {\n      \"School\": 1,\n      \"Name\": \"$Docs1.Name\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 3,
+        "nlq": "Display the school name together with the respective driver's name for all the school buses.",
+        "db_id": "school_bus",
+        "query": "db.school.aggregate([\n  {\n    $lookup: {\n      from: \"driver\",\n      localField: \"School_ID\",\n      foreignField: \"school_bus.School_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $project: {\n      \"School\": 1,\n      \"Name\": \"$Docs1.Name\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 4,
+        "nlq": "Give me the names of schools and their associated drivers for all school bus routes.",
+        "db_id": "school_bus",
+        "query": "db.school.aggregate([\n  {\n    $lookup: {\n      from: \"driver\",\n      localField: \"School_ID\",\n      foreignField: \"school_bus.School_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $project: {\n      \"School\": 1,\n      \"Name\": \"$Docs1.Name\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 5,
+        "nlq": "Show name, opening year, and capacity for each cinema.",
+        "db_id": "cinema",
+        "query": "db.cinema.find({}, { \"Name\": 1, \"Opening_year\": 1, \"Capacity\": 1, \"_id\": 0 });",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 6,
+        "nlq": "List the names, opening years, and capacities of all cinemas.",
+        "db_id": "cinema",
+        "query": "db.cinema.find({}, { \"Name\": 1, \"Openning_year\": 1, \"Capacity\": 1, \"_id\": 0 });",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 7,
+        "nlq": "Provide the opening year, name, and capacity for each cinema available.",
+        "db_id": "cinema",
+        "query": "db.cinema.find({}, { \"Name\": 1, \"Openning_year\": 1, \"Capacity\": 1, \"_id\": 0 });",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 8,
+        "nlq": "Can you display the capacity, opening year, and names of the cinemas?",
+        "db_id": "cinema",
+        "query": "db.cinema.find({}, { \"Name\": 1, \"Opening_year\": 1, \"Capacity\": 1, \"_id\": 0 });",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 9,
+        "nlq": "Retrieve the names, capacities, and their respective opening years for every cinema in the database.",
+        "db_id": "cinema",
+        "query": "db.cinema.find({}, { \"Name\": 1, \"Opening_year\": 1, \"Capacity\": 1, \"_id\": 0 });",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 10,
+        "nlq": "Show the most common nationality of pilots.",
+        "db_id": "pilot_record",
+        "query": "db.pilot.aggregate([\n  {\n    $group: {\n      _id: \"$Nationality\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { count: -1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      Nationality: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 11,
+        "nlq": "What is the nationality that most pilots belong to?",
+        "db_id": "pilot_record",
+        "query": "db.pilot.aggregate([\n  {\n    $group: {\n      _id: \"$Nationality\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { count: -1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      Nationality: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 12,
+        "nlq": "Find the nationality with the largest number of pilots.",
+        "db_id": "pilot_record",
+        "query": "db.pilot.aggregate([\n  {\n    $group: {\n      _id: \"$Nationality\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { count: -1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      Nationality: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 13,
+        "nlq": "Identify the most frequently occurring nationality among pilots.",
+        "db_id": "pilot_record",
+        "query": "db.pilot.aggregate([\n  {\n    $group: {\n      _id: \"$Nationality\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { count: -1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      Nationality: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 14,
+        "nlq": "Which nationality has the highest count of pilots?",
+        "db_id": "pilot_record",
+        "query": "db.pilot.aggregate([\n  {\n    $group: {\n      _id: \"$Nationality\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { count: -1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      Nationality: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 15,
+        "nlq": "Find the first names of students whose first names contain letter \"a\".",
+        "db_id": "college_3",
+        "query": "db.Student.find(\n  {\n    Fname: { $regex: \"a\", $options: \"i\" }\n  },\n  {\n    Fname: 1,\n    _id: 0\n  }\n);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 16,
+        "nlq": "What are the first names for students who have an \"a\" in their first name?",
+        "db_id": "college_3",
+        "query": "db.Student.find(\n  {\n    Fname: { $regex: \"a\", $options: \"i\" }\n  },\n  {\n    Fname: 1,\n    _id: 0\n  }\n);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 17,
+        "nlq": "List the first names of all students that have the letter \"a\" in their first name.",
+        "db_id": "college_3",
+        "query": "db.Student.find({Fname: {$regex: \"a\", $options: \"i\"}}, {Fname: 1, _id: 0});",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 18,
+        "nlq": "Provide the first names of students where the name includes the letter \"a\".",
+        "db_id": "college_3",
+        "query": "db.Student.find(\n  {\n    \"Fname\": { \"$regex\": \"a\", \"$options\": \"i\" }\n  },\n  {\n    \"Fname\": 1,\n    \"_id\": 0\n  }\n);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 19,
+        "nlq": "Retrieve the first names of students whose names feature the letter \"a\".",
+        "db_id": "college_3",
+        "query": "db.Student.find(\n  {\n    \"Fname\": { $regex: \"a\", $options: \"i\" }\n  },\n  {\n    \"Fname\": 1,\n    \"_id\": 0\n  }\n);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 20,
+        "nlq": "display all the information of those employees who did not have any job in the past.",
+        "db_id": "hr_1",
+        "query": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $lookup: {\n      from: \"departments\",\n      localField: \"employees.EMPLOYEE_ID\",\n      foreignField: \"employees.EMPLOYEE_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      \"employee\": {\n        $cond: [\n          {\n            $eq: [{ $size: \"$employees.job_history\" }, 0]\n          },\n          \"$employees\",\n          {\n            $cond: [\n              {\n                $eq: [{ $size: \"$Docs1.employees.job_history\" }, 0]\n              },\n              \"$Docs1.employees\",\n              false\n            ]\n          }\n        ]\n      }\n    }\n  },\n  {\n    $match: {\n      \"employee\": { $ne: false }\n    }\n  },\n  {\n    $project: {\n      \"EMPLOYEE_ID\": \"$employee.EMPLOYEE_ID\",\n      \"FIRST_NAME\": \"$employee.FIRST_NAME\",\n      \"LAST_NAME\": \"$employee.LAST_NAME\",\n      \"EMAIL\": \"$employee.EMAIL\",\n      \"PHONE_NUMBER\": \"$employee.PHONE_NUMBER\",\n      \"HIRE_DATE\": \"$employee.HIRE_DATE\",\n      \"JOB_ID\": \"$employee.JOB_ID\",\n      \"SALARY\": \"$employee.SALARY\",\n      \"COMMISSION_PCT\": \"$employee.COMMISSION_PCT\",\n      \"MANAGER_ID\": \"$employee.MANAGER_ID\",\n      \"DEPARTMENT_ID\": \"$employee.DEPARTMENT_ID\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 21,
+        "nlq": "What is all the information about employees who have never had a job in the past?",
+        "db_id": "hr_1",
+        "query": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $lookup: {\n      from: \"departments\",\n      localField: \"employees.EMPLOYEE_ID\",\n      foreignField: \"employees.EMPLOYEE_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      \"employee\": {\n        $cond: [\n          {\n            $eq: [{ $size: \"$employees.job_history\" }, 0]\n          },\n          \"$employees\",\n          {\n            $cond: [\n              {\n                $eq: [{ $size: \"$Docs1.employees.job_history\" }, 0]\n              },\n              \"$Docs1.employees\",\n              false\n            ]\n          }\n        ]\n      }\n    }\n  },\n  {\n    $match: {\n      \"employee\": { $ne: false }\n    }\n  },\n  {\n    $project: {\n      \"EMPLOYEE_ID\": \"$employee.EMPLOYEE_ID\",\n      \"FIRST_NAME\": \"$employee.FIRST_NAME\",\n      \"LAST_NAME\": \"$employee.LAST_NAME\",\n      \"EMAIL\": \"$employee.EMAIL\",\n      \"PHONE_NUMBER\": \"$employee.PHONE_NUMBER\",\n      \"HIRE_DATE\": \"$employee.HIRE_DATE\",\n      \"JOB_ID\": \"$employee.JOB_ID\",\n      \"SALARY\": \"$employee.SALARY\",\n      \"COMMISSION_PCT\": \"$employee.COMMISSION_PCT\",\n      \"MANAGER_ID\": \"$employee.MANAGER_ID\",\n      \"DEPARTMENT_ID\": \"$employee.DEPARTMENT_ID\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 22,
+        "nlq": "Show me all the details about employees who have never held any position previously.",
+        "db_id": "hr_1",
+        "query": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $lookup: {\n      from: \"departments\",\n      localField: \"employees.EMPLOYEE_ID\",\n      foreignField: \"employees.EMPLOYEE_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      employee: {\n        $cond: [\n          {\n            $eq: [{ $size: \"$employees.job_history\" }, 0]\n          },\n          \"$employees\",\n          {\n            $cond: [\n              {\n                $eq: [{ $size: \"$Docs1.employees.job_history\" }, 0]\n              },\n              \"$Docs1.employees\",\n              false\n            ]\n          }\n        ]\n      }\n    }\n  },\n  {\n    $match: {\n      employee: { $ne: false }\n    }\n  },\n  {\n    $project: {\n      \"EMPLOYEE_ID\": \"$employee.EMPLOYEE_ID\",\n      \"FIRST_NAME\": \"$employee.FIRST_NAME\",\n      \"LAST_NAME\": \"$employee.LAST_NAME\",\n      \"EMAIL\": \"$employee.EMAIL\",\n      \"PHONE_NUMBER\": \"$employee.PHONE_NUMBER\",\n      \"HIRE_DATE\": \"$employee.HIRE_DATE\",\n      \"JOB_ID\": \"$employee.JOB_ID\",\n      \"SALARY\": \"$employee.SALARY\",\n      \"COMMISSION_PCT\": \"$employee.COMMISSION_PCT\",\n      \"MANAGER_ID\": \"$employee.MANAGER_ID\",\n      \"DEPARTMENT_ID\": \"$employee.DEPARTMENT_ID\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 23,
+        "nlq": "Provide the information for those employees who lack any prior job experience.",
+        "db_id": "hr_1",
+        "query": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $match: {\n      \"employees.job_history\": { $size: 0 }\n    }\n  },\n  {\n    $project: {\n      \"EMPLOYEE_ID\": \"$employees.EMPLOYEE_ID\",\n      \"FIRST_NAME\": \"$employees.FIRST_NAME\",\n      \"LAST_NAME\": \"$employees.LAST_NAME\",\n      \"EMAIL\": \"$employees.EMAIL\",\n      \"PHONE_NUMBER\": \"$employees.PHONE_NUMBER\",\n      \"HIRE_DATE\": \"$employees.HIRE_DATE\",\n      \"JOB_ID\": \"$employees.JOB_ID\",\n      \"SALARY\": \"$employees.SALARY\",\n      \"COMMISSION_PCT\": \"$employees.COMMISSION_PCT\",\n      \"MANAGER_ID\": \"$employees.MANAGER_ID\",\n      \"DEPARTMENT_ID\": \"$employees.DEPARTMENT_ID\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 24,
+        "nlq": "Retrieve all relevant data about employees with no job history at all.",
+        "db_id": "hr_1",
+        "query": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $lookup: {\n      from: \"departments\",\n      localField: \"employees.EMPLOYEE_ID\",\n      foreignField: \"employees.EMPLOYEE_ID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      employee: {\n        $cond: [\n          {\n            $eq: [{ $size: \"$employees.job_history\" }, 0]\n          },\n          \"$employees\",\n          {\n            $cond: [\n              {\n                $eq: [{ $size: \"$Docs1.employees.job_history\" }, 0]\n              },\n              \"$Docs1.employees\",\n              false\n            ]\n          }\n        ]\n      }\n    }\n  },\n  {\n    $match: {\n      employee: { $ne: false }\n    }\n  },\n  {\n    $project: {\n      \"EMPLOYEE_ID\": \"$employee.EMPLOYEE_ID\",\n      \"FIRST_NAME\": \"$employee.FIRST_NAME\",\n      \"LAST_NAME\": \"$employee.LAST_NAME\",\n      \"EMAIL\": \"$employee.EMAIL\",\n      \"PHONE_NUMBER\": \"$employee.PHONE_NUMBER\",\n      \"HIRE_DATE\": \"$employee.HIRE_DATE\",\n      \"JOB_ID\": \"$employee.JOB_ID\",\n      \"SALARY\": \"$employee.SALARY\",\n      \"COMMISSION_PCT\": \"$employee.COMMISSION_PCT\",\n      \"MANAGER_ID\": \"$employee.MANAGER_ID\",\n      \"DEPARTMENT_ID\": \"$employee.DEPARTMENT_ID\",\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 25,
+        "nlq": "Find the name of the department that has the fewest members.",
+        "db_id": "college_3",
+        "query": "db.Department.aggregate([\n  {\n    $unwind: \"$Member_of\"\n  },\n  {\n    $group: {\n      _id: \"$DName\",\n      memberCount: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { memberCount: 1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      \"_id\": 0,\n      \"DName\": \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 26,
+        "nlq": "What is the name of the department with the fewest members?",
+        "db_id": "college_3",
+        "query": "db.Department.aggregate([\n  {\n    $unwind: \"$Member_of\"\n  },\n  {\n    $group: {\n      _id: \"$DName\",\n      memberCount: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { memberCount: 1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      DName: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 27,
+        "nlq": "Identify the department that has the smallest number of members.",
+        "db_id": "college_3",
+        "query": "db.Department.aggregate([\n  {\n    $unwind: \"$Member_of\"\n  },\n  {\n    $group: {\n      _id: \"$DName\",\n      memberCount: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { memberCount: 1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      DName: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 28,
+        "nlq": "Which department is associated with the least number of members?",
+        "db_id": "college_3",
+        "query": "db.Department.aggregate([\n  {\n    $unwind: \"$Member_of\"\n  },\n  {\n    $group: {\n      _id: \"$DName\",\n      memberCount: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { memberCount: 1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      DName: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 29,
+        "nlq": "What department has the lowest member count?",
+        "db_id": "college_3",
+        "query": "db.Department.aggregate([\n  {\n    $unwind: \"$Member_of\"\n  },\n  {\n    $group: {\n      _id: \"$DName\",\n      memberCount: { $sum: 1 }\n    }\n  },\n  {\n    $sort: { memberCount: 1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      DName: \"$_id\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 30,
+        "nlq": "Show names for all aircraft with at least two flights.",
+        "db_id": "flight_1",
+        "query": "db.aircraft.aggregate([\n  {\n    $project: {\n      name: 1,\n      count_flight: {\n        $size: \"$flight\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_flight: {\n        $gte: 2\n      }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": []
+    },
+    {
+        "index": 31,
+        "nlq": "What are the names for all aircrafts with at least 2 flights?",
+        "db_id": "flight_1",
+        "query": "db.aircraft.aggregate([\n  {\n    $project: {\n      name: 1,\n      count_flight: {\n        $size: \"$flight\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_flight: {\n        $gte: 2\n      }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": []
+    },
+    {
+        "index": 32,
+        "nlq": "List the names of all aircraft that have two or more flights.",
+        "db_id": "flight_1",
+        "query": "db.aircraft.aggregate([\n  {\n    $project: {\n      name: 1,\n      count_flight: {\n        $size: \"$flight\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_flight: {\n        $gte: 2\n      }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": []
+    },
+    {
+        "index": 33,
+        "nlq": "Provide the names of aircraft with at least a pair of flights.",
+        "db_id": "flight_1",
+        "query": "db.aircraft.aggregate([\n  {\n    $project: {\n      name: 1,\n      count_flight: {\n        $size: \"$flight\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_flight: {\n        $gte: 2\n      }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": []
+    },
+    {
+        "index": 34,
+        "nlq": "Retrieve the names of all aircraft that are associated with a minimum of two flights.",
+        "db_id": "flight_1",
+        "query": "db.aircraft.aggregate([\n  {\n    $project: {\n      name: 1,\n      count_flight: {\n        $size: \"$flight\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_flight: {\n        $gte: 2\n      }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": []
+    },
+    {
+        "index": 35,
+        "nlq": "Give me the average prices of wines that are produced by appelations in Sonoma County.",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $match: {\n      \"County\": \"Sonoma\"\n    }\n  },\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_Price: {\n        $avg: \"$wine.Price\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_Price: 1\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 36,
+        "nlq": "What is the average price of wines produced in appelations in Sonoma County?",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $match: {\n      \"County\": \"Sonoma\"\n    }\n  },\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_Price: {\n        $avg: \"$wine.Price\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_Price: 1\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 37,
+        "nlq": "What is the average cost of wines from appellations situated in Sonoma County?",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $match: {\n      \"County\": \"Sonoma\"\n    }\n  },\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_Price: {\n        $avg: \"$wine.Price\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_Price: 1\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 38,
+        "nlq": "Can you provide the average price for wines that come from Sonoma County appellations?",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $match: {\n      \"County\": \"Sonoma\"\n    }\n  },\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_Price: {\n        $avg: \"$wine.Price\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_Price: 1\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 39,
+        "nlq": "How much do wines from appellations in Sonoma County typically cost on average?",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $match: {\n      \"County\": \"Sonoma\"\n    }\n  },\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_Price: {\n        $avg: \"$wine.Price\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_Price: 1\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 40,
+        "nlq": "List the names of all distinct wines in alphabetical order.",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      names: {\n        $addToSet: \"$wine.Name\"\n      }\n    }\n  },\n  {\n    $unwind: \"$names\"\n  },\n  {\n    $sort: {\n      names: 1\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Name: \"$names\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 41,
+        "nlq": "What are the names of wines, sorted in alphabetical order?",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $project: {\n      Name: \"$wine.Name\",\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Name: 1\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 42,
+        "nlq": "Retrieve all unique wine names listed in order from A to Z.",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      names: {\n        $addToSet: \"$wine.Name\"\n      }\n    }\n  },\n  {\n    $unwind: \"$names\"\n  },\n  {\n    $sort: {\n      names: 1\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Name: \"$names\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 43,
+        "nlq": "Provide an alphabetical list of distinct wine names.",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      names: {\n        $addToSet: \"$wine.Name\"\n      }\n    }\n  },\n  {\n    $unwind: \"$names\"\n  },\n  {\n    $sort: {\n      names: 1\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Name: \"$names\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 44,
+        "nlq": "Show the names of all wines, ensuring they are sorted alphabetically without duplicates.",
+        "db_id": "wine_1",
+        "query": "db.appellations.aggregate([\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $group: {\n      _id: null,\n      names: {\n        $addToSet: \"$wine.Name\"\n      }\n    }\n  },\n  {\n    $unwind: \"$names\"\n  },\n  {\n    $sort: {\n      names: 1\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Name: \"$names\"\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 45,
+        "nlq": "How many captains are in each rank?",
+        "db_id": "ship_1",
+        "query": "db.Ship.aggregate([\n  {\n    $unwind: \"$captain\"\n  },\n  {\n    $group: {\n      _id: \"$captain.Rank\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      \"Rank\": \"$_id\",\n      \"count\": 1,\n      \"_id\": 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 46,
+        "nlq": "Count the number of captains that have each rank.",
+        "db_id": "ship_1",
+        "query": "db.Ship.aggregate([\n  {\n    $unwind: \"$captain\"\n  },\n  {\n    $group: {\n      _id: \"$captain.Rank\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      Rank: \"$_id\",\n      count: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 47,
+        "nlq": "What is the count of captains for each rank classification?",
+        "db_id": "ship_1",
+        "query": "db.Ship.aggregate([\n  {\n    $unwind: \"$captain\"\n  },\n  {\n    $group: {\n      _id: \"$captain.Rank\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      Rank: \"$_id\",\n      count: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 48,
+        "nlq": "How many captains exist for each rank category?",
+        "db_id": "ship_1",
+        "query": "db.Ship.aggregate([\n  {\n    $unwind: \"$captain\"\n  },\n  {\n    $group: {\n      _id: \"$captain.Rank\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      Rank: \"$_id\",\n      count: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    },
+    {
+        "index": 49,
+        "nlq": "Provide the total number of captains grouped by their rank.",
+        "db_id": "ship_1",
+        "query": "db.Ship.aggregate([\n  {\n    $unwind: \"$captain\"\n  },\n  {\n    $group: {\n      _id: \"$captain.Rank\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      Rank: \"$_id\",\n      count: 1,\n      _id: 0\n    }\n  }\n]);",
+        "execution_result": "Error in Executing Query and Transforming result into JSON: `Expecting property name enclosed in double quotes: line 3 column 5 (char 10)`"
+    }
+]

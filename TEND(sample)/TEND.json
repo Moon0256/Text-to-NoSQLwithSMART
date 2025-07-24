@@ -1,0 +1,1042 @@
+[
+    {
+        "record_id": 4274,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What is the smallest weight of the car produced with 8 cylinders on 1974 ?",
+            "What is the minimum weight of the car with 8 cylinders produced in 1974 ?",
+            "What is the lightest weight of an 8-cylinder car made in 1974?",
+            "Determine the minimum weight of cars manufactured with 8 cylinders in the year 1974.",
+            "Find the smallest weight of any car that has 8 cylinders and was produced in 1974."
+        ],
+        "ref_sql": "select min(weight) from cars_data where cylinders = 8 and year = 1974",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.cars_data.Cylinders\": 8,\n      \"countries.car_makers.model_list.car_names.cars_data.Year\": 1974\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      min_weight: {\n        $min: \"$countries.car_makers.model_list.car_names.cars_data.Weight\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      min_weight: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3528,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the name, latitude, and city of the station with the lowest latitude?",
+            "What is the name, latitude, and city of the station that is located the furthest South?",
+            "Can you provide the name, latitude, and city of the station situated at the lowest latitude?",
+            "What is the name, latitude, and city of the station positioned the furthest to the south?",
+            "Retrieve the name, latitude, and city for the station that has the southernmost latitude."
+        ],
+        "ref_sql": "SELECT name , lat , city FROM station ORDER BY lat LIMIT 1",
+        "MQL": "db.station.aggregate([\n  {\n    $sort: { \"lat\": 1 }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      name: 1,\n      lat: 1,\n      city: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2174,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the average bike availability in stations that are not located in Palo Alto?",
+            "What is the average bike availablility for stations not in Palo Alto?",
+            "What is the average number of bikes available at stations outside of Palo Alto?",
+            "Can you provide the average bike availability for stations that are not based in Palo Alto?",
+            "How many bikes, on average, are available in bike stations that do not include Palo Alto?"
+        ],
+        "ref_sql": "SELECT avg(bikes_available) FROM status WHERE station_id NOT IN (SELECT id FROM station WHERE city = \"Palo Alto\")",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      city: { $ne: \"Palo Alto\" }\n    }\n  },\n  {\n    $unwind: \"$status\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_bikes_available: { $avg: \"$status.bikes_available\" }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_bikes_available: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3028,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the date, mean temperature and mean humidity for the top 3 days with the largest max gust speeds?",
+            "What is the date, average temperature and mean humidity for the days with the 3 largest maximum gust speeds?",
+            "Can you provide the date, average temperature, and mean humidity for the three days with the highest maximum gust speeds?",
+            "What are the date, mean temperature, and humidity levels for the three days that experienced the strongest gust winds?",
+            "Please list the date, average temperature, and mean humidity for the top three days characterized by the highest gust speed readings."
+        ],
+        "ref_sql": "SELECT date , mean_temperature_f , mean_humidity FROM weather ORDER BY max_gust_speed_mph DESC LIMIT 3",
+        "MQL": "db.weather.aggregate([\n  {\n    $sort: {\n      max_gust_speed_mph: -1\n    }\n  },\n  {\n    $limit: 3\n  },\n  {\n    $project: {\n      date: 1,\n      mean_temperature_f: 1,\n      mean_humidity: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 4266,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many car models are produced by each maker ? Only list the count and the maker full name .",
+            "What is the total number of car models for each car maker? Please provide just the count along with the maker's full name.",
+            "Can you tell me how many models each car manufacturer has produced? I only need the count and the full name of the manufacturer.",
+            "Give me the count of car models produced by every car maker, including only the maker's full name in the results.",
+            "How many different car models does each car maker create? Only show me the count and the full manufacturer name."
+        ],
+        "ref_sql": "select count(*) , t2.fullname from model_list as t1 join car_makers as t2 on t1.maker = t2.id group by t2.id;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.FullName\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      FullName: \"$_id\",\n      count: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 247,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the first name of students who have cat or dog pet.",
+            "What are the first names of every student who has a cat or dog as a pet?",
+            "List the first names of students who own cats or dogs.",
+            "Provide the first names of all students that have a cat or a dog as their pet.",
+            "What are the first names of students with either a cat or a dog?"
+        ],
+        "ref_sql": "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat' OR T3.pettype = 'dog'",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.PetType\": {\n        $in: [\"cat\", \"dog\"]\n      }\n    }\n  },\n  {\n    $project: {\n      Fname: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3304,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the ids of stations that are located in San Francisco and have average bike availability above 10.",
+            "What are the ids of the stations in San Francisco that normally have more than 10 bikes available?",
+            "List the station IDs for those stations in San Francisco that typically have over 10 bikes available.",
+            "What station IDs correspond to locations in San Francisco with an average bike count exceeding 10?",
+            "Identify the IDs of San Francisco bike stations that often maintain more than 10 bikes for availability."
+        ],
+        "ref_sql": "SELECT id FROM station WHERE city = \"San Francisco\" INTERSECT SELECT station_id FROM status GROUP BY station_id HAVING avg(bikes_available) > 10",
+        "MQL": "db.station.aggregate([\n  {\n    $match: { city: \"San Francisco\" }\n  },\n  {\n    $unwind: \"$status\"\n  },\n  {\n    $group: {\n      _id: \"$id\",\n      avg_bikes_available: { $avg: \"$status.bikes_available\" }\n    }\n  },\n  {\n    $match: { avg_bikes_available: { $gt: 10 } }\n  },\n  {\n    $project: {\n      id: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2468,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many continents are there?",
+            "What is the number of continents?",
+            "What is the total count of continents recorded?",
+            "Please tell me the number of continents.",
+            "How many continents exist in the database?"
+        ],
+        "ref_sql": "SELECT count(*) FROM CONTINENTS;",
+        "MQL": "db.continents.aggregate([\n  {\n    $group: {\n      _id: null,\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      count: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3768,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the type and weight of the youngest pet.",
+            "What type of pet is the youngest animal, and how much does it weigh?",
+            "What is the type and weight of the pet that is the youngest?",
+            "Please provide the breed and weight of the youngest animal in the collection.",
+            "Identify the youngest pet along with its type and how much it weighs."
+        ],
+        "ref_sql": "SELECT pettype , weight FROM pets ORDER BY pet_age LIMIT 1",
+        "MQL": "db.Pets.aggregate([\n  {\n    $sort: {\n      pet_age: 1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      PetType: 1,\n      weight: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1329,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the last name of the student who has a cat that is age 3.",
+            "What is the last name of the student who has a cat that is 3 years old?",
+            "What is the surname of the student with a 3-year-old cat?",
+            "Identify the last name of the student who owns a cat aged 3.",
+            "Give me the last name of the student that has a cat which is 3 years in age."
+        ],
+        "ref_sql": "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pet_age = 3 AND T3.pettype = 'cat'",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.PetType\": \"cat\",\n      \"Docs1.pet_age\": 3\n    }\n  },\n  {\n    $project: {\n      LName: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1296,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What is the horsepower of the car with the largest accelerate?",
+            "What is the horsepower of the car with the greatest accelerate?",
+            "What is the horsepower of the fastest-accelerating car?",
+            "How much horsepower does the car with the highest acceleration have?",
+            "Can you tell me the horsepower of the car that accelerates the quickest?"
+        ],
+        "ref_sql": "SELECT T1.horsepower FROM CARS_DATA AS T1 ORDER BY T1.accelerate DESC LIMIT 1;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $sort: {\n      \"countries.car_makers.model_list.car_names.cars_data.Accelerate\": -1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      Horsepower: \"$countries.car_makers.model_list.car_names.cars_data.Horsepower\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2731,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the number of pets whose weight is heavier than 10.",
+            "How many pets have a greater weight than 10?",
+            "Count how many pets weigh more than 10 units.",
+            "What is the total number of pets that have a weight exceeding 10?",
+            "How many pets have a weight that is greater than 10?"
+        ],
+        "ref_sql": "SELECT count(*) FROM pets WHERE weight > 10",
+        "MQL": "db.Pets.aggregate([\n  {\n    $match: {\n      weight: { $gt: 10 }\n    }\n  },\n  {\n    $count: \"count\"\n  }\n]);\n"
+    },
+    {
+        "record_id": 4271,
+        "db_id": "car_1",
+        "nl_queries": [
+            "In which years cars were produced weighing no less than 3000 and no more than 4000 ?",
+            "What are the different years in which there were cars produced that weighed less than 4000 and also cars that weighted more than 3000 ?",
+            "Which years saw the production of cars with weights ranging from 3000 to 4000?",
+            "What years had cars manufactured that weighed between 3000 and 4000?",
+            "In which years were vehicles produced that weighed no less than 3000 and no more than 4000?"
+        ],
+        "ref_sql": "select distinct year from cars_data where weight between 3000 and 4000;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.cars_data.Weight\": {\n        $gte: 3000,\n        $lte: 4000\n      }\n    }\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.model_list.car_names.cars_data.Year\"\n    }\n  },\n  {\n    $project: {\n      Year: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 119,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "How many days had both mean humidity above 50 and mean visibility above 8?",
+            "What is the number of days that had an average humity above 50 and an average visibility above 8?",
+            "How many days experienced a mean humidity higher than 50 and mean visibility greater than 8 miles?",
+            "What is the total count of days with average humidity exceeding 50 and average visibility over 8 miles?",
+            "Count the number of days that recorded mean humidity above 50 and mean visibility above 8 miles."
+        ],
+        "ref_sql": "SELECT COUNT(*) FROM weather WHERE mean_humidity > 50 AND mean_visibility_miles > 8",
+        "MQL": "db.weather.aggregate([\n  {\n    $match: {\n      mean_humidity: { $gt: 50 },\n      mean_visibility_miles: { $gt: 8 }\n    }\n  },\n  {\n    $count: \"num_days\"\n  }\n])"
+    },
+    {
+        "record_id": 2464,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many car models were produced by the maker with full name American Motor Company?",
+            "What is the number of car models created by the car maker American Motor Company?",
+            "What is the total number of car models manufactured by the American Motor Company?",
+            "How many distinct car models does American Motor Company produce?",
+            "Can you provide the count of car models available from the maker known as American Motor Company?"
+        ],
+        "ref_sql": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker WHERE T1.FullName = 'American Motor Company';",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.FullName\": \"American Motor Company\"\n    }\n  },\n  {\n    $project: {\n      count: {\n        $size: \"$countries.car_makers.model_list\"\n      },\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3684,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the names of stations that have latitude lower than 37.5?",
+            "What are the names of all stations with a latitude smaller than 37.5?",
+            "List the names of stations located at latitudes below 37.5.",
+            "Show me the names of all stations where the latitude is beneath 37.5.",
+            "What are the names of stations with latitudes that are less than 37.5 degrees?"
+        ],
+        "ref_sql": "SELECT name FROM station WHERE lat < 37.5",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      lat: { $lt: 37.5 }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 254,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Find the name of the makers that produced some cars in the year of 1970?",
+            "What is the name of the different car makers who produced a car in 1970?",
+            "List the manufacturers that made cars in the year 1970.",
+            "Can you provide the names of car makers who produced vehicles during 1970?",
+            "Identify the car manufacturers that were active in producing models in the year 1970."
+        ],
+        "ref_sql": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker JOIN CAR_NAMES AS T3 ON T2.model = T3.model JOIN CARS_DATA AS T4 ON T3.MakeId = T4.id WHERE T4.year = '1970';",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.cars_data.Year\": 1970\n    }\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.Maker\"\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Maker: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1313,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "For each trip, return its ending station's installation date.",
+            "What is the installation date for each ending station on all the trips?",
+            "Can you provide the installation date for the end station associated with each trip?",
+            "Show the installation dates of the concluding stations for all trips.",
+            "For every trip, what is the installation date of its corresponding end station?"
+        ],
+        "ref_sql": "SELECT T1.id , T2.installation_date FROM trip AS T1 JOIN station AS T2 ON T1.end_station_id = T2.id",
+        "MQL": "db.trip.aggregate([\n  {\n    $lookup: {\n      from: \"station\",\n      localField: \"end_station_id\",\n      foreignField: \"id\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      id: 1,\n      installation_date: {\n        $arrayElemAt: [\"$Docs1.installation_date\", 0]\n      },\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2469,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many countries are listed?",
+            "How many countries exist?",
+            "What is the total number of countries recorded?",
+            "Can you tell me how many countries are available?",
+            "How many nations are presented in the list?"
+        ],
+        "ref_sql": "SELECT count(*) FROM COUNTRIES;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $group: {\n      _id: null,\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      count: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1762,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What is the maximum horsepower and the make of the car models with 3 cylinders?",
+            "What is the largest amount of horsepower for the models with 3 cylinders and what make is it?",
+            "Can you tell me the highest horsepower and the manufacturer of cars that have 3 cylinders?",
+            "What is the highest horsepower achieved by car models with 3 cylinders, and which make produces that model?",
+            "Identify the car make and maximum horsepower for models equipped with 3 cylinders."
+        ],
+        "ref_sql": "SELECT T2.horsepower , T1.Make FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.cylinders = 3 ORDER BY T2.horsepower DESC LIMIT 1;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.cars_data.Cylinders\": 3\n    }\n  },\n  {\n    $project: {\n      Horsepower: \"$countries.car_makers.model_list.car_names.cars_data.Horsepower\",\n      Make: \"$countries.car_makers.model_list.car_names.Make\"\n    }\n  },\n  {\n    $sort: {\n      Horsepower: -1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      Horsepower: 1,\n      Make: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 111,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many cars has over 6 cylinders?",
+            "What is the number of carsw ith over 6 cylinders?",
+            "What is the total count of cars that have more than 6 cylinders?",
+            "How many vehicles are equipped with over 6 cylinders?",
+            "Count the number of cars featuring greater than 6 cylinders."
+        ],
+        "ref_sql": "SELECT COUNT(*) FROM CARS_DATA WHERE Cylinders > 6;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.cars_data.Cylinders\": {\n        $gt: 6\n      }\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      COUNT: \"$count\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 4251,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the weight of the youngest dog.",
+            "How much does the youngest dog weigh?",
+            "What is the weight of the youngest dog in the collection?",
+            "Please provide the weight of the dog that is the youngest.",
+            "Can you tell me the weight of the most youthful dog?"
+        ],
+        "ref_sql": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1",
+        "MQL": "db.Pets.aggregate([\n  {\n    $match: {\n      PetType: \"dog\"\n    }\n  },\n  {\n    $sort: {\n      pet_age: 1\n    }\n  },\n  {\n    $project: {\n      weight: 1,\n      _id: 0\n    }\n  },\n  {\n    $limit: 1\n  }\n]);\n"
+    },
+    {
+        "record_id": 3683,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the names of stations that are located in Palo Alto city but have never been the ending point of trips more than 100 times?",
+            "What are the names of the stations that are located in Palo Alto but have never been the ending point of the trips",
+            "Can you list the stations in Palo Alto that have served as trip endpoints 100 times or fewer?",
+            "What stations in the city of Palo Alto have had at most 100 trips ending at them?",
+            "Identify the names of stations located in Palo Alto that have been the destination for no more than 100 trips."
+        ],
+        "ref_sql": "SELECT name FROM station WHERE city = \"Palo Alto\" EXCEPT SELECT end_station_name FROM trip GROUP BY end_station_name HAVING count(*) > 100",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      city: \"Palo Alto\"\n    }\n  },\n  {\n    $lookup: {\n      from: \"trips\",\n      localField: \"id\",\n      foreignField: \"end_station_id\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $group: {\n      _id: \"$name\",\n      sum_Docs1: { $sum: { $size: \"$Docs1\" } }\n    }\n  },\n  {\n    $match: {\n      sum_Docs1: { $lte: 100 }\n    }\n  },\n  {\n    $project: {\n      name: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1004,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many models does each car maker produce? List maker full name, id and the number.",
+            "What is the full name of each car maker, along with its id and how many models it produces?",
+            "Can you provide the count of models produced by each car manufacturer along with their full name and ID?",
+            "For each car maker, how many models do they manufacture? Please include their full name and ID in the results.",
+            "List the full name and ID of every car maker together with the total number of models they produce."
+        ],
+        "ref_sql": "SELECT T1.FullName , T1.Id , count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $group: {\n      _id: {\n        Id: \"$countries.car_makers.Id\",\n        FullName: \"$countries.car_makers.FullName\"\n      },\n      modelCount: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      Id: \"$_id.Id\",\n      FullName: \"$_id.FullName\",\n      count: \"$modelCount\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3952,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the id of students who do not have a cat pet.",
+            "What are the ids of the students who do not own cats as pets?",
+            "List the student IDs of those who do not have cats as pets.",
+            "Identify the ids of students without any cat pets.",
+            "Provide the IDs of students who do not own a pet of type cat."
+        ],
+        "ref_sql": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat'",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: {\n      path: \"$Docs1\",\n      preserveNullAndEmptyArrays: true\n    }\n  },\n  {\n    $match: {\n      $or: [\n        { \"Docs1.PetType\": { $ne: \"cat\" } },\n        { \"Docs1\": { $exists: false } }\n      ]\n    }\n  },\n  {\n    $group: {\n      _id: \"$StuID\"\n    }\n  },\n  {\n    $project: {\n      StuID: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1324,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the latitude, longitude, city of the station from which the shortest trip started?",
+            "What is the latitude, longitude, and city of the station from which the trip with smallest duration started?",
+            "Can you provide the latitude, longitude, and city of the station where the shortest duration trip began?",
+            "What are the coordinates (latitude and longitude) and city of the station from which the quickest trip originated?",
+            "Please tell me the latitude, longitude, and city of the starting station for the trip with the least duration."
+        ],
+        "ref_sql": "SELECT T1.lat , T1.long , T1.city FROM station AS T1 JOIN trip AS T2 ON T1.id = T2.start_station_id ORDER BY T2.duration LIMIT 1",
+        "MQL": "db.trip.aggregate([\n  {\n    $sort: {\n      duration: 1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $lookup: {\n      from: \"station\",\n      localField: \"start_station_id\",\n      foreignField: \"id\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      lat: {\n        $arrayElemAt: [\"$Docs1.lat\", 0]\n      },\n      long: {\n        $arrayElemAt: [\"$Docs1.long\", 0]\n      },\n      city: {\n        $arrayElemAt: [\"$Docs1.city\", 0]\n      },\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2242,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the average weight for each pet type.",
+            "What is the average weight for each type of pet?",
+            "What is the average weight associated with each type of pet?",
+            "Calculate the mean weight for all pet types.",
+            "Determine the average weight for various categories of pets."
+        ],
+        "ref_sql": "SELECT avg(weight) , pettype FROM pets GROUP BY pettype",
+        "MQL": "db.Pets.aggregate([\n  {\n    $group: {\n      _id: \"$PetType\",\n      avg_weight: { $avg: \"$weight\" }\n    }\n  },\n  {\n    $project: {\n      PetType: \"$_id\",\n      avg_weight: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2389,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the number of pets for each student who has any pet and student id.",
+            "Calculate how many pets each student has, along with their student IDs.",
+            "Get the count of pets for every student who owns at least one pet, including their Student ID.",
+            "What is the number of pets owned by each student, along with their respective student IDs?",
+            "List each student’s Student ID along with the total number of pets they have."
+        ],
+        "ref_sql": "SELECT count(*) , T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid",
+        "MQL": "db.Student.aggregate([\n  {\n    $unwind: \"$Has_Pet\"\n  },\n  {\n    $group: {\n      _id: \"$StuID\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      StuID: \"$_id\",\n      count: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 298,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "Return the unique name for stations that have ever had 7 bikes available.",
+            "What are the different names for each station that has ever had 7 bikes available?",
+            "List the distinct names of stations that have reached a total of 7 bikes available at any time.",
+            "Retrieve the unique station names where there have been instances of 7 bikes being available.",
+            "Provide the different names for each station that has had at least 7 bicycles available at some point."
+        ],
+        "ref_sql": "SELECT DISTINCT T1.name FROM station AS T1 JOIN status AS T2 ON T1.id = T2.station_id WHERE T2.bikes_available = 7",
+        "MQL": "db.station.aggregate([\n  {\n    $project: {\n      _id: 0,\n      name: 1,\n      has_7_bikes_available: {\n        $in: [7, \"$status.bikes_available\"]\n      }\n    }\n  },\n  {\n    $match: {\n      has_7_bikes_available: true\n    }\n  },\n  {\n    $group: {\n      _id: \"$name\"\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      name: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 976,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many car makers are there in each continents? List the continent name and the count.",
+            "What is the name of each continent and how many car makers are there in each one?",
+            "Can you provide the count of car manufacturers for each continent along with their names?",
+            "What are the names of all continents, and how many automobile makers are located in each?",
+            "List the continents and indicate the number of car makers available in each one."
+        ],
+        "ref_sql": "SELECT T1.Continent , count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.continent JOIN car_makers AS T3 ON T2.CountryId = T3.Country GROUP BY T1.Continent;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $group: {\n      _id: \"$Continent\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      Continent: \"$_id\",\n      count: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2866,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the number of distinct cities the stations are located at?",
+            "How many different cities have these stations?",
+            "How many unique cities are represented by the bike stations?",
+            "What is the total number of different cities with bike stations?",
+            "Can you tell me the count of distinct cities where the stations are found?"
+        ],
+        "ref_sql": "SELECT count(DISTINCT city) FROM station",
+        "MQL": "db.station.aggregate([\n  {\n    $group: {\n      _id: \"$city\"\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      count_DISTINCT_city: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      count_DISTINCT_city: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3927,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "Find the ids and names of stations from which at least 200 trips started.",
+            "What are the ids and names of all start stations that were the beginning of at least 200 trips?",
+            "List the station IDs and names for all stations where 200 or more trips have commenced.",
+            "Provide the IDs and names of any stations that served as the starting point for at least 200 trips.",
+            "Identify the IDs and names of stations that have seen at least 200 trips begin from them."
+        ],
+        "ref_sql": "SELECT start_station_id , start_station_name FROM trip GROUP BY start_station_name HAVING COUNT(*) >= 200",
+        "MQL": "db.trip.aggregate([\n  {\n    $group: {\n      _id: {\n        start_station_id: \"$start_station_id\",\n        start_station_name: \"$start_station_name\"\n      },\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $match: {\n      count: { $gte: 200 }\n    }\n  },\n  {\n    $project: {\n      start_station_id: \"$_id.start_station_id\",\n      start_station_name: \"$_id.start_station_name\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3361,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the major and age of students who do not have a cat pet.",
+            "What major is every student who does not own a cat as a pet, and also how old are they?",
+            "List the major and age of all students without a pet cat.",
+            "What are the majors and ages of students who don't own cats as pets?",
+            "Identify the major and age of each student who does not have a cat pet."
+        ],
+        "ref_sql": "SELECT major , age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat')",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.PetType\": { $ne: \"cat\" }\n    }\n  },\n  {\n    $project: {\n      Major: \"$Major\",\n      Age: \"$Age\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2210,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the average and maximum age for each type of pet.",
+            "What is the average and maximum age for each pet type?",
+            "Please provide the average and maximum ages for each category of pet.",
+            "What are the average and maximum ages for pets categorized by type?",
+            "Calculate both the average and highest age for every type of pet."
+        ],
+        "ref_sql": "SELECT avg(pet_age) , max(pet_age) , pettype FROM pets GROUP BY pettype",
+        "MQL": "db.Pets.aggregate([\n  {\n    $group: {\n      _id: \"$PetType\",\n      avg_pet_age: { $avg: \"$pet_age\" },\n      max_pet_age: { $max: \"$pet_age\" }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_pet_age: 1,\n      max_pet_age: 1,\n      PetType: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 4259,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the average age of students who do not have any pet .",
+            "What is the average age for all students who do not own any pets ?",
+            "Calculate the average age of students that do not have any pets.",
+            "What is the mean age for students who do not keep pets?",
+            "Determine the average age of students without any pet ownership."
+        ],
+        "ref_sql": "select avg(age) from student where stuid not in (select stuid from has_pet)",
+        "MQL": "db.Student.aggregate([\n  {\n    $project: {\n      avg_age: {\n        $cond: [\n          {\n            $eq: [\n              {\n                $size: \"$Has_Pet\"\n              },\n              0\n            ]\n          },\n          \"$Age\",\n          null\n        ]\n      }\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      avg_age: {\n        $avg: \"$avg_age\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_age: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3369,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What is the maximum accelerate for different number of cylinders?",
+            "What is the maximum accelerate for all the different cylinders?",
+            "What is the highest acceleration for the different cylinder counts?",
+            "Can you provide the maximum acceleration figures for various numbers of cylinders?",
+            "What are the maximum acceleration values associated with each cylinder count?"
+        ],
+        "ref_sql": "SELECT max(Accelerate) , Cylinders FROM CARS_DATA GROUP BY Cylinders;",
+        "MQL": "db.continents.aggregate([\n  { $unwind: \"$countries\" },\n  { $unwind: \"$countries.car_makers\" },\n  { $unwind: \"$countries.car_makers.model_list\" },\n  { $unwind: \"$countries.car_makers.model_list.car_names\" },\n  { $unwind: \"$countries.car_makers.model_list.car_names.cars_data\" },\n  {\n    $group: {\n      _id: \"$countries.car_makers.model_list.car_names.cars_data.Cylinders\",\n      max_Accelerate: { $max: \"$countries.car_makers.model_list.car_names.cars_data.Accelerate\" }\n    }\n  },\n  {\n    $project: {\n      Cylinders: \"$_id\",\n      max_Accelerate: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 426,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "List all the distinct stations from which a trip of duration below 100 started.",
+            "What are all the different start station names for a trip that lasted less than 100?",
+            "Retrieve the unique names of stations where trips with a duration under 100 minutes began.",
+            "Can you provide a list of all the different stations that initiated trips lasting less than 100 minutes?",
+            "Identify all the distinct start stations for trips that were under 100 minutes in length."
+        ],
+        "ref_sql": "SELECT DISTINCT start_station_name FROM trip WHERE duration < 100",
+        "MQL": "db.trip.aggregate([\n  {\n    $match: {\n      duration: { $lt: 100 }\n    }\n  },\n  {\n    $group: {\n      _id: \"$start_station_name\"\n    }\n  },\n  {\n    $project: {\n      start_station_name: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2858,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "From the trip record, find the number of unique bikes.",
+            "How many different bike ids are there?",
+            "What is the total number of unique bike identifiers in the trip records?",
+            "Count how many distinct bike IDs are present in the trip data.",
+            "Determine the number of unique bikes recorded in the trip information."
+        ],
+        "ref_sql": "SELECT count(DISTINCT bike_id) FROM trip",
+        "MQL": "db.trip.aggregate([\n  {\n    $group: {\n      _id: null,\n      count_DISTINCT_bike_id: { $addToSet: \"$bike_id\" }\n    }\n  },\n  {\n    $project: {\n      count_DISTINCT_bike_id: { $size: \"$count_DISTINCT_bike_id\" },\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 289,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which distinct car models are the produced after 1980?",
+            "What are the different models for the cards produced after 1980?",
+            "What unique car models were manufactured after the year 1980?",
+            "Can you list the various car models that have been produced since 1980?",
+            "Identify the distinct models of cars that have been made post-1980."
+        ],
+        "ref_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model = T2.model JOIN CARS_DATA AS T3 ON T2.MakeId = T3.id WHERE T3.year > 1980;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.cars_data.Year\": {\n        $gt: 1980\n      }\n    }\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.model_list.car_names.Model\",\n      Model: {\n        $first: \"$countries.car_makers.model_list.car_names.Model\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Model: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3433,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the maximum weight for each type of pet. List the maximum weight and pet type.",
+            "List the maximum weight and type for each type of pet.",
+            "What is the heaviest weight for each category of pet? Please provide the pet type along with its maximum weight.",
+            "Show the maximum weight alongside the type of pet for each pet category.",
+            "Retrieve the maximum weight associated with every pet type and list both the pet type and its maximum weight."
+        ],
+        "ref_sql": "SELECT max(weight) , petType FROM pets GROUP BY petType",
+        "MQL": "db.Pets.aggregate([\n  {\n    $group: {\n      _id: \"$PetType\",\n      max_weight: { $max: \"$weight\" }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      PetType: \"$_id\",\n      max_weight: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2905,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the number of distinct type of pets.",
+            "How many different types of pet are there?",
+            "How many unique pet types are available?",
+            "What is the total count of different pet types?",
+            "Can you tell me the number of distinct types of pets?"
+        ],
+        "ref_sql": "SELECT count(DISTINCT pettype) FROM pets",
+        "MQL": "db.Pets.aggregate([\n  {\n    $group: {\n      _id: \"$PetType\"\n    }\n  },\n  {\n    $count: \"count_DISTINCT_pettype\"\n  }\n]);\n"
+    },
+    {
+        "record_id": 975,
+        "db_id": "car_1",
+        "nl_queries": [
+            "How many countries does each continent have? List the continent id, continent name and the number of countries.",
+            "For each continent, list its id, name, and how many countries it has?",
+            "What is the number of countries in each continent? Provide the continent ID, continent name, and the total number of countries.",
+            "Can you provide a list of continents along with their IDs, names, and the count of countries they contain?",
+            "For every continent, what are the continent ID and name, and how many countries belong to each?"
+        ],
+        "ref_sql": "SELECT T1.ContId , T1.Continent , count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.Continent GROUP BY T1.ContId;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $group: {\n      _id: {\n        ContId: \"$ContId\",\n        Continent: \"$Continent\"\n      },\n      countryCount: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      ContId: \"$_id.ContId\",\n      Continent: \"$_id.Continent\",\n      count: \"$countryCount\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2131,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the average latitude and longitude of the starting points of all trips?",
+            "What is the average latitude and longitude of all starting stations for the trips?",
+            "What are the average coordinates (latitude and longitude) of the departure points for all bike trips?",
+            "Can you provide the average latitude and longitude for all starting stations used in bike trips?",
+            "Determine the average latitude and longitude for every starting location of the trips."
+        ],
+        "ref_sql": "SELECT avg(T1.lat) , avg(T1.long) FROM station AS T1 JOIN trip AS T2 ON T1.id = T2.start_station_id",
+        "MQL": "db.trip.aggregate([\n  {\n    $lookup: {\n      from: \"station\",\n      localField: \"start_station_id\",\n      foreignField: \"id\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $group: {\n      _id: null,\n      avg_lat: { $avg: \"$Docs1.lat\" },\n      avg_long: { $avg: \"$Docs1.long\" }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_lat: 1,\n      avg_long: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2343,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the 3 most common cloud cover rates in the region of zip code 94107?",
+            "What are the 3 most common cloud covers in the zip code of 94107?",
+            "Can you provide the top 3 most frequent cloud cover values for the area with zip code 94107?",
+            "What are the three cloud cover levels that occur most often in the 94107 zip code region?",
+            "List the three predominant cloud cover rates recorded for the zip code 94107."
+        ],
+        "ref_sql": "SELECT cloud_cover FROM weather WHERE zip_code = 94107 GROUP BY cloud_cover ORDER BY COUNT (*) DESC LIMIT 3",
+        "MQL": "db.weather.aggregate([\n  {\n    $match: {\n      zip_code: 94107\n    }\n  },\n  {\n    $group: {\n      _id: \"$cloud_cover\",\n      count: {\n        $sum: 1\n      }\n    }\n  },\n  {\n    $sort: {\n      count: -1\n    }\n  },\n  {\n    $limit: 3\n  },\n  {\n    $project: {\n      cloud_cover: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1003,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "What are the students' first names who have both cats and dogs as pets?",
+            "Which students own both a cat and a dog? Please provide their first names.",
+            "Can you list the first names of students who have both dogs and cats as their pets?",
+            "Identify the first names of students who are pet owners of both dogs and cats.",
+            "What are the first names of those students who have both a dog and a cat as pets?"
+        ],
+        "ref_sql": "SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat' INTERSECT SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'dog'",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.PetType\": {\n        $all: [\"cat\", \"dog\"]\n      }\n    }\n  },\n  {\n    $project: {\n      \"Fname\": 1,\n      \"_id\": 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3997,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the total and maximum duration of trips with bike id 636?",
+            "What is the total and maximum duration for all trips with the bike id 636?",
+            "Can you provide the total and highest duration for trips taken with bike ID 636?",
+            "What are the total and maximum trip durations associated with bike ID 636?",
+            "Find the sum and maximum duration of all trips that utilized bike ID 636."
+        ],
+        "ref_sql": "SELECT sum(duration) , max(duration) FROM trip WHERE bike_id = 636",
+        "MQL": "db.trip.aggregate([\n  {\n    $match: {\n      bike_id: 636\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      sum_duration: {\n        $sum: \"$duration\"\n      },\n      max_duration: {\n        $max: \"$duration\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      sum_duration: 1,\n      max_duration: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2245,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "Which bike traveled the most often in zip code 94002?",
+            "What is the id of the bike that traveled the most in 94002?",
+            "Which bicycle has been used the most in the 94002 area?",
+            "What bike id corresponds to the most frequently used bike in the zip code 94002?",
+            "Identify the bike that has the highest frequency of trips in the 94002 region."
+        ],
+        "ref_sql": "SELECT bike_id FROM trip WHERE zip_code = 94002 GROUP BY bike_id ORDER BY COUNT(*) DESC LIMIT 1",
+        "MQL": "db.trip.aggregate([\n  {\n    $match: {\n      zip_code: 94002\n    }\n  },\n  {\n    $group: {\n      _id: \"$bike_id\",\n      count: {\n        $sum: 1\n      }\n    }\n  },\n  {\n    $sort: {\n      count: -1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      bike_id: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 279,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the first name and age of students who have a pet.",
+            "What are the different first names and ages of the students who do have pets?",
+            "List the first names and ages of students that own pets.",
+            "Provide the first names and ages of students who possess pets.",
+            "What are the first names and ages of students that have pets?"
+        ],
+        "ref_sql": "SELECT DISTINCT T1.fname , T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      Docs1: { $ne: [] }\n    }\n  },\n  {\n    $project: {\n      Fname: 1,\n      Age: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1405,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are names of stations that have average bike availability above 10 and are not located in San Jose city?",
+            "What are the names of all stations that have more than 10 bikes available and are not located in San Jose?",
+            "List the names of all stations that offer an average of over 10 bikes and are outside San Jose.",
+            "What stations are available that have more than 10 bikes on average and are not situated in San Jose?",
+            "Provide the names of stations with an average bike count greater than 10 that are located elsewhere than San Jose."
+        ],
+        "ref_sql": "SELECT T1.name FROM station AS T1 JOIN status AS T2 ON T1.id = T2.station_id GROUP BY T2.station_id HAVING avg(bikes_available) > 10 EXCEPT SELECT name FROM station WHERE city = \"San Jose\"",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      city: { $ne: \"San Jose\" }\n    }\n  },\n  {\n    $unwind: \"$status\"\n  },\n  {\n    $group: {\n      _id: \"$id\",\n      name: { $first: \"$name\" },\n      avg_bikes_available: { $avg: \"$status.bikes_available\" }\n    }\n  },\n  {\n    $match: {\n      avg_bikes_available: { $gt: 10 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      name: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 627,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which model has the most version(make) of cars?",
+            "What model has the most different versions?",
+            "Which car model features the greatest number of variants available?",
+            "Identify the model that has the highest variety of car makes.",
+            "What car model is associated with the most different versions produced?"
+        ],
+        "ref_sql": "SELECT Model FROM CAR_NAMES GROUP BY Model ORDER BY count(*) DESC LIMIT 1;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.model_list.Model\",\n      count: {\n        $sum: 1\n      }\n    }\n  },\n  {\n    $sort: {\n      count: -1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      Model: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1005,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which makers designed more than 3 car models? List full name and the id.",
+            "What are the names and ids of all makers with more than 3 models?",
+            "Who are the manufacturers that have created over three different car models? Please provide their full names and IDs.",
+            "Can you list the names and IDs of car makers that offer more than three models?",
+            "Identify the car manufacturers with a model range exceeding three. Include their full names and identifiers."
+        ],
+        "ref_sql": "SELECT T1.FullName , T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id HAVING count(*) > 3;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $project: {\n      FullName: \"$countries.car_makers.FullName\",\n      Id: \"$countries.car_makers.Id\",\n      count_model_list: {\n        $size: \"$countries.car_makers.model_list\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_model_list: {\n        $gt: 3\n      }\n    }\n  },\n  {\n    $project: {\n      FullName: 1,\n      Id: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3305,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the ids of stations that have latitude above 37.4 and never had bike availability below 7?",
+            "What are the ids of all stations that have a latitude above 37.4 and have never had less than 7 bikes available?",
+            "List the station IDs for stations situated at a latitude greater than 37.4 that have always had 7 or more bikes available.",
+            "Retrieve the IDs of all bike stations where the latitude exceeds 37.4 and that have not recorded bike availability below 7 at any time.",
+            "Identify the station IDs of locations with a latitude above 37.4 that have consistently maintained an availability of at least 7 bikes."
+        ],
+        "ref_sql": "SELECT id FROM station WHERE lat > 37.4 EXCEPT SELECT station_id FROM status GROUP BY station_id HAVING min(bikes_available) < 7",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      lat: { $gt: 37.4 }\n    }\n  },\n  {\n    $project: {\n      id: 1,\n      has_low_bikes: {\n        $gte: [\n          { $size: { $filter: { input: \"$status\", as: \"status\", cond: { $lt: [\"$$status.bikes_available\", 7] } } } },\n          1\n        ]\n      }\n    }\n  },\n  {\n    $match: {\n      has_low_bikes: false\n    }\n  },\n  {\n    $project: {\n      id: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3034,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "In zip code 94107, on which day neither Fog nor Rain was not observed?",
+            "On which day has it neither been foggy nor rained in the zip code of 94107?",
+            "What dates in zip code 94107 did not experience any fog or rain?",
+            "Which days in the 94107 area had neither foggy conditions nor rain?",
+            "List the dates in zip code 94107 when fog and rain were both absent."
+        ],
+        "ref_sql": "SELECT date FROM weather WHERE zip_code = 94107 AND EVENTS != \"Fog\" AND EVENTS != \"Rain\"",
+        "MQL": "db.weather.aggregate([\n  {\n    $match: {\n      zip_code: 94107,\n      $and: [\n        { events: { $nin: [\"Fog\", \"Rain\"] } }\n      ]\n    }\n  },\n  {\n    $project: {\n      date: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 4256,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "Find the zip code in which the average mean visibility is lower than 10.",
+            "For each zip code, select all those that have an average mean visiblity below 10.",
+            "Identify the zip codes where the average mean visibility falls below 10 miles.",
+            "List all zip codes that have an average mean visibility under 10.",
+            "Which zip codes report an average visibility of less than 10 miles?"
+        ],
+        "ref_sql": "SELECT zip_code FROM weather GROUP BY zip_code HAVING avg(mean_visibility_miles) < 10",
+        "MQL": "db.weather.aggregate([\n  {\n    $group: {\n      _id: \"$zip_code\",\n      avg_mean_visibility_miles: {\n        $avg: \"$mean_visibility_miles\"\n      }\n    }\n  },\n  {\n    $match: {\n      avg_mean_visibility_miles: {\n        $lt: 10\n      }\n    }\n  },\n  {\n    $project: {\n      zip_code: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1281,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the first name and age of students who have a dog but do not have a cat as a pet.",
+            "What is the first name of every student who has a dog but does not have a cat?",
+            "List the first names and ages of students who own a dog and do not have a cat as a pet.",
+            "Provide the first names of all students who have a dog while having no cats.",
+            "Retrieve the ages and first names of students that have a dog but lack a cat as a pet."
+        ],
+        "ref_sql": "SELECT T1.fname , T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat')",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $addFields: {\n      hasDog: {\n        $in: [\"dog\", \"$Docs1.PetType\"]\n      },\n      hasCat: {\n        $in: [\"cat\", \"$Docs1.PetType\"]\n      }\n    }\n  },\n  {\n    $match: {\n      hasDog: true,\n      hasCat: false\n    }\n  },\n  {\n    $project: {\n      Fname: 1,\n      Age: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1287,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the first name and gender of student who have more than one pet.",
+            "What is the first name and gender of the all the students who have more than one pet?",
+            "List the first names and genders of students who own more than one pet.",
+            "What are the first names and genders of all students that have multiple pets?",
+            "Identify the first names and sexes of students with over one pet."
+        ],
+        "ref_sql": "SELECT T1.fname , T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING count(*) > 1",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      Fname: 1,\n      Sex: 1,\n      count_Docs1: {\n        $size: \"$Docs1\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_Docs1: {\n        $gt: 1\n      }\n    }\n  },\n  {\n    $project: {\n      Fname: 1,\n      Sex: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 312,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?",
+            "What are the different models created by either the car maker General Motors or weighed more than 3500?",
+            "What unique car models are associated with the manufacturer known as General Motors or have a weight greater than 3500?",
+            "Can you list the different car models from either General Motors or those that exceed a weight of 3500?",
+            "Identify the distinct models produced by General Motors or those whose weight is over 3500 pounds."
+        ],
+        "ref_sql": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model = T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker = T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId = T4.Id WHERE T3.FullName = 'General Motors' OR T4.weight > 3500;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      $or: [\n        { \"countries.car_makers.FullName\": \"General Motors\" },\n        { \"countries.car_makers.model_list.car_names.cars_data.Weight\": { $gt: 3500 } }\n      ]\n    }\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.model_list.car_names.Model\"\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Model: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1347,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the names and ids of stations that had more than 14 bikes available on average or were installed in December?",
+            "What are the names and ids of all stations that have more than 14 bikes available on average or had bikes installed in December?",
+            "List the names and identifiers of stations that either have an average bike availability exceeding 14 or were installed in the month of December.",
+            "Provide the names and ids of all stations with an average of more than 14 bikes available, or those that were installed during December.",
+            "What are the identifiers and names of the stations that show an average of over 14 bikes available or had installations in December?"
+        ],
+        "ref_sql": "SELECT T1.name , T1.id FROM station AS T1 JOIN status AS T2 ON T1.id = T2.station_id GROUP BY T2.station_id HAVING avg(T2.bikes_available) > 14 UNION SELECT name , id FROM station WHERE installation_date LIKE \"12/%\"",
+        "MQL": "db.station.aggregate([\n  {\n    $project: {\n      name: 1,\n      id: 1,\n      bikes_available_avg: {\n        $avg: \"$status.bikes_available\"\n      },\n      installation_month: {\n        $month: {\n          $dateFromString: {\n            dateString: \"$installation_date\"\n          }\n        }\n      }\n    }\n  },\n  {\n    $match: {\n      $or: [\n        { bikes_available_avg: { $gt: 14 } },\n        { installation_month: 12 }\n      ]\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      id: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1841,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the id of the pet owned by student whose last name is ‘Smith’.",
+            "What is the id of the pet owned by the student whose last name is 'Smith'?",
+            "Retrieve the pet identifier for the student with the last name 'Smith'.",
+            "What is the identifier for the pet owned by the student named 'Smith'?",
+            "Can you tell me the pet ID of the student whose surname is 'Smith'?"
+        ],
+        "ref_sql": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.Lname = 'Smith'",
+        "MQL": "db.Student.aggregate([\n  {\n    $match: {\n      LName: \"Smith\"\n    }\n  },\n  {\n    $unwind: \"$Has_Pet\"\n  },\n  {\n    $project: {\n      PetID: \"$Has_Pet.PetID\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2198,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the average latitude and longitude of stations located in San Jose city?",
+            "What is the average latitude and longitude in San Jose?",
+            "What are the mean latitude and longitude coordinates of bike stations situated in San Jose?",
+            "Can you provide the average latitude and longitude for stations within San Jose?",
+            "Determine the average latitudinal and longitudinal values for stations found in the city of San Jose."
+        ],
+        "ref_sql": "SELECT avg(lat) , avg(long) FROM station WHERE city = \"San Jose\"",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      city: \"San Jose\"\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      avg_lat: { $avg: \"$lat\" },\n      avg_long: { $avg: \"$long\" }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_lat: 1,\n      avg_long: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2200,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What is the average longitude of stations that never had bike availability more than 10?",
+            "What is the mean longitude for all stations that have never had more than 10 bikes available?",
+            "What is the average longitude for stations that have always had bike availability of 10 or fewer?",
+            "Calculate the mean longitude of all stations that have never recorded more than 10 bikes available at any time.",
+            "How much is the average longitude of stations that have not exceeded 10 bikes in availability throughout their operation?"
+        ],
+        "ref_sql": "SELECT avg(long) FROM station WHERE id NOT IN (SELECT station_id FROM status GROUP BY station_id HAVING max(bikes_available) > 10)",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      \"status.bikes_available\": {\n        $not: {\n          $gt: 10\n        }\n      }\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      avg_long: {\n        $avg: \"$long\"\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      avg_long: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 188,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What are the name of the countries where there is not a single car maker?",
+            "What are the names of the countries with no car makers?",
+            "Which countries do not have any car manufacturers?",
+            "List the names of countries that lack car makers.",
+            "What countries have no car manufacturing companies present?"
+        ],
+        "ref_sql": "SELECT CountryName FROM countries EXCEPT SELECT T1.CountryName FROM countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.countryId = T2.Country;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $project: {\n      CountryName: \"$countries.CountryName\",\n      hasCarMakers: {\n        $cond: { if: { $isArray: \"$countries.car_makers\" }, then: { $gt: [{ $size: \"$countries.car_makers\" }, 0] }, else: false }\n      }\n    }\n  },\n  {\n    $match: {\n      hasCarMakers: false\n    }\n  },\n  {\n    $project: {\n      CountryName: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 3033,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the dates in which the mean sea level pressure was between 30.3 and 31?",
+            "What are the dates that have an average sea level pressure between 30.3 and 31?",
+            "Which dates fall within the range of 30.3 and 31 for the mean sea level pressure?",
+            "List the dates when the average sea level pressure was recorded between 30.3 and 31.",
+            "Can you provide the dates that show a mean sea level pressure in the interval from 30.3 to 31?"
+        ],
+        "ref_sql": "SELECT date FROM weather WHERE mean_sea_level_pressure_inches BETWEEN 30.3 AND 31",
+        "MQL": "db.weather.aggregate([\n  {\n    $match: {\n      mean_sea_level_pressure_inches: {\n        $gte: 30.3,\n        $lt: 31\n      }\n    }\n  },\n  {\n    $project: {\n      date: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1560,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which of the countries has the most car makers? List the country name.",
+            "What is the name of the country with the most car makers?",
+            "Which country is home to the highest number of car manufacturers? Please provide the country name.",
+            "Identify the country that boasts the most car makers. What is its name?",
+            "Can you tell me the name of the country with the largest quantity of car manufacturers?"
+        ],
+        "ref_sql": "SELECT T2.CountryName FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country = T2.CountryId GROUP BY T1.Country ORDER BY Count(*) DESC LIMIT 1;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $group: {\n      _id: \"$countries.CountryName\",\n      count: {\n        $sum: 1\n      }\n    }\n  },\n  {\n    $sort: {\n      count: -1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      _id: 0,\n      CountryName: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1211,
+        "db_id": "car_1",
+        "nl_queries": [
+            "For model volvo, how many cylinders does the car with the least accelerate have?",
+            "For a volvo model, how many cylinders does the version with least accelerate have?",
+            "How many cylinders does the Volvo model with the lowest acceleration feature?",
+            "For the Volvo car model, what is the cylinder count of the version that accelerates the slowest?",
+            "In terms of acceleration, how many cylinders does the Volvo model exhibit for the one that accelerates the least?"
+        ],
+        "ref_sql": "SELECT T1.cylinders FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T2.Model = 'volvo' ORDER BY T1.accelerate ASC LIMIT 1;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.model_list.car_names.Model\": \"volvo\"\n    }\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $sort: {\n      \"countries.car_makers.model_list.car_names.cars_data.Accelerate\": 1\n    }\n  },\n  {\n    $limit: 1\n  },\n  {\n    $project: {\n      Cylinders: \"$countries.car_makers.model_list.car_names.cars_data.Cylinders\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1349,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "For each station, return its longitude and the average duration of trips that started from the station.",
+            "For each start station id, what is its name, longitude and average duration of trips started there?",
+            "Provide the longitude and average trip duration for each starting station.",
+            "What are the names, longitudes, and average durations of trips from each station?",
+            "For every start station ID, return its associated name, longitude, and the average duration of trips that commenced there."
+        ],
+        "ref_sql": "SELECT T1.name , T1.long , avg(T2.duration) FROM station AS T1 JOIN trip AS T2 ON T1.id = T2.start_station_id GROUP BY T2.start_station_id",
+        "MQL": "db.trip.aggregate([\n  {\n    $group: {\n      _id: \"$start_station_id\",\n      avg_trip_duration: { $avg: \"$duration\" }\n    }\n  },\n  {\n    $lookup: {\n      from: \"station\",\n      localField: \"_id\",\n      foreignField: \"id\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      name: { $arrayElemAt: [\"$Docs1.name\", 0] },\n      long: { $arrayElemAt: [\"$Docs1.long\", 0] },\n      avg_trip_duration: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 285,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "What are the id and name of the stations that have ever had more than 12 bikes available?",
+            "What are the different ids and names of the stations that have had more than 12 bikes available?",
+            "Can you provide the ids and names of stations that have ever had over 12 bikes available?",
+            "Please list the unique station ids and names where the number of available bikes has exceeded 12 at any time.",
+            "What are the ids and names of the stations that have had more than 12 bicycles available at any time?"
+        ],
+        "ref_sql": "SELECT DISTINCT T1.id , T1.name FROM station AS T1 JOIN status AS T2 ON T1.id = T2.station_id WHERE T2.bikes_available > 12",
+        "MQL": "db.station.aggregate([\n  {\n    $unwind: \"$status\"\n  },\n  {\n    $match: {\n      \"status.bikes_available\": { $gt: 12 }\n    }\n  },\n  {\n    $group: {\n      _id: {\n        id: \"$id\",\n        name: \"$name\"\n      }\n    }\n  },\n  {\n    $project: {\n      id: \"$_id.id\",\n      name: \"$_id.name\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 4283,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the first name of students who have both cat and dog pets .",
+            "Retrieve the first names of students who own both a dog and a cat.",
+            "Which students have both cats and dogs? Please provide their first names.",
+            "Get the first names of those students who possess both a cat and a dog as pets.",
+            "List the first names of students that have both a dog and a cat as their pets."
+        ],
+        "ref_sql": "select t1.fname from student as t1 join has_pet as t2 on t1.stuid = t2.stuid join pets as t3 on t3.petid = t2.petid where t3.pettype = 'cat' intersect select t1.fname from student as t1 join has_pet as t2 on t1.stuid = t2.stuid join pets as t3 on t3.petid = t2.petid where t3.pettype = 'dog'",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.PetType\": { $all: [\"cat\", \"dog\"] }\n    }\n  },\n  {\n    $project: {\n      \"Fname\": 1,\n      \"_id\": 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1171,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?",
+            "List the IDs and names of countries that have over three car manufacturers or offer the 'fiat' model.",
+            "Which countries have either more than three car makers or produce the 'fiat' model? Provide their IDs and names.",
+            "Please provide the country IDs and names where there are more than three car makers or they manufacture the 'fiat' model.",
+            "Identify the countries with more than three car manufacturers or that produce the 'fiat' model, including their IDs and names."
+        ],
+        "ref_sql": "SELECT T1.countryId , T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country GROUP BY T1.countryId HAVING count(*) > 3 UNION SELECT T1.countryId , T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country JOIN MODEL_LIST AS T3 ON T2.Id = T3.Maker WHERE T3.Model = 'fiat';",
+        "MQL": "db.continents.aggregate([\n  {\n    $project: {\n      countries: {\n        $filter: {\n          input: \"$countries\",\n          as: \"country\",\n          cond: {\n            $or: [\n              { $gt: [{ $size: \"$$country.car_makers\" }, 3] },\n              {\n                $gt: [\n                  {\n                    $size: {\n                      $filter: {\n                        input: \"$$country.car_makers\",\n                        as: \"maker\",\n                        cond: {\n                          $gt: [\n                            {\n                              $size: {\n                                $filter: {\n                                  input: \"$$maker.model_list\",\n                                  as: \"model\",\n                                  cond: {\n                                    $eq: [\"$$model.Model\", \"fiat\"]\n                                  }\n                                }\n                              }\n                            },\n                            0\n                          ]\n                        }\n                      }\n                    }\n                  },\n                  0\n                ]\n              }\n            ]\n          }\n        }\n      }\n    }\n  },\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $project: {\n   _id:0,\n   CountryId: \"$countries.CountryId\",\n      CountryName: \"$countries.CountryName\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 118,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "How many stations does Mountain View city has?",
+            "How many stations are in Mountain View?",
+            "What is the total number of bike stations in the city of Mountain View?",
+            "Can you tell me the count of stations that exist in Mountain View?",
+            "How many bike-sharing stations are located within Mountain View?"
+        ],
+        "ref_sql": "SELECT COUNT(*) FROM station WHERE city = \"Mountain View\"",
+        "MQL": "db.station.aggregate([\n  {\n    $match: {\n      city: \"Mountain View\"\n    }\n  },\n  {\n    $count: \"COUNT\"\n  }\n]);\n"
+    },
+    {
+        "record_id": 1348,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "For each station, find its latitude and the minimum duration of trips that ended at the station.",
+            "For each end station id, what is its name, latitude, and minimum duration for trips ended there?",
+            "Retrieve the latitude and the shortest trip duration for every station where trips have concluded.",
+            "For all end stations, provide the station name, latitude, and the minimum duration of trips that ended at each location.",
+            "What are the names and latitudes of stations along with the shortest duration of trips that finished at those stations?"
+        ],
+        "ref_sql": "SELECT T1.name , T1.lat , min(T2.duration) FROM station AS T1 JOIN trip AS T2 ON T1.id = T2.end_station_id GROUP BY T2.end_station_id",
+        "MQL": "db.trip.aggregate([\n  {\n    $group: {\n      _id: \"$end_station_id\",\n      min_trip_duration: { $min: \"$duration\" }\n    }\n  },\n  {\n    $lookup: {\n      from: \"station\",\n      localField: \"_id\",\n      foreignField: \"id\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $project: {\n      name: { $arrayElemAt: [\"$Docs1.name\", 0] },\n      lat: { $arrayElemAt: [\"$Docs1.lat\", 0] },\n      min_trip_duration: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2316,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "For each city, return the highest latitude among its stations.",
+            "For each city, what is the highest latitude for its stations?",
+            "Identify the maximum latitude of bike stations for every city.",
+            "What is the top latitude recorded among bike stations in each city?",
+            "For each city, determine the highest latitude of its bike stations."
+        ],
+        "ref_sql": "SELECT city , max(lat) FROM station GROUP BY city",
+        "MQL": "db.station.aggregate([\n  {\n    $group: {\n      _id: \"$city\",\n      max_lat: { $max: \"$lat\" }\n    }\n  },\n  {\n    $project: {\n      city: \"$_id\",\n      max_lat: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2330,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "List all the cities in a decreasing order of each city's stations' highest latitude.",
+            "For each city, list their names in decreasing order by their highest station latitude.",
+            "Provide a list of cities sorted by the highest latitude of their stations in descending order.",
+            "Enumerate the names of cities based on the maximum latitude of their respective stations, sorted from highest to lowest.",
+            "Show all city names arranged in decreasing order according to the highest latitude recorded among their stations."
+        ],
+        "ref_sql": "SELECT city FROM station GROUP BY city ORDER BY max(lat) DESC",
+        "MQL": "db.station.aggregate([\n  {\n    $group: {\n      _id: \"$city\",\n      highest_latitude: { $max: \"$lat\" }\n    }\n  },\n  {\n    $sort: {\n      highest_latitude: -1\n    }\n  },\n  {\n    $project: {\n      city: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 1013,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which model of the car has the minimum horsepower?",
+            "What is the model of the car with the smallest amount of horsepower?",
+            "What is the car model that exhibits the lowest horsepower?",
+            "Identify the car model that has the least horsepower available.",
+            "Which car model features the minimum horsepower among all options?"
+        ],
+        "ref_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id ORDER BY T2.horsepower ASC LIMIT 1;",
+        "MQL": "db.continents.aggregate([\n  { $unwind: \"$countries\" },\n  { $unwind: \"$countries.car_makers\" },\n  { $unwind: \"$countries.car_makers.model_list\" },\n  { $unwind: \"$countries.car_makers.model_list.car_names\" },\n  { $unwind: \"$countries.car_makers.model_list.car_names.cars_data\" },\n  {\n    $sort: { \"countries.car_makers.model_list.car_names.cars_data.Horsepower\": 1 }\n  },\n  { $limit: 1 },\n  { $project: { Model: \"$countries.car_makers.model_list.car_names.Model\", _id: 0 } }\n]);\n"
+    },
+    {
+        "record_id": 3766,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the id and weight of all pets whose age is older than 1.",
+            "What is the id and weight of every pet who is older than 1?",
+            "Retrieve the PetID and weight of all pets that are older than one year.",
+            "List the ID and weight for every pet that is more than one year old.",
+            "Show me the PetID and weight for pets whose age exceeds one year."
+        ],
+        "ref_sql": "SELECT petid , weight FROM pets WHERE pet_age > 1",
+        "MQL": "db.Pets.find({\n  pet_age: { $gt: 1 }\n}, {\n  PetID: 1,\n  weight: 1,\n  _id: 0\n});\n"
+    },
+    {
+        "record_id": 288,
+        "db_id": "car_1",
+        "nl_queries": [
+            "Which models are lighter than 3500 but not built by the 'Ford Motor Company'?",
+            "What are the different models wthat are lighter than 3500 but were not built by the Ford Motor Company?",
+            "Which car models weigh less than 3500 and are not manufactured by Ford?",
+            "List the models that are lighter than 3500 and were not produced by the Ford Motor Company.",
+            "What models exist that have a weight less than 3500 and are not from the Ford Motor Company?"
+        ],
+        "ref_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.Model = T2.Model JOIN CARS_DATA AS T3 ON T2.MakeId = T3.Id JOIN CAR_MAKERS AS T4 ON T1.Maker = T4.Id WHERE T3.weight < 3500 AND T4.FullName != 'Ford Motor Company';",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $unwind: \"$countries.car_makers\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names\"\n  },\n  {\n    $unwind: \"$countries.car_makers.model_list.car_names.cars_data\"\n  },\n  {\n    $match: {\n      \"countries.car_makers.FullName\": { $ne: \"Ford Motor Company\" },\n      \"countries.car_makers.model_list.car_names.cars_data.Weight\": { $lt: 3500 }\n    }\n  },\n  {\n    $group: {\n      _id: \"$countries.car_makers.model_list.car_names.Model\"\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      Model: \"$_id\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2784,
+        "db_id": "pets_1",
+        "nl_queries": [
+            "Find the number of dog pets that are raised by female students (with sex F).",
+            "How many dog pets are raised by female students?",
+            "How many female students own dogs as pets?",
+            "Count the number of dogs that are kept by students who are female.",
+            "What is the total number of dog pets owned by female students?"
+        ],
+        "ref_sql": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T2.petid = T3.petid WHERE T1.sex = 'F' AND T3.pettype = 'dog'",
+        "MQL": "db.Student.aggregate([\n  {\n    $lookup: {\n      from: \"Pets\",\n      localField: \"Has_Pet.PetID\",\n      foreignField: \"PetID\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $unwind: \"$Docs1\"\n  },\n  {\n    $match: {\n      Sex: \"F\",\n      \"Docs1.PetType\": \"dog\"\n    }\n  },\n  {\n    $group: {\n      _id: null,\n      count: {\n        $sum: 1\n      }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      count: 1\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 168,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What is the number of car models that are produced by each maker and what is the id and full name of each maker?",
+            "How many different car models does each maker produce, and what are their IDs and full names?",
+            "Provide the total number of car models for each maker along with their identification number and full names.",
+            "What is the count of car models made by every manufacturer, and could you include each maker's ID and full name in the response?",
+            "Can you tell me the number of car models owned by each maker, along with their maker IDs and complete names?"
+        ],
+        "ref_sql": "SELECT Count(*) , T2.FullName , T2.id FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker = T2.Id GROUP BY T2.id;",
+        "MQL": "db.continents.aggregate([\n  { $unwind: \"$countries\" },\n  { $unwind: \"$countries.car_makers\" },\n  { $project: {\n      \"MakerId\": \"$countries.car_makers.Id\",\n      \"MakerFullName\": \"$countries.car_makers.FullName\",\n      \"ModelCount\": { $size: \"$countries.car_makers.model_list\" }\n    }\n  },\n  { $group: {\n      \"_id\": { \"MakerId\": \"$MakerId\", \"MakerFullName\": \"$MakerFullName\" },\n      \"ModelCount\": { $sum: \"$ModelCount\" }\n    }\n  },\n  { $project: {\n      \"_id\": 0,\n      \"Id\": \"$_id.MakerId\",\n      \"FullName\": \"$_id.MakerFullName\",\n      \"Count\": \"$ModelCount\"\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 2312,
+        "db_id": "bike_1",
+        "nl_queries": [
+            "List the name and the number of stations for all the cities that have at least 15 stations.",
+            "What is the name of every city that has at least 15 stations and how many stations does it have?",
+            "Identify the cities that have 15 or more bike stations and provide the count of stations for each.",
+            "Which cities boast at least 15 stations, and what is the number of stations in each city?",
+            "Can you list all cities with a minimum of 15 bike stations along with their respective station counts?"
+        ],
+        "ref_sql": "SELECT city , COUNT(*) FROM station GROUP BY city HAVING COUNT(*) >= 15",
+        "MQL": "db.station.aggregate([\n  {\n    $group: {\n      _id: \"$city\",\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $match: {\n      count: { $gte: 15 }\n    }\n  },\n  {\n    $project: {\n      city: \"$_id\",\n      COUNT: \"$count\",\n      _id: 0\n    }\n  }\n]);\n"
+    },
+    {
+        "record_id": 978,
+        "db_id": "car_1",
+        "nl_queries": [
+            "What are the countries having at least one car maker? List name and id.",
+            "What are the names and ids of all countries with at least one car maker?",
+            "Which countries have at least one car manufacturer? Please provide their names and IDs.",
+            "Can you list the names and IDs of countries that feature at least one car maker?",
+            "Identify the countries with one or more car manufacturers and provide their corresponding names and IDs."
+        ],
+        "ref_sql": "SELECT T1.CountryName , T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country GROUP BY T1.CountryId HAVING count(*) >= 1;",
+        "MQL": "db.continents.aggregate([\n  {\n    $unwind: \"$countries\"\n  },\n  {\n    $project: {\n      CountryName: \"$countries.CountryName\",\n      CountryId: \"$countries.CountryId\",\n      count_car_maker: {\n        $size: \"$countries.car_makers\"\n      }\n    }\n  },\n  {\n    $match: {\n      count_car_maker: {\n        $gt: 0\n      }\n    }\n  },\n  {\n    $project: {\n      CountryName: 1,\n      CountryId: 1,\n      _id: 0\n    }\n  }\n]);\n"
+    }
+]
