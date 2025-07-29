@@ -126,7 +126,20 @@ def query_debug(NLQ, mql_ori, db_id, cols, fields_db, fields_alias, target_field
         f.write(prompt)
     # exit()
     # reply = generate_reply(messages=messages, model="gpt-4o-mini-2024-07-18")[0]
+
+    if index == 0:
+        print("\n" + "="*30 + " PROMPT SENT TO GPT " + "="*30)
+        for m in messages:
+            print(f"[{m['role'].upper()}]: {m['content']}\n")
+
     reply = generate_reply(messages=messages)[0]
+
+    if index == 0:
+        print("="*30 + " GPT OUTPUT " + "="*30)
+        print(reply)
+        print("="*70 + "\n")
+
+    # reply = generate_reply(messages=messages)[0]
 
     if NEED_PRINT:
         print(reply, end= "\n" + "*"*100 + "\n")
@@ -158,7 +171,7 @@ if __name__ == "__main__":
     topk = args.topk
     file_path = "../TEND/test_SLM_subset_rag_no_pref.json"
     #file_path = "./results/SMART/test_SLM_prediction_rag.json"
-    save_path = "./results/SMART/test_debug_rag{}.json".format(topk)
+    save_path = "./results/test_debug_rag{}.json".format(topk)
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
     with open(file_path, "r") as f:

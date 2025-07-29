@@ -433,7 +433,7 @@ def process_example(example: Dict[str, Any], task: str) -> List[Dict[str, Any]]:
     
     return processed_examples
 
-# creates train_SLM_prediction_data.json for embedding based retrieval, extracts and stores all key componenets using train.json
+# creates train_SLM_prediction_data.json for embedding based retrieval, extracts and stores all key components using train.json
 def prepare_training_data():
     with open("../TEND/train.json", "r", encoding="utf-8") as f:
         train_data = json.load(f)

@@ -1,15 +1,25 @@
-mkdir -p ../TEND/mongodb_data_split
+DATA_DIR="../TEND/mongodb_spl3"
+ls "$DATA_DIR"
 
-for file in ../TEND/mongodb_data/*.json; do
-  base=$(basename "$file" .json)
+DB_NAME="TEND"
 
-  keys=$(jq -r 'keys[]' "$file")
-  for key in $keys; do
-    out="../TEND/mongodb_data_split/${base}_${key}.json"
-    jq ".$key" "$file" > "$out"
-    echo "Importing $out into collection '$key'..."
-    mongoimport --db TEND --collection "$key" --file "$out" --jsonArray --drop
-  done
+# Loop through all .json files in the directory
+for file in "$DATA_DIR"/*.json; do
+  # Extract filename without directory and extension
+  filename=$(basename "$file" .json)
+
+  # Extract the collection name as the last part after the last underscore
+  collection_name="${filename##*_}"
+
+  echo "Importing $file into $DB_NAME.$collection_name ..."
+
+  # Run mongoimport for each file
+  mongoimport --db "$DB_NAME" --collection "$collection_name" --file "$file" --jsonArray
 done
+
+echo "✅ All files imported into database '$DB_NAME'."
+# Final message after all files have been processed
+
+
 
 

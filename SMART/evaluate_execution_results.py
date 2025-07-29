@@ -4,8 +4,8 @@ import os
 from utils.mongosh_exec import MongoShellExecutor
 
 # Set paths
-input_file = "./results/SMART/test_debug_rag_exec2.json"
-output_file = "./results/SMART/test_debug_rag_exec2_results.json"
+input_file = "./results/test_debug_rag_exec2.json"
+output_file = "./results/test_debug_rag_exec2_results.json"
 
 # Create output directory if it doesn't exist
 os.makedirs(os.path.dirname(output_file), exist_ok=True)

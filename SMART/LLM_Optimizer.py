@@ -207,8 +207,8 @@ if __name__ == "__main__":
     # was earlier parser.add_argument("--topk", default=20, type=int, help="Num of Retrieval Example")
     args = parser.parse_known_args()[0]
     topk = args.topk
-    file_path = "./results/SMART/test_debug_rag{}.json".format(topk)
-    save_path = "./results/SMART/test_debug_rag_exec{}.json".format(topk)
+    file_path = "./results/test_debug_rag{}.json".format(topk)
+    save_path = "./results/test_debug_rag_exec{}.json".format(topk)
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
 
