@@ -56,7 +56,8 @@ def generate_zero_shot(example:dict):
     return ans
 
 if __name__ == "__main__":
-    file_name = "./TEND/test_debug_rag20_deepseekv3.json"
+    # file_name = "./TEND/test_debug_rag20_deepseekv3.json"
+    file_name = "./TEND/test_subset.json"
     save_path = "./results/results_zero_shot_deepseekv3.json"
 
     with open(file_name, "r") as f:
