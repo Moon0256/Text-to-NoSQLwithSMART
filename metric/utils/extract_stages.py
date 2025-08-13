@@ -2,54 +2,54 @@ import re
 from typing import List, Dict, Any
 
 def _extract_regex_operators(query_str: str) -> bool:
-    """检查查询字符串中是否包含正则表达式操作符"""
-    # 检查显式的 $regex 操作符
+    """Checks if the query string contains regular expression (regex) operator"""
+    # checks for explicit $regex operators
     if '$regex' in query_str:
         return True
-    # 检查 /pattern/i 格式的正则表达式
+    # Checks for a regular pattern of the form /pattern/i
     if re.search(r'/[^/]+/[i]?', query_str):
         return True
     return False
 
 def _extract_expr_operators(match_str: str) -> List[str]:
-    """从$expr中提取操作符"""
+    """Extract the operator from $expr"""
     operators = []
     if '$expr' in match_str:
         operators.append('expr')
-        # 提取比较操作符
+        # Extract comparison operators
         for op in ['$eq', '$gt', '$gte', '$lt', '$lte', '$ne', '$not']:
             if op in match_str:
                 operators.append(op.lstrip('$'))
     return operators
 
 def _parse_pipeline_stage(stage_str: str) -> List[str]:
-    """解析单个管道阶段"""
+    """Parsing a single pipeline stage"""
     operators = []
     
-    # 提取主要操作符
+    # Extract the main operators
     stage_ops = re.findall(r'\$(\w+):', stage_str)
     if stage_ops:
         main_op = stage_ops[0]
         operators.append(main_op)
         
-        # 处理match阶段
+        # Processing match phase
         if main_op == 'match':
-            # 检查 $not 操作符
+            # Check the $not operator
             if '$not' in stage_str:
                 operators.append('not')
-            # 只在没有 $not 操作符时检查正则表达式
+            # Only check regular operation when there is no $not operator
             elif _extract_regex_operators(stage_str):
                 operators.append('regex')
-            # 检查表达式操作符
+            # check expression operators
             operators.extend(_extract_expr_operators(stage_str))
             
-        # 处理lookup阶段中的子管道
+        # Handling sub-pipelines in the lookup stage
         elif main_op == 'lookup' and 'pipeline:' in stage_str:
-            # 提取子管道
+            # Extract the sub-pipeline
             pipeline_match = re.search(r'pipeline:\s*\[(.*?)\]', stage_str, re.DOTALL)
             if pipeline_match:
                 sub_pipeline = pipeline_match.group(1)
-                # 解析子管道中的每个阶段
+                # Parse each stage in the sub-pipeline
                 sub_stages = re.findall(r'\{(.*?)\}', sub_pipeline, re.DOTALL)
                 for sub_stage in sub_stages:
                     operators.extend(_parse_pipeline_stage(sub_stage))
@@ -58,49 +58,49 @@ def _parse_pipeline_stage(stage_str: str) -> List[str]:
 
 def get_query_stages(query: str) -> List[str]:
     """
-    从MongoDB查询语句中提取所有的操作阶段
+    Extract all operation stages from a MongoDB query statement.
     
     Args:
-        query (str): MongoDB查询语句
+        query (str): MongoDB query statement
         
     Returns:
-        List[str]: 查询中的所有操作阶段列表
+        List[str]: List of all operation stages in the query
     """
     stages = []
     
-    # 清理查询字符串
+    # cleaning query strings
     query = query.strip()
     
     if ".find(" in query:
-        # 处理find查询
+        # Processing find queries
         try:
-            # 提取find参数
+            # Extracting find() parameters
             find_match = re.search(r'\.find\s*\((.*?)\)(?:\s*\.|\s*;|\s*$)', query, re.DOTALL)
             if find_match:
                 find_args = find_match.group(1)
                 
-                # 分割查询条件和投影
+                # Splitting query conditions and projections
                 args = re.findall(r'\{(.*?)\}', find_args, re.DOTALL)
                 
-                # 处理查询条件
+                # Processing query conditions
                 if args and args[0].strip():
                     stages.append("match")
-                    # 检查正则表达式
+                    # check regular expressions
                     if _extract_regex_operators(args[0]):
                         stages.append("regex")
-                    # 检查 $not 操作符
+                    # check the $not operator
                     if '$not' in args[0]:
                         stages.append("not")
                 
-                # 处理投影
+                # processing projections
                 if len(args) > 1 and args[1].strip():
                     stages.append("project")
                 
-                # 检查排序
+                # check sorting
                 if ".sort(" in query:
                     stages.append("sort")
                     
-                # 检查限制
+                # check restrictions
                 if ".limit(" in query:
                     stages.append("limit")
                     
@@ -108,17 +108,17 @@ def get_query_stages(query: str) -> List[str]:
             print(f"Error parsing find query: {e}")
             
     elif ".aggregate(" in query:
-        # 处理aggregate查询
+        # processing aggregate queries
         try:
-            # 提取aggregate管道
+            # extracting the aggregrate() pipeline
             agg_match = re.search(r'\.aggregate\s*\((.*?)\)(?:\s*;|\s*$)', query, re.DOTALL)
             if agg_match:
                 pipeline_str = agg_match.group(1)
                 
-                # 提取每个管道阶段
+                # extract each stage in the pipeline
                 stages_matches = re.findall(r'\{(.*?)\}', pipeline_str, re.DOTALL)
                 
-                # 解析每个阶段
+                # analyze each stage
                 for stage_str in stages_matches:
                     stages.extend(_parse_pipeline_stage(stage_str))
                     

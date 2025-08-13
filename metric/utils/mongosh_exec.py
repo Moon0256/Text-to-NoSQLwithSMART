@@ -4,24 +4,52 @@ import os
 from typing import Union, List, Dict
 from datetime import datetime
 from tqdm import tqdm
+import shutil
+import platform
+import re
 
 class MongoShellExecutor:
-    def __init__(self, connection_string: str = "mongodb://localhost:27017", output_dir: str = "output"):
+    def __init__(self, connection_string: str = "mongodb://localhost:27017", output_dir: str = "output", mongosh_path: str = None):
         self.connection_string = connection_string
-        self.mongosh_path = self._get_mongosh_path()
+        self.mongosh_path = mongosh_path or self._get_mongosh_path()
         self.output_dir = output_dir
         
-        # 创建输出目录
+        # Create output directory if it doesn't exist
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         
-        # 测试连接
+        # Test the connection upon initialization
         self._test_connection()
 
     def _get_mongosh_path(self) -> str:
-        """获取mongosh可执行文件的路径"""
-        # 检查多个可能的路径
-        possible_paths = [
+        """Find a mongosh/mongo executable across platforms."""
+        # 1) Env var override
+        env_path = os.environ.get("MONGOSH_PATH")
+        if env_path and os.path.exists(env_path):
+            print(f"Using mongosh from MONGOSH_PATH: {env_path}")
+            return env_path
+
+        # 2) PATH lookup
+        for binary in ("mongosh", "mongo"):
+            p = shutil.which(binary)
+            if p:
+                print(f"Using MongoDB shell from PATH: {p}")
+                return p
+
+        # 3) Common macOS Homebrew paths
+        mac_paths = [
+            "/opt/homebrew/bin/mongosh",   # Apple Silicon
+            "/usr/local/bin/mongosh",      # Intel
+            "/opt/homebrew/bin/mongo",
+            "/usr/local/bin/mongo",
+        ]
+        for p in mac_paths:
+            if os.path.exists(p):
+                print(f"Found MongoDB shell at: {p}")
+                return p
+
+        # 4) Windows fallbacks (your originals)
+        win_paths = [
             r"C:\Program Files\MongoDB\Server\7.0\bin\mongosh.exe",
             r"C:\Program Files\MongoDB\Server\6.0\bin\mongosh.exe",
             r"C:\Program Files\MongoDB\Server\5.0\bin\mongosh.exe",
@@ -31,29 +59,31 @@ class MongoShellExecutor:
             r"D:\MongoDB\Server\6.0\bin\mongosh.exe",
             r"D:\MongoDB\Server\5.0\bin\mongosh.exe",
             r"D:\MongoDB\Server\4.4\bin\mongo.exe",
-            r"D:\MongoDB\Server\4.2\bin\mongo.exe"
+            r"D:\MongoDB\Server\4.2\bin\mongo.exe",
         ]
-        
-        for path in possible_paths:
-            if os.path.exists(path):
-                print(f"找到MongoDB执行文件: {path}")
-                return path
-            
-        raise FileNotFoundError("找不到mongo或mongosh。请确保已安装MongoDB并将其添加到系统路径中。")
+        for p in win_paths:
+            if os.path.exists(p):
+                print(f"Found MongoDB shell at: {p}")
+                return p
 
+        raise FileNotFoundError(
+            "Could not find mongosh or mongo executable. "
+            "Install mongosh or set MONGOSH_PATH or pass mongosh_path=..."
+        )
+    
     def _format_query(self, query: str) -> str:
-        """格式化查询字符串"""
-        query = query.strip().rstrip(';')
+        """Formatting query strings"""
+        q = query.strip().rstrip(';')
         
-        if ('.find(' in query or '.aggregate(' in query) and '.toArray()' not in query:
-            query += '.toArray()'
+        if ('.find(' in q or '.aggregate(' in q) and '.toArray()' not in q:
+            q += '.toArray()'
             
-        return query
+        return q
 
     def _save_to_json(self, data: Union[List, Dict], filename: str = None) -> str:
-        """保存结果到JSON文件"""
+        """Save the results to a JSON file"""
         if filename is None:
-            # 使用时间戳生成文件名
+            # Generate filenames using timestamps
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             filename = f"query_result_{timestamp}.json"
         
@@ -64,23 +94,152 @@ class MongoShellExecutor:
             
         return filepath
 
-    def execute_query(self, db_name: str, query: str, output_file: str = None, timeout: int = 30, get_str: bool = False) -> List[Dict]:
+    def _startupinfo(self):
+        """Windows-only STARTUPINFO to hide the console window."""
+        if platform.system().lower().startswith("win"):
+            si = subprocess.STARTUPINFO()
+            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            return si
+        return None
+    # Previous code for execute_query is commented out
+    # def execute_query(
+    #     self,
+    #     db_name: str,
+    #     query: str,
+    #     output_file: str = None,
+    #     timeout: int = 30,
+    #     get_str: bool = False
+    # ) -> List[Dict]:
+    #     try:
+    #         formatted_query = self._format_query(query)
+    #         js_command = f'''
+    #             try {{
+    #                 db = connect("{self.connection_string}").getSiblingDB("{db_name}");
+    #                 result = {formatted_query};
+    #                 printjson(result);
+    #             }} catch (e) {{
+    #                 print("QUERY_ERROR: " + e.message);
+    #                 quit(1);
+    #             }}
+    #         '''
+
+    #         result = subprocess.run(
+    #             [self.mongosh_path, "--quiet", "--eval", js_command],
+    #             capture_output=True,
+    #             text=True,
+    #             timeout=timeout,
+    #             encoding='utf-8',
+    #             errors='replace',
+    #             startupinfo=self._startupinfo()
+    #         )
+
+    #         if result.stderr:
+    #             print(f"Query Error: {result.stderr}")
+    #             return []
+
+    #         output = result.stdout.strip()
+    #         if not output:
+    #             print("The query result is empty")
+    #             return []
+
+    #         if "QUERY_ERROR" in output:
+    #             print(f"Query Execution error: {output}")
+    #             return []
+
+    #         try:
+    #             # Normalize special Mongo types so json.loads can parse
+    #             special_types = [
+    #                 (r'ObjectId\(([^)]+)\)', r'"ObjectId(\1)"'),
+    #                 (r'ISODate\(([^)]+)\)', r'"ISODate(\1)"'),
+    #                 (r'NumberLong\(([^)]+)\)', r'\1'),
+    #                 (r'NumberDecimal\(([^)]+)\)', r'\1'),
+    #                 (r'Timestamp\(([^)]+)\)', r'"Timestamp(\1)"'),
+    #                 (r'BinData\(([^)]+)\)', r'"BinData(\1)"'),
+    #                 (r'DBRef\(([^)]+)\)', r'"DBRef(\1)"'),
+    #                 (r'NumberInt\(([^)]+)\)', r'\1'),
+    #                 (r'Date\(([^)]+)\)', r'"Date(\1)"'),
+    #             ]
+    #             for pattern, repl in special_types:
+    #                 output = re.sub(pattern, repl, output)
+
+    #             data = json.loads(output)
+    #             if not isinstance(data, list):
+    #                 data = [data]
+    #             for item in data:
+    #                 if not isinstance(item, (dict, list)):
+    #                     print(f"Warning: unexpected data item type - {type(item)}")
+    #             return data
+
+    #         except json.JSONDecodeError as e:
+    #             if get_str:
+    #                 return f"Error in Executing Query and Transforming result into JSON: `{str(e)}`"
+    #             else:
+    #                 print(f"JSON parsing error: {str(e)}")
+    #                 print(f"Error position: {e.pos}")
+    #                 print(f"Error line: {e.lineno}, Column: {e.colno}")
+    #                 print(f"Original output fragment: {output[max(0, e.pos-50):e.pos+50]}")
+    #             return []
+
+    #         except Exception as e:
+    #             if get_str:
+    #                 return f"Error in Executing Query and Transforming result into JSON: `{str(e)}`"
+    #             else:
+    #                 print(f"Data conversion error: {str(e)}")
+    #                 print(f"Raw output: {output[:200]}...")
+    #             return []
+
+    #     except subprocess.TimeoutExpired:
+    #         if get_str:
+    #             return f"Query Timeout: `{timeout} seconds`"
+    #         else:
+    #             print(f"Query timeout (>{timeout} seconds)")
+    #         return []
+    #     except Exception as e:
+    #         if get_str:
+    #             return f"Error in Executing Query and Transforming result into JSON: `{str(e)}`"
+    #         else:
+    #             print(f"An error occurred while executing the query: {str(e)}")
+    #         return []
+
+    def execute_query(
+        self,
+        db_name: str,
+        query: str,
+        output_file: str = None,
+        timeout: int = 30,
+        get_str: bool = False
+    ):
+        """
+        Execute a MongoDB query via mongosh.
+
+        - Ensures .toArray() for find/aggregate so results are materialized.
+        - Prints strict JSON using EJSON.stringify(..., {relaxed:true}).
+        - If get_str == False: returns Python object (list/dict) parsed from JSON.
+          If get_str == True:  returns raw JSON string (stdout) as-is.
+        """
         try:
-            formatted_query = self._format_query(query)
+            # 1) Normalize/complete query
+            q = self._format_query(query)  # adds .toArray() if needed and strips trailing ';'
+
+            # 2) Build the JS we ask mongosh to run
             js_command = f'''
                 try {{
                     db = connect("{self.connection_string}").getSiblingDB("{db_name}");
-                    result = {formatted_query};
-                    printjson(result);
+                    const __result = {q};
+                    // Force strict JSON (relaxed:true keeps numbers/strings human-friendly)
+                    const __out = EJSON.stringify(__result, {{relaxed: true}});
+                    print(__out);
                 }} catch (e) {{
-                    print("QUERY_ERROR: " + e.message);
+                    // Machine-detectable error marker; avoid noisy stacks
+                    print("__QUERY_ERROR__:" + e.message);
                     quit(1);
                 }}
             '''
-            
-            startupinfo = subprocess.STARTUPINFO()
-            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            
+
+            # 3) Windows-only STARTUPINFO to hide window; None elsewhere
+            startupinfo = self._startupinfo()
+
+            # 4) Run mongosh
             result = subprocess.run(
                 [self.mongosh_path, "--quiet", "--eval", js_command],
                 capture_output=True,
@@ -90,86 +249,37 @@ class MongoShellExecutor:
                 errors='replace',
                 startupinfo=startupinfo
             )
-            
+
+            # 5) Handle stderr (shell errors) quickly
             if result.stderr:
-                print(f"查询错误: {result.stderr}")
+                return result.stderr if get_str else []
+
+            stdout = result.stdout.strip()
+
+            # 6) Bail out on explicit error marker
+            if stdout.startswith("__QUERY_ERROR__:"):
+                return stdout if get_str else []
+
+            # 7) Respect get_str contract
+            if get_str:
+                # At this point stdout is valid JSON (EJSON.stringify)
+                return stdout
+
+            # 8) Parse JSON into Python types
+            if not stdout:
                 return []
-            
-            output = result.stdout.strip()
-            if not output:
-                print("查询结果为空")
-                return []
-            
-            if "QUERY_ERROR" in output:
-                print(f"查询执行错误: {output}")
-                return []
-            
-            try:
-                # 处理MongoDB特殊类型
-                special_types = [
-                    ('ObjectId\\(([^)]+)\\)', r'"ObjectId(\1)"'),
-                    ('ISODate\\(([^)]+)\\)', r'"ISODate(\1)"'),
-                    ('NumberLong\\(([^)]+)\\)', r'\1'),
-                    ('NumberDecimal\\(([^)]+)\\)', r'\1'),
-                    ('Timestamp\\(([^)]+)\\)', r'"Timestamp(\1)"'),
-                    ('BinData\\(([^)]+)\\)', r'"BinData(\1)"'),
-                    ('DBRef\\(([^)]+)\\)', r'"DBRef(\1)"'),
-                    ('NumberInt\\(([^)]+)\\)', r'\1'),
-                    ('Date\\(([^)]+)\\)', r'"Date(\1)"')
-                ]
-                
-                import re
-                for pattern, replacement in special_types:
-                    output = re.sub(pattern, replacement, output)
-                    
-                data = json.loads(output)
-                if not isinstance(data, list):
-                    data = [data]
-                    
-                # 验证转换后的数据
-                for item in data:
-                    if not isinstance(item, (dict, list)):
-                        print(f"警告：数据项类型异常 - {type(item)}")
-                        
-                return data
-                
-            except json.JSONDecodeError as e:
-                if get_str:
-                    out_str = f"Error in Executing Query and Transfroming result into JSON: `{str(e)}`"
-                    return out_str
-                else:
-                    print(f"JSON 解析错误: {str(e)}")
-                    print(f"错误位置: {e.pos}")
-                    print(f"错误行: {e.lineno}, 列: {e.colno}")
-                print(f"原始输出片段: {output[max(0, e.pos-50):e.pos+50]}")
-                return []
-                
-            except Exception as e:
-                if get_str:
-                    out_str = f"Error in Executing Query and Transfroming result into JSON: `{str(e)}`"
-                    return out_str
-                else:
-                    print(f"数据转换错误: {str(e)}")
-                    print(f"原始输出: {output[:200]}...")  # 只显示前200个字符
-                return []
-                
+            data = json.loads(stdout)
+            # Normalize to list for downstream code
+            return data if isinstance(data, list) else [data]
+
         except subprocess.TimeoutExpired:
-            if get_str:
-                out_str = f"Query Timeout: `{timeout} seconds`"
-                return out_str
-            else:
-                print(f"查询超时 (>{timeout}秒)")
-            return []
+            return (f"__QUERY_ERROR__:timeout>{timeout}s") if get_str else []
         except Exception as e:
-            if get_str:
-                out_str = f"Error in Executing Query and Transfroming result into JSON: `{str(e)}`"
-                return out_str
-            else:
-                print(f"执行查询时发生错误: {str(e)}")
-            return []
+            # On unexpected issues, either return [] or a tagged string
+            return (f"__QUERY_ERROR__:{type(e).__name__}:{e}") if get_str else []
+
 
     def execute_script(self, db_name: str, script_path: str) -> str:
-        """执行MongoDB脚本文件"""
         try:
             command = [self.mongosh_path, db_name, script_path]
             result = subprocess.run(
@@ -180,13 +290,13 @@ class MongoShellExecutor:
             )
             return result.stdout
         except subprocess.CalledProcessError as e:
-            print(f"执行脚本时出错: {e.stderr}")
+            print(f"Error while executing script: {e.stderr}")
             raise
 
     def _test_connection(self):
-        """测试数据库连接"""
+        """Quick shell availability & connection test."""
         try:
-            print(f"正在尝试连接到 MongoDB: {self.connection_string}")
+            print(f"Trying to connect to MongoDB: {self.connection_string}")
             js_command = f'''
                 try {{
                     db = connect("{self.connection_string}");
@@ -196,11 +306,6 @@ class MongoShellExecutor:
                     quit(1);
                 }}
             '''
-            
-            # 使用 UTF-8 编码运行命令
-            startupinfo = subprocess.STARTUPINFO()
-            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            
             result = subprocess.run(
                 [self.mongosh_path, "--quiet", "--eval", js_command],
                 capture_output=True,
@@ -208,70 +313,17 @@ class MongoShellExecutor:
                 timeout=5,
                 encoding='utf-8',
                 errors='replace',
-                startupinfo=startupinfo
+                startupinfo=self._startupinfo()
             )
-            
             if result.stderr:
-                print(f"连接错误输出: {result.stderr}")
-                raise Exception(f"MongoDB连接错误: {result.stderr}")
-                
-            if result.stdout:
-                print(f"连接输出: {result.stdout}")
-            
-            if "CONNECTION_SUCCESS" not in result.stdout:
-                raise Exception("MongoDB连接失败")
-                
-            print("MongoDB连接测试成功！")
-            
+                raise Exception(f"MongoDB connection error: {result.stderr}")
+            if "CONNECTION_SUCCESS" not in (result.stdout or ""):
+                raise Exception("MongoDB connection failed")
+            print("MongoDB connection test successful!")
         except Exception as e:
-            print(f"MongoDB连接测试失败: {str(e)}")
-            print("\n请确保：")
-            print("1. MongoDB 服务已经启动（net start MongoDB）")
-            print("2. 端口 27017 未被占用")
-            print("3. 防火墙未阻止连接")
-            print(f"4. MongoDB路径正确: {self.mongosh_path}")
+            print(f"MongoDB connection test failed: {str(e)}")
+            print("\nPlease make sure:")
+            print("1. mongosh is installed and on PATH, or pass mongosh_path / set MONGOSH_PATH")
+            print("2. MongoDB service is running on the target host/port")
+            print(f"3. Using shell at: {self.mongosh_path}")
             raise
-
-def main():
-    try:
-        executor = MongoShellExecutor(
-            connection_string="mongodb://localhost:27017/?connectTimeoutMS=5000",
-            output_dir="query_results"
-        )
-        
-        # 读取测试数据
-        # test_file = "./TEND/test_debug_rag_exec20_deepseekv3_ori.json"
-        test_file = "./test_results_nostep.json"
-        print(f"\n正在读取测试文件: {test_file}")
-        
-        with open(test_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        
-        print(f"成功加载测试数据，共 {len(data)} 条记录")
-        
-        for i, example in tqdm(enumerate(data, 1), total=len(data)):
-            try:
-                # print(f"\n执行查询 {i}/{len(data)}:")
-                # print(f"数据库: {example['db_id']}")
-                # print(f"查询: {example['MQL']}")
-                
-                result = executor.execute_query(
-                    example["db_id"], 
-                    example['predict'],
-                    get_str=True
-                )
-                
-                if isinstance(result, str):
-                    print(f"查询结果: {result}")
-                # else:
-                #     print(f"查询结果: {json.dumps(result, ensure_ascii=False, indent=2)}")
-                
-            except Exception as e:
-                print(f"处理记录 {example.get('record_id', i)} 时出错: {str(e)}")
-                continue
-            
-    except Exception as e:
-        print(f"程序执行错误: {str(e)}")
-
-if __name__ == "__main__":
-    main()
