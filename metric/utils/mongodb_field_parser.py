@@ -1,6 +1,6 @@
 """
 MongoDB Field Parser
-用于解析MongoDB查询中的数据库字段
+Used to parse database fields in MongoDB queries.
 
 This module extracts and lists all fields used in MongoDB queries,
 including find queries, aggregation pipelines, and complex expressions.
@@ -12,23 +12,23 @@ from typing import List, Set, Dict, Union, Any
 
 class MongoFieldParser:
     def __init__(self):
-        # 存储每个集合的字段
+        # Fields to store each collection
         self.collection_fields = {}
         self.current_collection = None
-        # 存储计算字段和临时字段
+        # Storing calculated and temporary fields
         self.computed_fields = set()
         
     def parse_query(self, query: str) -> Dict[str, List[str]]:
         """
-        解析MongoDB查询语句，提取所有字段
+        Parse a MongoDB query statement to extract all used fields.
         
         Args:
-            query (str): MongoDB查询语句
+            query (str): MongoDB query statement
             
         Returns:
-            Dict[str, List[str]]: 每个集合的字段列表
+            Dict[str, List[str]]: List of fields for each collection
         """
-        # 提取集合名
+        # Extract the collection name L
         try:
             collection = query.split("db.", 1)[1].split(".", 1)[0]
             self.current_collection = collection
@@ -44,16 +44,16 @@ class MongoFieldParser:
         elif ".aggregate(" in query:
             self._parse_aggregate_query(query)
             
-        # 返回每个集合的排序后的字段列表
+        # Returns a sorted list of fields for each collection
         return {coll: sorted(list(fields)) 
                 for coll, fields in self.collection_fields.items()}
     
     def _add_field(self, field: str, collection: str = None) -> None:
-        """添加字段到指定集合"""
+        """Add a field to the current collection's field set"""
         if collection is None:
             collection = self.current_collection
             
-        # 检查是否应该排除该字段
+        # Check if the field should be excluded
         if self._should_exclude_field(field):
             return
             
@@ -62,42 +62,42 @@ class MongoFieldParser:
         self.collection_fields[collection].add(field)
     
     def _should_exclude_field(self, field: str) -> bool:
-        """检查是否应该排除该字段"""
-        # 排除以下字段：
-        # 1. 以 $$ 开头的变量引用
-        # 2. _id 的子字段（在group阶段中）
-        # 3. lookup的as字段
-        # 4. 计算字段
+        """check if a field should be excluded from parsing"""
+        # Exclude the following fields：
+        # 1. Variable references starting with $$
+        # 2. _id subfields (in the group stage)
+        # 3. lookup as fields
+        # 4. calculated fields (EVc)
         return (field.startswith("$$") or
                 field.startswith("_id.") or
                 field in self.computed_fields)
 
     def _add_computed_field(self, field: str) -> None:
-        """添加计算字段"""
+        """Add a calculated field"""
         self.computed_fields.add(field)
         
     def _parse_find_query(self, query: str) -> None:
-        """解析find查询中的字段"""
+        """Parsing fields in find queries"""
         try:
-            # 提取find()中的参数
+            # Extracting parameters from find()
             args_str = query.split(".find(", 1)[1].rsplit(")", 1)[0].strip()
             
-            # 处理参数字符串
-            args_str = args_str.replace("'", '"')  # 将单引号替换为双引号
-            args_str = args_str.replace("None", "null")  # 处理Python的None
-            args_str = args_str.replace("True", "true").replace("False", "false")  # 处理布尔值
+            # Processing parameter strings
+            args_str = args_str.replace("'", '"')  # replace single quotes with double quotes
+            args_str = args_str.replace("None", "null")  # handling Python's None
+            args_str = args_str.replace("True", "true").replace("False", "false")  # handling boolean values
             
-            # 确保args_str是一个有效的数组
+            # make sure args_str is a valid JSON array
             if not args_str.startswith("["):
                 args_str = "[" + args_str + "]"
                 
             try:
                 args = demjson.decode(args_str)
             except:
-                # 如果解析失败，尝试分割参数
+                # If parsing fails, try splitting arguments
                 parts = args_str.split("}, {")
                 if len(parts) > 1:
-                    # 重建参数字符串
+                    # Rebuild parameter strings
                     args_str = "[{"
                     args_str += "}, {".join(parts)
                     args_str += "}]"
@@ -108,28 +108,28 @@ class MongoFieldParser:
             if args and isinstance(args[0], dict):
                 self._extract_fields_from_dict(args[0])
                 
-            # 处理投影字段 (第二个参数)
+            # Processing projection fields (second argument)
             if len(args) > 1 and isinstance(args[1], dict):
                 self._extract_projection_fields(args[1])
         except Exception as e:
             print(f"Error parsing find query: {e}")
     
     def _parse_aggregate_query(self, query: str) -> None:
-        """解析aggregate查询中的字段"""
+        """resolving fields in aggregate queries"""
         try:
-            # 提取aggregate()中的参数
+            # Extracting parameters from aggregate()
             pipeline_str = query.split(".aggregate(", 1)[1].rsplit(")", 1)[0].strip()
             
-            # 处理参数字符串
-            pipeline_str = pipeline_str.replace("'", '"')  # 将单引号替换为双引号
-            pipeline_str = pipeline_str.replace("None", "null")  # 处理Python的None
-            pipeline_str = pipeline_str.replace("True", "true").replace("False", "false")  # 处理布尔值
+            # Processing parameter strings
+            pipeline_str = pipeline_str.replace("'", '"')  # replace single quotes with double quotes
+            pipeline_str = pipeline_str.replace("None", "null")  # Handling Python's None
+            pipeline_str = pipeline_str.replace("True", "true").replace("False", "false")  # Handling boolean values
             
-            # 尝试直接解析
+            # Try parsing directly
             try:
                 pipeline = demjson.decode(pipeline_str)
             except:
-                # 如果解析失败，尝试规范化MongoDB操作符
+                # If parsing fails, try to normalize MongoDB operators
                 pipeline_str = pipeline_str.replace("$match:", '"$match":')
                 pipeline_str = pipeline_str.replace("$group:", '"$group":')
                 pipeline_str = pipeline_str.replace("$project:", '"$project":')
@@ -151,7 +151,7 @@ class MongoFieldParser:
             print(f"Error parsing aggregate query: {e}")
     
     def _parse_aggregate_stage(self, stage: Dict) -> None:
-        """解析聚合管道的每个阶段"""
+        """analyze each stage of the aggregation pipeline"""
         if not isinstance(stage, dict):
             return
             
@@ -168,13 +168,13 @@ class MongoFieldParser:
             elif operator == "$lookup":
                 self._extract_lookup_fields(value)
             elif operator == "$unwind":
-                # 处理$unwind操作
+                # handling $unwind operations
                 if isinstance(value, str):
                     self._add_field(value.strip("$"))
                 elif isinstance(value, dict) and "path" in value:
                     self._add_field(value["path"].strip("$"))
             elif operator == "$sort":
-                # 处理$sort操作
+                # handling $sort operations
                 if isinstance(value, dict):
                     for field in value.keys():
                         if not field.startswith("$"):
@@ -183,7 +183,7 @@ class MongoFieldParser:
                 pass
     
     def _handle_expr_operator(self, expr_value: dict) -> None:
-        """处理$expr操作符"""
+        """handle $expr operator in MongoDB queries"""
         if isinstance(expr_value, dict):
             for op, value in expr_value.items():
                 if isinstance(value, list):
@@ -200,7 +200,7 @@ class MongoFieldParser:
                     self._extract_fields_from_dict(value)
     
     def _extract_fields_from_dict(self, d: Dict, parent: str = "") -> None:
-        """递归提取字典中的字段名"""
+        """recursively extract fields from a dictionary"""
         if not isinstance(d, dict):
             return
             
@@ -225,9 +225,9 @@ class MongoFieldParser:
                 self._add_field(full_key)
     
     def _extract_group_fields(self, group_dict: Dict) -> None:
-        """提取$group阶段中的字段"""
+        """Extract fields in $group stage"""
         for key, value in group_dict.items():
-            # 将所有group阶段的输出字段标记为计算字段
+            # Mark all fields in $group as computed fields
             if key != "_id":
                 self._add_computed_field(key)
                 
@@ -244,31 +244,31 @@ class MongoFieldParser:
                         self._add_field(field[1:])
     
     def _extract_projection_fields(self, proj_dict: Dict) -> None:
-        """提取投影中的字段"""
+        """Extracting fields from $project stage"""
         for key, value in proj_dict.items():
             if not key.startswith("$"):
                 if isinstance(value, (int, bool)) and value:
-                    # 简单投影
+                    # Simple field projection
                     self._add_field(key)
                 elif isinstance(value, str) and value.startswith("$"):
-                    # 字段引用
+                    # Field references
                     self._add_field(value[1:])
                 elif isinstance(value, dict):
-                    # 将使用表达式的字段标记为计算字段
+                    # Mark fields that use expressions as calculated fields
                     self._add_computed_field(key)
                     for op, field in value.items():
                         if isinstance(field, str) and field.startswith("$"):
                             self._add_field(field[1:])
                             
     def _extract_lookup_fields(self, lookup_dict: Dict) -> None:
-        """提取$lookup阶段中的字段"""
+        """Extract fields from $lookup stage"""
         if not isinstance(lookup_dict, dict):
             return
             
-        # 记录原始集合
+        # Record the original collection 
         original_collection = self.current_collection
             
-        # 将as字段标记为计算字段
+        # Mark the field as calculated field 
         if "as" in lookup_dict:
             self._add_computed_field(lookup_dict["as"])
             
@@ -285,11 +285,11 @@ class MongoFieldParser:
                     if isinstance(stage, dict):
                         self._parse_aggregate_stage(stage)
                         
-        # 恢复原始集合
+        # Restore the original collection
         self.current_collection = original_collection
 
 def main():
-    """测试示例"""
+    """test example"""
     parser = MongoFieldParser()
     
     # file_path = "./data/train/TEND_train.json"

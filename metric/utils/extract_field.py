@@ -5,54 +5,54 @@ class MongoFieldParser:
         self.fields = set()
         
     def _parse_mongodb_query(self, query_str: str) -> dict:
-        """使用正则表达式解析MongoDB查询字符串"""
+        """Parsing MongoDB query strings using regular expressions"""
         try:
-            # MongoDB操作符列表
+            # List of MongoDB operators
             operators = {
-                # 比较操作符
+                # Comparison operators
                 "eq", "gt", "gte", "in", "lt", "lte", "ne", "nin",
-                # 逻辑操作符
+                # Logical operators
                 "and", "not", "nor", "or",
-                # 元素操作符
+                # Element wise operators
                 "exists", "type",
-                # 评估操作符
+                # Evaluation operators
                 "expr", "jsonSchema", "mod", "regex", "text", "where",
-                # 地理空间操作符
+                # Geospatial operators
                 "geoIntersects", "geoWithin", "near", "nearSphere",
-                # 数组操作符
+                # Array operators
                 "all", "elemMatch", "size",
-                # 按位操作符
+                # bitwise operators
                 "bitsAllClear", "bitsAllSet", "bitsAnyClear", "bitsAnySet",
-                # 聚合操作符
+                # aggregation operators
                 "sum", "avg", "first", "last", "max", "min", "push", "addToSet",
-                # 聚合阶段操作符
+                # aggregration phase operators
                 "group", "match", "project", "limit", "skip", "sort", "unwind",
-                # 聚合阶段参数
+                # aggregration phase parameters
                 "from", "localField", "foreignField", "as", "pipeline",
-                # 计数和控制字段
+                # count and control fields
                 "count", "size",
-                # 其他操作符
+                # other operators
                 "comment", "rand"
             }
             
-            # 提取字段名（包括带引号和不带引号的）
+            # Extract field names (quoted and unquoted)
             fields = set()
             
-            # 匹配带引号的字段名
+            # Matches quoted field names
             quoted_fields = re.finditer(r'"([^"$][^"]*)":', query_str)
             for match in quoted_fields:
                 field = match.group(1)
                 if field not in operators and not field.startswith("$"):
                     self._add_normalized_field(fields, field)
             
-            # 匹配不带引号的字段名
+            # Matches unquoted field names
             unquoted_fields = re.finditer(r'([a-zA-Z_$][\w$]*)\s*:', query_str)
             for match in unquoted_fields:
                 field = match.group(1)
                 if not field.startswith("$") and field not in operators:
                     self._add_normalized_field(fields, field)
             
-            # 匹配字段引用（$field）
+            # Matching field references（$field）
             field_refs = re.finditer(r'\$([a-zA-Z_$][\w$]*(?:\.[a-zA-Z_$][\w$]*)*)', query_str)
             for match in field_refs:
                 field = match.group(1)
@@ -65,27 +65,27 @@ class MongoFieldParser:
             return None
             
     def _add_normalized_field(self, fields: set, field: str) -> None:
-        """添加规范化的字段名到集合中"""
-        # 分割字段路径
+        """add normalized field name to the set"""
+        # split field path
         parts = field.split('.')
         
-        # 如果字段路径中包含 "employees" 或 "employee"，提取最后的字段名
+        # If the field is nested under 'employees' or 'employee', take the last part
         if any(part in ["employees", "employee"] for part in parts[:-1]):
             field = parts[-1]
         
-        # 添加字段名（如果不是数字且不是特殊字段）
+        # add field if it's not purely numeric and not a common nested object name
         if not field.isdigit() and field not in ["employees", "employee", "job_history"]:
             fields.add(field)
 
     def _parse_aggregate_query(self, query: str) -> None:
-        """解析aggregate查询中的字段"""
+        """resolving fields in aggregate queries"""
         try:
-            # 提取aggregate()中的参数部分
+            # extract the parameter part in aggregate()
             match = re.search(r'\.aggregate\s*\((.*)\)\s*;?\s*$', query, re.DOTALL | re.MULTILINE)
             if match:
                 pipeline_str = match.group(1).strip()
                 
-                # 提取所有阶段
+                # Extract all stages
                 stages = re.finditer(r'\{[^{}]*\}', pipeline_str)
                 for stage_match in stages:
                     stage_str = stage_match.group(0)
@@ -95,7 +95,7 @@ class MongoFieldParser:
                             for field in stage["fields"]:
                                 self.fields.add(field)
                         
-                        # 检查是否是$count阶段
+                        # Check if its the $count stage
                         count_match = re.search(r'"?\$count"?\s*:\s*"([^"]+)"', stage_str)
                         if count_match:
                             self.fields.add(count_match.group(1))
@@ -103,14 +103,14 @@ class MongoFieldParser:
             print(f"Error parsing aggregate query: {e}")
 
     def _parse_find_query(self, query: str) -> None:
-        """解析find查询中的字段"""
+        """parsing fields in find queries"""
         try:
-            # 提取find()中的参数部分
+            #extract the parameter part in find() 
             match = re.search(r'\.find\s*\((.*)\)\s*;?\s*$', query, re.DOTALL | re.MULTILINE)
             if match:
                 args_str = match.group(1).strip()
                 
-                # 提取所有参数
+                # extract all parameters
                 args_matches = re.finditer(r'\{[^{}]*\}', args_str)
                 args = []
                 for arg_match in args_matches:
@@ -118,12 +118,12 @@ class MongoFieldParser:
                     if isinstance(arg, dict) and "fields" in arg:
                         args.append(arg["fields"])
                 
-                # 处理查询条件
+                # processing query conditions
                 if len(args) > 0:
                     for field in args[0]:
                         self.fields.add(field)
                 
-                # 处理投影
+                # processing projections
                 if len(args) > 1:
                     for field in args[1]:
                         self.fields.add(field)
@@ -132,18 +132,18 @@ class MongoFieldParser:
 
     def parse_query(self, query: str) -> list:
         """
-        解析MongoDB查询语句，提取所有字段
+        Parse a MongoDB query statement to extract all used fields.
         
         Args:
-            query (str): MongoDB查询语句
+            query (str): MongoDB query statement
             
         Returns:
-            List[str]: 查询中使用的所有字段列表
+            List[str]: List of all fields used in the query
         """
         self.fields.clear()
         
         try:
-            # 清理查询字符串
+            # cleaning up the query string
             query = query.strip()
             
             if ".find(" in query:
@@ -158,13 +158,13 @@ class MongoFieldParser:
 
 def extract_fields(MQL: str) -> list:
     """
-    从MongoDB查询语句中提取所有使用的字段
+    Extract all fields used in a MongoDB query statement.
     
     Args:
-        MQL (str): MongoDB查询语句
+        MQL (str): MongoDB query statement
         
     Returns:
-        List[str]: 查询中使用的所有字段列表
+        List[str]: list of all fields used in the query
     """
     parser = MongoFieldParser()
     return parser.parse_query(MQL)
