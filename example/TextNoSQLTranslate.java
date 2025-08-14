@@ -40,8 +40,8 @@ public class TextNoSQLTranslate {
 
             // Make connection. TODO: Change user id and password as needed            
             System.out.println("\nGetting connection:  " + url);
-            // con = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
-            con = (MongoConnection) DriverManager.getConnection(url);
+            con = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
+            // con = (MongoConnection) DriverManager.getConnection(url);
             System.out.println("\nConnection successful for " + url);
 
             // Translate SQL to MongoDB query
