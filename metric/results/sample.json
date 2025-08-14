@@ -1,0 +1,16 @@
+[
+  {
+    "record_id": 1,
+    "db_id": "school_bus",
+    "nlq": "Show the school name and driver name for all school buses.",
+    "MQL": "db.school.aggregate([{ \"$lookup\": { \"from\": \"driver\", \"localField\": \"School_ID\", \"foreignField\": \"school_bus.School_ID\", \"as\": \"Docs1\" } }, { \"$unwind\": \"$Docs1\" }, { \"$project\": { \"School\": 1, \"Name\": \"$Docs1.Name\", \"_id\": 0 } }]);",
+    "MQL_pred": "db.school.aggregate([{ $lookup: { from: \"driver\", localField: \"School_ID\", foreignField: \"school_bus.School_ID\", as: \"Docs1\" } }, { $unwind: \"$Docs1\" }, { $project: { School: 1, Name: \"$Docs1.Name\", _id: 0 } }]);"
+  },
+  {
+    "record_id": 2,
+    "db_id": "school_bus",
+    "nlq": "List all schools (names only).",
+    "MQL": "db.school.find({}, { \"School\": 1, \"_id\": 0 });",
+    "MQL_pred": "db.school.find({}, { School: 1, _id: 0 });"
+  }
+]

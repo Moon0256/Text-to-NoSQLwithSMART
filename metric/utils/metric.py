@@ -282,7 +282,7 @@ if __name__ == "__main__":
         "db_id": example['db_id'],
         "NLQ": example['nlq'],
         "target": example['MQL'],
-        "prediction": example['MQL_debug_exec'],
+        "prediction": example['MQL_pred'],
     } for example in predictions]
 
     # Calculation indicators
