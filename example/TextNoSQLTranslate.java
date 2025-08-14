@@ -1,56 +1,58 @@
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
-import com.mongodb.client.FindIterable;
+import org.bson.Document;
+
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-// import com.unityjdbc.mongodb.MongoDBTranslator; // Adjust import as needed
 import mongodb.jdbc.MongoConnection;
 import mongodb.jdbc.MongoStatement;
+import mongodb.query.MongoQuery;
 import unity.annotation.GlobalSchema;
 import unity.operators.Operator;
 import unity.query.GlobalQuery;
 
-public class TextNoSQLTranslate {
-
-     // Use demo tpch Mongo instance. Queries that can be directly done using MongoDB can refer to collections not in this instance.
-    // Queries that will involve UnityJDBC need a schema and a valid instance.
-    // private static String url = "jdbc:mongo://localhost/tpch?debug=false&authDB=admin";
-    private static String url = "jdbc:mongo://localhost/cre_Doc_Template_Mgt?debug=false&authDB=admin";
+public class TextNoSQLTranslate {     
+    private static String url = "jdbc:mongo://localhost/tpch?debug=false&authDB=admin";    
 
     // Mongo JDBC connection
     private static MongoConnection con = null;
 
     public static void main(String[] args) {
-
         try
-        {
-            // A query that can be translated and executed directly on MongoDB
-            // String sql = "SELECT r_regionkey, r_name FROM region WHERE r_regionkey < 3;";
-            String sql = "SELECT sum(enr) FROM college WHERE cName NOT IN (SELECT cName FROM tryout WHERE pPos = \"goalie\")";
+        {            
+            // Configure database
+            String dbName = "tpch"; // TODO: Change to your database name
+            dbName = "flight_2";
+            
+            // Connection URL
+            url = "jdbc:mongo://localhost/"+dbName+"?rebuildSchema=true&schema=example/schema/mongo_"+dbName+".xml&debug=false&authDB=admin&generate";
+
+            // Test SQL
+            String sql;
+            sql = "SELECT r_regionkey, r_name, n_name, n_regionkey, n_nationkey FROM region R INNER JOIN nation N ON R.r_regionkey = N.n_regionkey WHERE r_regionkey < 3;";
             sql = "SELECT Airline , Abbreviation FROM AIRLINES WHERE Country = 'USA'";
-            sql = "SELECT name FROM web_client_accelerator WHERE name LIKE '%Opera%'";
-            sql = "SELECT count(*) FROM Documents AS T1 JOIN Templates AS T2 ON T1.Template_ID = T2.Template_ID WHERE T2.Template_Type_Code = 'PPT'";
-            // sql = "SELECT Time_of_purchase , age , address FROM member ORDER BY Time_of_purchase";
-            // sql = "SELECT name , Level_of_membership FROM visitor WHERE Level_of_membership > 4 ORDER BY age DESC";
-            // translate(sql, con);
 
-            // // A query that can be translated and executed directly on MongoDB (even though the given collection does not exist in the sample Mongo instance)
-            // sql = "SELECT * FROM my_collection WHERE value < 3 AND value2 >= 'abc';";
-            // translate(sql, con);
-
-            // A query that can be executed by MongoDB directly which is translated into a query plan involving queries to MongoDB and operators done by UnityJDBC
-            // This example REQUIRES a connection to the data source
+            // Make connection. TODO: Change user id and password as needed            
             System.out.println("\nGetting connection:  " + url);
-            con = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
+            // con = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
+            con = (MongoConnection) DriverManager.getConnection(url);
             System.out.println("\nConnection successful for " + url);
 
-            // sql = "SELECT r_regionkey, r_name, n_name, n_regionkey, n_nationkey FROM region R INNER JOIN nation N ON R.r_regionkey = N.n_regionkey WHERE r_regionkey < 3;";
-            // sql = "SELECT r_regionkey, r_name, n_name, n_regionkey, n_nationkey FROM region JOIN nation ON r_regionkey = n_regionkey";
-            // sql = "SELECT Airline , Abbreviation FROM AIRLINES WHERE Country = 'USA'";
-            translate(sql, con);            
+            // Translate SQL to MongoDB query
+            System.out.println("\nTranslating SQL to MongoDB query...");
+            MongoStatement stmt = translate(sql, con);
+
+            // Execute the translated query
+            System.out.println("\nExecuting translated MongoDB query...");
+            execute(sql, con, stmt);
+
+            stmt.close();
         }
         catch (SQLException ex)
         {
@@ -72,28 +74,69 @@ public class TextNoSQLTranslate {
             }
         }
         System.exit(1);
-        // String jsonFilePath = "test/convert/train_SLM_subset.json";
-        // try (FileReader reader = new FileReader(jsonFilePath)) {
-        //     JsonParser parser = new JsonParser();
-        //     JsonElement root = parser.parse(reader);
-        //     if (root.isJsonArray()) {
-        //         JsonArray records = root.getAsJsonArray();
-        //         for (JsonElement elem : records) {
-        //             JsonObject obj = elem.getAsJsonObject();
-        //             String refSql = obj.get("ref_sql").getAsString();
-        //             //String mongoQuery = MongoDBTranslator.translateSQL(refSql);
-        //             String mongoQuery = "Translated MongoDB Query"; // Placeholder for actual translation logic
-        //             System.out.println("SQL: " + refSql);
-        //             System.out.println("MongoDB Query: " + mongoQuery);
-        //             System.out.println("-----");
-        //         }
-        //     } else {
-        //         System.out.println("JSON file does not contain an array.");
-        //     }
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
     }
+
+    
+    public static void execute(String sql, MongoConnection connection, MongoStatement stmt)            
+    {        
+        MongoQuery mq = stmt.getQuery();
+        String mongoQuery = stmt.getQueryString();
+
+        System.out.println("\nExecuting SQL query directed on MongoDB: \n" + sql + '\n' + "\nMongo Query: \n"+mongoQuery+"\n");                
+
+        DB db = connection.getDB();
+        MongoClient mongoClient = db.getMongoClient();
+        MongoDatabase database = mongoClient.getDatabase(db.getName());        
+        MongoCollection<Document> collection = database.getCollection(mq.collectionName);
+
+        // Get just query part (find or aggregate)       
+        boolean isAggregate = mongoQuery.startsWith("db."+mq.collectionName+".aggregate(");
+
+        long startTime = System.currentTimeMillis();  
+
+        Iterable<Document> docs = null;
+        if (isAggregate) 
+        {
+            int start = mongoQuery.indexOf('[');
+            int end = mongoQuery.lastIndexOf(']');
+            String jsonArray = mongoQuery.substring(start, end + 1); // keep the [ and ]
+            Document wrapper = Document.parse("{\"pipeline\": " + jsonArray + "}");            
+            List<Document> pipeline = (List<Document>) wrapper.get("pipeline");           
+            docs = collection.aggregate(pipeline);
+            System.out.println("Executing aggregation pipeline: \n" + pipeline);
+        }
+         else
+        {
+            int start = mongoQuery.indexOf('(');
+            int end = mongoQuery.lastIndexOf(')');
+            String queryStr = mongoQuery.substring(start + 1, end); 
+            Document queryExec = Document.parse(queryStr);
+            
+            // Split into filter and projection parts
+            String[] parts = queryStr.split("},\\s*\\{", 2);
+            Document filter = Document.parse(parts[0] + "}");
+
+            // Only if projection exists            
+            if (parts.length > 1) {
+                Document projection = Document.parse("{" + parts[1]);
+                docs = collection.find(filter).projection(projection);
+            } else {
+                docs = collection.find(filter);
+            }
+        }
+                    
+        System.out.println("Results");
+        int count = 0;
+        for (Document doc : docs) {            
+            // doc.toString();
+            System.out.println(doc.toJson());
+            count++;
+        }                           
+        System.out.println("Time for direct mongo query (in ms): "+(System.currentTimeMillis()-startTime));
+        System.out.println("Total results: "+count);            
+    }
+
+
     /**
      * Translates a SQL query to MongoDB (if possible).
      * 
@@ -104,7 +147,7 @@ public class TextNoSQLTranslate {
      * @throws SQLException
      *             if a database or translation error occurs
      */
-    public static void translate(String sql, MongoConnection connection)
+    public static MongoStatement translate(String sql, MongoConnection connection)
             throws SQLException
     {
         MongoStatement stmt;
@@ -136,8 +179,8 @@ public class TextNoSQLTranslate {
         else
         {
             System.out.println("To Mongo query: \n" + mongoQuery);
-        }
-        if (connection != null)
-            stmt.close();
+        }       
+
+        return stmt;
     }
 }
