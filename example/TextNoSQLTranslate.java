@@ -18,7 +18,7 @@ import unity.operators.Operator;
 import unity.query.GlobalQuery;
 
 public class TextNoSQLTranslate {     
-    private static String url = "jdbc:mongo://localhost/tpch?debug=false&authDB=admin";    
+    private static String url = "jdbc:mongo://localhost/tpch?debug=false";    
 
     // Mongo JDBC connection
     private static MongoConnection con = null;
@@ -31,7 +31,7 @@ public class TextNoSQLTranslate {
             dbName = "flight_2";
             
             // Connection URL
-            url = "jdbc:mongo://localhost/"+dbName+"?rebuildSchema=true&schema=example/schema/mongo_"+dbName+".xml&debug=false&authDB=admin&generate";
+            url = "jdbc:mongo://localhost/"+dbName+"?rebuildSchema=true&schema=example/schema/mongo_"+dbName+".xml&debug=false&generate";
 
             // Test SQL
             String sql;
@@ -40,7 +40,7 @@ public class TextNoSQLTranslate {
 
             // Make connection. TODO: Change user id and password as needed            
             System.out.println("\nGetting connection:  " + url);
-            con = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
+            con = (MongoConnection) DriverManager.getConnection(url);
             // con = (MongoConnection) DriverManager.getConnection(url);
             System.out.println("\nConnection successful for " + url);
 

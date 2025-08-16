@@ -1,0 +1,6 @@
+{"db_id": "school_bus", "sql": "SELECT T2.School, T1.Name FROM school_bus AS T3 JOIN school AS T2 ON T3.School_ID = T2.School_ID JOIN driver AS T1 ON T3.Driver_ID = T1.Driver_ID;"}
+{"db_id": "school_bus", "sql": "SELECT T2.School , T1.Name FROM school_bus AS T3 JOIN driver AS T1 ON T3.Driver_ID = T1.Driver_ID JOIN school AS T2 ON T3.School_ID = T2.School_ID"}
+{"db_id": "cinema", "sql": "SELECT Name, Openning_year, Capacity FROM cinema"}
+{"db_id": "cinema", "sql": "SELECT Name, Openning_year, Capacity FROM cinema"}
+{"db_id": "pilot_record", "sql": "SELECT Nationality FROM pilot GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1"}
+{"db_id": "pilot_record", "sql": "SELECT Nationality FROM pilot GROUP BY Nationality ORDER BY count(*) DESC LIMIT 1"}

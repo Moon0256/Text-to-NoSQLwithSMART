@@ -51,8 +51,8 @@ public class TranslateServer {
             MongoConnection connection = connections.get(databaseName);
             if (connection == null) {
                 System.out.println("Creating new connection for database: " + databaseName);
-                String url = "jdbc:mongo://localhost/"+databaseName+"?schema=example/schema/mongo_"+databaseName+".xml&debug=false&authDB=admin";
-                connection = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
+                String url = "jdbc:mongo://localhost/"+databaseName+"?schema=example/schema/mongo_"+databaseName+".xml&debug=false";
+                connection = (MongoConnection) DriverManager.getConnection(url);
                 connections.put(databaseName, connection);
             }
 
@@ -117,8 +117,14 @@ public class TranslateServer {
             try {
                 mongo = Translator.translate(sql, db);
             } catch (SQLException e) {
-                mongo = e.toString();
-                return;
+                // mongo = e.toString();
+                // // Might have to change to return error
+                // return;
+                sendJson(exchange, 500, Map.of(
+                        "db", db,
+                        "sql", sql,
+                        "error", e.toString()
+                ));
             }
             
             sendJson(exchange, 200, Map.of(

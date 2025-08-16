@@ -1,0 +1,3801 @@
+File name: result1
+Using MongoDB shell from PATH: /opt/homebrew/bin/mongosh
+Trying to connect to MongoDB: mongodb://localhost:27017
+MongoDB connection test successful!
+
+Processing examples:   0%|          | 0/2775 [00:00<?, ?it/s]
+==================================================
+[DB ID: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school_bus.aggregate([{"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$lookup": {"from": "driver", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "driver"}}, {"$unwind": "$driver"}, {"$project": {"School": 1, "Name": 1, "_id": 0}}])
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['lookup', 'unwind', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'driver', 'school']
+TARGET execution result:
+[
+  {
+    "School": "Noelani Elementary School",
+    "Name": "Henry Genga"
+  },
+  {
+    "School": "Harvard Law School",
+    "Name": "Jason Rojas"
+  },
+  {
+    "School": "Occidental College",
+    "Name": "Douglas McCrory"
+  },
+  {
+    "School": "Punahou School",
+    "Name": "Minnie Gonzalez"
+  },
+  {
+    "School": "State Elementary School Menteng 01",
+    "Name": "Angel Acre"
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id school_bus: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+Processing examples:   0%|          | 1/2775 [00:00<36:35,  1.26it/s]
+==================================================
+[DB ID: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school_bus.aggregate([{"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$lookup": {"from": "driver", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "driver"}}, {"$unwind": "$driver"}, {"$project": {"School": 1, "Name": 1, "_id": 0}}])
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['lookup', 'unwind', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'driver', 'school']
+TARGET execution result:
+[
+  {
+    "School": "Noelani Elementary School",
+    "Name": "Henry Genga"
+  },
+  {
+    "School": "Harvard Law School",
+    "Name": "Jason Rojas"
+  },
+  {
+    "School": "Occidental College",
+    "Name": "Douglas McCrory"
+  },
+  {
+    "School": "Punahou School",
+    "Name": "Minnie Gonzalez"
+  },
+  {
+    "School": "State Elementary School Menteng 01",
+    "Name": "Angel Acre"
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id school_bus: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+Processing examples:   0%|          | 2/2775 [00:01<36:14,  1.28it/s]
+==================================================
+[DB ID: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school_bus.aggregate([{"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$lookup": {"from": "driver", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "driver"}}, {"$unwind": "$driver"}, {"$project": {"School": 1, "Name": 1, "_id": 0}}])
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['lookup', 'unwind', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'driver', 'school']
+TARGET execution result:
+[
+  {
+    "School": "Noelani Elementary School",
+    "Name": "Henry Genga"
+  },
+  {
+    "School": "Harvard Law School",
+    "Name": "Jason Rojas"
+  },
+  {
+    "School": "Occidental College",
+    "Name": "Douglas McCrory"
+  },
+  {
+    "School": "Punahou School",
+    "Name": "Minnie Gonzalez"
+  },
+  {
+    "School": "State Elementary School Menteng 01",
+    "Name": "Angel Acre"
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id school_bus: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+
+Processing examples:   3%|▎         | 93/2775 [01:10<35:41,  1.25it/s]
+==================================================
+[DB ID: hr_1]
+TARGET QUERY:
+db.jobs.aggregate([
+  {
+    $unwind: "$employees"
+  },
+  {
+    $match: {
+      "employees.FIRST_NAME": {
+        $not: {
+          $regex: "M",
+          $options: "i"
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      FIRST_NAME: "$employees.FIRST_NAME",
+      LAST_NAME: "$employees.LAST_NAME",
+      HIRE_DATE: "$employees.HIRE_DATE",
+      SALARY: "$employees.SALARY",
+      DEPARTMENT_ID: "$employees.DEPARTMENT_ID",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+ERROR: java.sql.SQLException: Non-existing table referenced: employees
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['unwind', 'match', 'not', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['DEPARTMENT_ID', 'FIRST_NAME', 'HIRE_DATE', 'LAST_NAME', 'SALARY', 'employees']
+PREDICT fields: []
+TARGET execution result:
+[
+  {
+    "FIRST_NAME": "Steven",
+    "LAST_NAME": "King",
+    "HIRE_DATE": "1987-06-17",
+    "SALARY": 24000,
+    "DEPARTMENT_ID": 90
+  },
+  {
+    "FIRST_NAME": "Nancy",
+    "LAST_NAME": "Greenberg",
+    "HIRE_DATE": "1987-06-25",
+    "SALARY": 12000,
+    "DEPARTMENT_ID": 100
+  },
+  {
+    "FIRST_NAME": "Shelley",
+    "LAST_NAME": "Higgins",
+    "HIRE_DATE": "1987-09-30",
+    "SALARY": 12000,
+    "DEPARTMENT_ID": 110
+  },
+  {
+    "FIRST_NAME": "Jennifer",
+    "LAST_NAME": "Whalen",
+    "HIRE_DATE": "1987-09-25",
+    "SALARY": 4400,
+    "DEPARTMENT_ID": 10
+  },
+  {
+    "FIRST_NAME": "Daniel",
+    "LAST_NAME": "Faviet",
+    "HIRE_DATE": "1987-06-26",
+    "SALARY": 9000,
+    "DEPARTMENT_ID": 100
+  },
+  {
+    "FIRST_NAME": "John",
+    "LAST_NAME": "Chen",
+    "HIRE_DATE": "1987-06-27",
+    "SALARY": 8200,
+    "DEPARTMENT_ID": 100
+  },
+  {
+    "FIRST_NAME": "Luis",
+    "LAST_NAME": "Popp",
+    "HIRE_DATE": "1987-06-30",
+    "SALARY": 6900,
+    "DEPARTMENT_ID": 100
+  },
+  {
+    "FIRST_NAME": "Neena",
+    "LAST_NAME": "Kochhar",
+    "HIRE_DATE": "1987-06-18",
+    "SALARY": 17000,
+    "DEPARTMENT_ID": 90
+  },
+  {
+    "FIRST_NAME": "Lex",
+    "LAST_NAME": "De Haan",
+    "HIRE_DATE": "1987-06-19",
+    "SALARY": 17000,
+    "DEPARTMENT_ID": 90
+  },
+  {
+    "FIRST_NAME": "John",
+    "LAST_NAME": "Russell",
+    "HIRE_DATE": "1987-08-01",
+    "SALARY": 14000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Karen",
+    "LAST_NAME": "Partners",
+    "HIRE_DATE": "1987-08-02",
+    "SALARY": 13500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Alberto",
+    "LAST_NAME": "Errazuriz",
+    "HIRE_DATE": "1987-08-03",
+    "SALARY": 12000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Gerald",
+    "LAST_NAME": "Cambrault",
+    "HIRE_DATE": "1987-08-04",
+    "SALARY": 11000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Eleni",
+    "LAST_NAME": "Zlotkey",
+    "HIRE_DATE": "1987-08-05",
+    "SALARY": 10500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Alexander",
+    "LAST_NAME": "Khoo",
+    "HIRE_DATE": "1987-07-02",
+    "SALARY": 3100,
+    "DEPARTMENT_ID": 30
+  },
+  {
+    "FIRST_NAME": "Shelli",
+    "LAST_NAME": "Baida",
+    "HIRE_DATE": "1987-07-03",
+    "SALARY": 2900,
+    "DEPARTMENT_ID": 30
+  },
+  {
+    "FIRST_NAME": "Sigal",
+    "LAST_NAME": "Tobias",
+    "HIRE_DATE": "1987-07-04",
+    "SALARY": 2800,
+    "DEPARTMENT_ID": 30
+  },
+  {
+    "FIRST_NAME": "Guy",
+    "LAST_NAME": "Himuro",
+    "HIRE_DATE": "1987-07-05",
+    "SALARY": 2600,
+    "DEPARTMENT_ID": 30
+  },
+  {
+    "FIRST_NAME": "Karen",
+    "LAST_NAME": "Colmenares",
+    "HIRE_DATE": "1987-07-06",
+    "SALARY": 2500,
+    "DEPARTMENT_ID": 30
+  },
+  {
+    "FIRST_NAME": "Den",
+    "LAST_NAME": "Raphaely",
+    "HIRE_DATE": "1987-07-01",
+    "SALARY": 11000,
+    "DEPARTMENT_ID": 30
+  },
+  {
+    "FIRST_NAME": "Shanta",
+    "LAST_NAME": "Vollman",
+    "HIRE_DATE": "1987-07-10",
+    "SALARY": 6500,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Kevin",
+    "LAST_NAME": "Mourgos",
+    "HIRE_DATE": "1987-07-11",
+    "SALARY": 5800,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Alexander",
+    "LAST_NAME": "Hunold",
+    "HIRE_DATE": "1987-06-20",
+    "SALARY": 9000,
+    "DEPARTMENT_ID": 60
+  },
+  {
+    "FIRST_NAME": "Bruce",
+    "LAST_NAME": "Ernst",
+    "HIRE_DATE": "1987-06-21",
+    "SALARY": 6000,
+    "DEPARTMENT_ID": 60
+  },
+  {
+    "FIRST_NAME": "David",
+    "LAST_NAME": "Austin",
+    "HIRE_DATE": "1987-06-22",
+    "SALARY": 4800,
+    "DEPARTMENT_ID": 60
+  },
+  {
+    "FIRST_NAME": "Valli",
+    "LAST_NAME": "Pataballa",
+    "HIRE_DATE": "1987-06-23",
+    "SALARY": 4800,
+    "DEPARTMENT_ID": 60
+  },
+  {
+    "FIRST_NAME": "Diana",
+    "LAST_NAME": "Lorentz",
+    "HIRE_DATE": "1987-06-24",
+    "SALARY": 4200,
+    "DEPARTMENT_ID": 60
+  },
+  {
+    "FIRST_NAME": "Susan",
+    "LAST_NAME": "Mavris",
+    "HIRE_DATE": "1987-09-28",
+    "SALARY": 6500,
+    "DEPARTMENT_ID": 40
+  },
+  {
+    "FIRST_NAME": "Peter",
+    "LAST_NAME": "Tucker",
+    "HIRE_DATE": "1987-08-06",
+    "SALARY": 10000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "David",
+    "LAST_NAME": "Bernstein",
+    "HIRE_DATE": "1987-08-07",
+    "SALARY": 9500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Peter",
+    "LAST_NAME": "Hall",
+    "HIRE_DATE": "1987-08-08",
+    "SALARY": 9000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Christopher",
+    "LAST_NAME": "Olsen",
+    "HIRE_DATE": "1987-08-09",
+    "SALARY": 8000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Nanette",
+    "LAST_NAME": "Cambrault",
+    "HIRE_DATE": "1987-08-10",
+    "SALARY": 7500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Oliver",
+    "LAST_NAME": "Tuvault",
+    "HIRE_DATE": "1987-08-11",
+    "SALARY": 7000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Janette",
+    "LAST_NAME": "King",
+    "HIRE_DATE": "1987-08-12",
+    "SALARY": 10000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Patrick",
+    "LAST_NAME": "Sully",
+    "HIRE_DATE": "1987-08-13",
+    "SALARY": 9500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Allan",
+    "LAST_NAME": "McEwen",
+    "HIRE_DATE": "1987-08-14",
+    "SALARY": 9000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Lindsey",
+    "LAST_NAME": "Smith",
+    "HIRE_DATE": "1987-08-15",
+    "SALARY": 8000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Louise",
+    "LAST_NAME": "Doran",
+    "HIRE_DATE": "1987-08-16",
+    "SALARY": 7500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Sarath",
+    "LAST_NAME": "Sewall",
+    "HIRE_DATE": "1987-08-17",
+    "SALARY": 7000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Clara",
+    "LAST_NAME": "Vishney",
+    "HIRE_DATE": "1987-08-18",
+    "SALARY": 10500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Danielle",
+    "LAST_NAME": "Greene",
+    "HIRE_DATE": "1987-08-19",
+    "SALARY": 9500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "David",
+    "LAST_NAME": "Lee",
+    "HIRE_DATE": "1987-08-21",
+    "SALARY": 6800,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Sundar",
+    "LAST_NAME": "Ande",
+    "HIRE_DATE": "1987-08-22",
+    "SALARY": 6400,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Lisa",
+    "LAST_NAME": "Ozer",
+    "HIRE_DATE": "1987-08-24",
+    "SALARY": 11500,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Harrison",
+    "LAST_NAME": "Bloom",
+    "HIRE_DATE": "1987-08-25",
+    "SALARY": 10000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Tayler",
+    "LAST_NAME": "Fox",
+    "HIRE_DATE": "1987-08-26",
+    "SALARY": 9600,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Elizabeth",
+    "LAST_NAME": "Bates",
+    "HIRE_DATE": "1987-08-28",
+    "SALARY": 7300,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Sundita",
+    "LAST_NAME": "Kumar",
+    "HIRE_DATE": "1987-08-29",
+    "SALARY": 6100,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Ellen",
+    "LAST_NAME": "Abel",
+    "HIRE_DATE": "1987-08-30",
+    "SALARY": 11000,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Alyssa",
+    "LAST_NAME": "Hutton",
+    "HIRE_DATE": "1987-08-31",
+    "SALARY": 8800,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Jonathon",
+    "LAST_NAME": "Taylor",
+    "HIRE_DATE": "1987-09-01",
+    "SALARY": 8600,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Jack",
+    "LAST_NAME": "Livingston",
+    "HIRE_DATE": "1987-09-02",
+    "SALARY": 8400,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Charles",
+    "LAST_NAME": "Johnson",
+    "HIRE_DATE": "1987-09-04",
+    "SALARY": 6200,
+    "DEPARTMENT_ID": 80
+  },
+  {
+    "FIRST_NAME": "Pat",
+    "LAST_NAME": "Fay",
+    "HIRE_DATE": "1987-09-27",
+    "SALARY": 6000,
+    "DEPARTMENT_ID": 20
+  },
+  {
+    "FIRST_NAME": "Julia",
+    "LAST_NAME": "Nayer",
+    "HIRE_DATE": "1987-07-12",
+    "SALARY": 3200,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Irene",
+    "LAST_NAME": "Mikkilineni",
+    "HIRE_DATE": "1987-07-13",
+    "SALARY": 2700,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Steven",
+    "LAST_NAME": "Markle",
+    "HIRE_DATE": "1987-07-15",
+    "SALARY": 2200,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Laura",
+    "LAST_NAME": "Bissot",
+    "HIRE_DATE": "1987-07-16",
+    "SALARY": 3300,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "TJ",
+    "LAST_NAME": "Olson",
+    "HIRE_DATE": "1987-07-19",
+    "SALARY": 2100,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Jason",
+    "LAST_NAME": "Mallin",
+    "HIRE_DATE": "1987-07-20",
+    "SALARY": 3300,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Ki",
+    "LAST_NAME": "Gee",
+    "HIRE_DATE": "1987-07-22",
+    "SALARY": 2400,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Hazel",
+    "LAST_NAME": "Philtanker",
+    "HIRE_DATE": "1987-07-23",
+    "SALARY": 2200,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Renske",
+    "LAST_NAME": "Ladwig",
+    "HIRE_DATE": "1987-07-24",
+    "SALARY": 3600,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Stephen",
+    "LAST_NAME": "Stiles",
+    "HIRE_DATE": "1987-07-25",
+    "SALARY": 3200,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "John",
+    "LAST_NAME": "Seo",
+    "HIRE_DATE": "1987-07-26",
+    "SALARY": 2700,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Joshua",
+    "LAST_NAME": "Patel",
+    "HIRE_DATE": "1987-07-27",
+    "SALARY": 2500,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Trenna",
+    "LAST_NAME": "Rajs",
+    "HIRE_DATE": "1987-07-28",
+    "SALARY": 3500,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Curtis",
+    "LAST_NAME": "Davies",
+    "HIRE_DATE": "1987-07-29",
+    "SALARY": 3100,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Randall",
+    "LAST_NAME": "Matos",
+    "HIRE_DATE": "1987-07-30",
+    "SALARY": 2600,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Peter",
+    "LAST_NAME": "Vargas",
+    "HIRE_DATE": "1987-07-31",
+    "SALARY": 2500,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Winston",
+    "LAST_NAME": "Taylor",
+    "HIRE_DATE": "1987-09-05",
+    "SALARY": 3200,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Jean",
+    "LAST_NAME": "Fleaur",
+    "HIRE_DATE": "1987-09-06",
+    "SALARY": 3100,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Girard",
+    "LAST_NAME": "Geoni",
+    "HIRE_DATE": "1987-09-08",
+    "SALARY": 2800,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Nandita",
+    "LAST_NAME": "Sarchand",
+    "HIRE_DATE": "1987-09-09",
+    "SALARY": 4200,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Alexis",
+    "LAST_NAME": "Bull",
+    "HIRE_DATE": "1987-09-10",
+    "SALARY": 4100,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Julia",
+    "LAST_NAME": "Dellinger",
+    "HIRE_DATE": "1987-09-11",
+    "SALARY": 3400,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Anthony",
+    "LAST_NAME": "Cabrio",
+    "HIRE_DATE": "1987-09-12",
+    "SALARY": 3000,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Kelly",
+    "LAST_NAME": "Chung",
+    "HIRE_DATE": "1987-09-13",
+    "SALARY": 3800,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Jennifer",
+    "LAST_NAME": "Dilly",
+    "HIRE_DATE": "1987-09-14",
+    "SALARY": 3600,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Randall",
+    "LAST_NAME": "Perkins",
+    "HIRE_DATE": "1987-09-16",
+    "SALARY": 2500,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Sarah",
+    "LAST_NAME": "Bell",
+    "HIRE_DATE": "1987-09-17",
+    "SALARY": 4000,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Britney",
+    "LAST_NAME": "Everett",
+    "HIRE_DATE": "1987-09-18",
+    "SALARY": 3900,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Vance",
+    "LAST_NAME": "Jones",
+    "HIRE_DATE": "1987-09-20",
+    "SALARY": 2800,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Alana",
+    "LAST_NAME": "Walsh",
+    "HIRE_DATE": "1987-09-21",
+    "SALARY": 3100,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Kevin",
+    "LAST_NAME": "Feeney",
+    "HIRE_DATE": "1987-09-22",
+    "SALARY": 3000,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Donald",
+    "LAST_NAME": "OConnell",
+    "HIRE_DATE": "1987-09-23",
+    "SALARY": 2600,
+    "DEPARTMENT_ID": 50
+  },
+  {
+    "FIRST_NAME": "Douglas",
+    "LAST_NAME": "Grant",
+    "HIRE_DATE": "1987-09-24",
+    "SALARY": 2600,
+    "DEPARTMENT_ID": 50
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id hr_1: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+Processing examples:  20%|██        | 558/2775 [07:21<28:49,  1.28it/s]
+==================================================
+[DB ID: customer_complaints]
+TARGET QUERY:
+db.Customers.aggregate([
+  {
+    $unwind: "$Complaints"
+  },
+  {
+    $match: {
+      "Complaints.complaint_type_code": "Product Failure"
+    }
+  },
+  {
+    $group: {
+      _id: "$Complaints.complaint_status_code",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      complaint_status_code: "$_id",
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.Customers.aggregate([{"$group": {"_id": {"customer_type_code": "$customer_type_code"}, "Expr0": {"$sum": 1}}}, {"$sort": {"Expr0": -1}}, {"$limit": 1}])
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['unwind', 'match', 'group', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Complaints', 'complaint_status_code']
+PREDICT fields: ['customer_type_code']
+TARGET execution result:
+[
+  {
+    "count": 1,
+    "complaint_status_code": "Open"
+  },
+  {
+    "count": 1,
+    "complaint_status_code": "Closed"
+  }
+]
+PREDICT execution result:
+[
+  {
+    "_id": {
+      "customer_type_code": "Good Credit Rating"
+    },
+    "Expr0": 6
+  }
+]
+TARGET result fields: {'complaint_status_code', 'count'}
+PREDICT result fields: {'_id', 'customer_type_code', 'Expr0'}
+Final metrics for db_id customer_complaints: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 0, 'EVM': 0}
+==================================================
+
+
+
+
+Processing examples:  30%|███       | 842/2775 [11:12<26:09,  1.23it/s]
+==================================================
+[DB ID: county_public_safety]
+TARGET QUERY:
+db.county_public_safety.find({
+  city: {
+    $elemMatch: {
+      White: { $gt: 90 }
+    }
+  }
+}, {
+  Crime_rate: 1,
+  _id: 0
+});
+
+PREDICTION QUERY:
+db.county_public_safety.find({}, {}).count()
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['match', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Crime_rate', 'White', 'city']
+PREDICT fields: []
+TARGET execution result:
+[
+  {
+    "Crime_rate": 118
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id county_public_safety: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+Processing examples:  47%|████▋     | 1300/2775 [19:55<20:18,  1.21it/s]
+==================================================
+[DB ID: flight_1]
+TARGET QUERY:
+db.employee.find({
+  $or: [
+    { certificate: { $exists: false } },
+    { certificate: { $size: 0 } }
+  ]
+}, { eid: 1, _id: 0 });
+
+PREDICTION QUERY:
+ERROR: java.sql.SQLException: Non-existing table referenced: flight
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['match', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['certificate', 'eid']
+PREDICT fields: []
+TARGET execution result:
+[
+  {
+    "eid": 489456522
+  },
+  {
+    "eid": 489221823
+  },
+  {
+    "eid": 310454877
+  },
+  {
+    "eid": 287321212
+  },
+  {
+    "eid": 552455348
+  },
+  {
+    "eid": 248965255
+  },
+  {
+    "eid": 486512566
+  },
+  {
+    "eid": 619023588
+  },
+  {
+    "eid": 254099823
+  },
+  {
+    "eid": 348121549
+  },
+  {
+    "eid": 15645489
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id flight_1: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+
+Processing examples:  56%|█████▌    | 1548/2775 [23:17<16:51,  1.21it/s]
+==================================================
+[DB ID: climbing]
+TARGET QUERY:
+db.mountain.aggregate([
+  {
+    $unwind: "$climber"
+  },
+  {
+    $group: {
+      _id: "$climber.Country"
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      "COUNT_DISTINCT_Country": { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      "COUNT_DISTINCT_Country": 1
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.climber.find({"$lookup": {"from": "", "localField": "Country", "foreignField": "Switzerland"}}, {"Name": 1, "_id": 0})
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['unwind', 'group', 'group', 'project']
+Extracted Stages from PREDICTION: ['match', 'project']
+TARGET fields: ['climber']
+PREDICT fields: ['Country', 'Name']
+TARGET execution result:
+[
+  {
+    "COUNT_DISTINCT_Country": 3
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id climbing: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+Processing examples:  63%|██████▎   | 1739/2775 [25:53<13:44,  1.26it/s]
+==================================================
+[DB ID: flight_4]
+TARGET QUERY:
+db.airlines.aggregate([
+  {
+    $group: {
+      _id: "$country",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { count: -1 }
+  },
+  {
+    $project: {
+      country: "$_id",
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.airports.find({"city": "New York"}, {"name": 1, "city": 1, "country": 1, "elevation": 1, "_id": 0})
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['group', 'sort', 'project']
+Extracted Stages from PREDICTION: ['match', 'project']
+TARGET fields: ['country', 'y']
+PREDICT fields: ['city', 'country', 'elevation', 'name']
+TARGET execution result:
+[
+  {
+    "count": 1099,
+    "country": "United States"
+  },
+  {
+    "count": 440,
+    "country": "Mexico"
+  },
+  {
+    "count": 414,
+    "country": "United Kingdom"
+  },
+  {
+    "count": 323,
+    "country": "Canada"
+  },
+  {
+    "count": 238,
+    "country": "Russia"
+  },
+  {
+    "count": 168,
+    "country": "Spain"
+  },
+  {
+    "count": 135,
+    "country": "Germany"
+  },
+  {
+    "count": 123,
+    "country": "France"
+  },
+  {
+    "count": 94,
+    "country": "Australia"
+  },
+  {
+    "count": 93,
+    "country": "Italy"
+  },
+  {
+    "count": 91,
+    "country": "South Africa"
+  },
+  {
+    "count": 90,
+    "country": "Ukraine"
+  },
+  {
+    "count": 85,
+    "country": "Nigeria"
+  },
+  {
+    "count": 79,
+    "country": "Kazakhstan"
+  },
+  {
+    "count": 72,
+    "country": "China"
+  },
+  {
+    "count": 70,
+    "country": "Sweden"
+  },
+  {
+    "count": 60,
+    "country": "Brazil"
+  },
+  {
+    "count": 60,
+    "country": "Switzerland"
+  },
+  {
+    "count": 52,
+    "country": "Netherlands"
+  },
+  {
+    "count": 52,
+    "country": "Thailand"
+  },
+  {
+    "count": 50,
+    "country": "Indonesia"
+  },
+  {
+    "count": 50,
+    "country": "Austria"
+  },
+  {
+    "count": 49,
+    "country": "Egypt"
+  },
+  {
+    "count": 49,
+    "country": "Japan"
+  },
+  {
+    "count": 49,
+    "country": "Sudan"
+  },
+  {
+    "count": 45,
+    "country": "Portugal"
+  },
+  {
+    "count": 44,
+    "country": "Chile"
+  },
+  {
+    "count": 44,
+    "country": "Colombia"
+  },
+  {
+    "count": 39,
+    "country": "Turkey"
+  },
+  {
+    "count": 37,
+    "country": "Angola"
+  },
+  {
+    "count": 35,
+    "country": "Mauritania"
+  },
+  {
+    "count": 34,
+    "country": "Iran"
+  },
+  {
+    "count": 34,
+    "country": "Kyrgyzstan"
+  },
+  {
+    "count": 32,
+    "country": "Czech Republic"
+  },
+  {
+    "count": 32,
+    "country": "Denmark"
+  },
+  {
+    "count": 31,
+    "country": "Norway"
+  },
+  {
+    "count": 31,
+    "country": "United Arab Emirates"
+  },
+  {
+    "count": 30,
+    "country": "Dominican Republic"
+  },
+  {
+    "count": 29,
+    "country": "India"
+  },
+  {
+    "count": 29,
+    "country": "Pakistan"
+  },
+  {
+    "count": 29,
+    "country": "Greece"
+  },
+  {
+    "count": 29,
+    "country": "Argentina"
+  },
+  {
+    "count": 28,
+    "country": "New Zealand"
+  },
+  {
+    "count": 28,
+    "country": "Ireland"
+  },
+  {
+    "count": 28,
+    "country": "Bulgaria"
+  },
+  {
+    "count": 27,
+    "country": "Belgium"
+  },
+  {
+    "count": 26,
+    "country": "Peru"
+  },
+  {
+    "count": 26,
+    "country": "Libya"
+  },
+  {
+    "count": 26,
+    "country": "Sierra Leone"
+  },
+  {
+    "count": 26,
+    "country": "Ecuador"
+  },
+  {
+    "count": 26,
+    "country": "Venezuela"
+  },
+  {
+    "count": 24,
+    "country": "Kenya"
+  },
+  {
+    "count": 24,
+    "country": "Uganda"
+  },
+  {
+    "count": 23,
+    "country": "Zambia"
+  },
+  {
+    "count": 22,
+    "country": "Israel"
+  },
+  {
+    "count": 21,
+    "country": "Philippines"
+  },
+  {
+    "count": 20,
+    "country": "Iceland"
+  },
+  {
+    "count": 20,
+    "country": "Poland"
+  },
+  {
+    "count": 20,
+    "country": "Ghana"
+  },
+  {
+    "count": 20,
+    "country": "Moldova"
+  },
+  {
+    "count": 19,
+    "country": "Cambodia"
+  },
+  {
+    "count": 19,
+    "country": "Democratic Republic of the Congo"
+  },
+  {
+    "count": 19,
+    "country": "Finland"
+  },
+  {
+    "count": 19,
+    "country": "Slovakia"
+  },
+  {
+    "count": 19,
+    "country": "Lithuania"
+  },
+  {
+    "count": 18,
+    "country": "Hungary"
+  },
+  {
+    "count": 18,
+    "country": "Georgia"
+  },
+  {
+    "count": 18,
+    "country": "Romania"
+  },
+  {
+    "count": 17,
+    "country": "Ivory Coast"
+  },
+  {
+    "count": 17,
+    "country": "Haiti"
+  },
+  {
+    "count": 17,
+    "country": "Armenia"
+  },
+  {
+    "count": 16,
+    "country": "Lebanon"
+  },
+  {
+    "count": 15,
+    "country": ""
+  },
+  {
+    "count": 14,
+    "country": "Serbia"
+  },
+  {
+    "count": 14,
+    "country": "Uruguay"
+  },
+  {
+    "count": 14,
+    "country": "Malaysia"
+  },
+  {
+    "count": 14,
+    "country": "Guinea"
+  },
+  {
+    "count": 14,
+    "country": "Bangladesh"
+  },
+  {
+    "count": 13,
+    "country": "Senegal"
+  },
+  {
+    "count": 13,
+    "country": "Latvia"
+  },
+  {
+    "count": 12,
+    "country": "Luxembourg"
+  },
+  {
+    "count": 11,
+    "country": "Namibia"
+  },
+  {
+    "count": 11,
+    "country": "Gabon"
+  },
+  {
+    "count": 11,
+    "country": "Uzbekistan"
+  },
+  {
+    "count": 11,
+    "country": "Singapore"
+  },
+  {
+    "count": 11,
+    "country": "Equatorial Guinea"
+  },
+  {
+    "count": 11,
+    "country": "Nepal"
+  },
+  {
+    "count": 10,
+    "country": "Tanzania"
+  },
+  {
+    "count": 10,
+    "country": "Croatia"
+  },
+  {
+    "count": 10,
+    "country": "Barbados"
+  },
+  {
+    "count": 9,
+    "country": "Bahamas"
+  },
+  {
+    "count": 9,
+    "country": "Democratic Republic of Congo"
+  },
+  {
+    "count": 9,
+    "country": "Estonia"
+  },
+  {
+    "count": 9,
+    "country": "Costa Rica"
+  },
+  {
+    "count": 9,
+    "country": "Cyprus"
+  },
+  {
+    "count": 9,
+    "country": "Bolivia"
+  },
+  {
+    "count": 9,
+    "country": "Belarus"
+  },
+  {
+    "count": 9,
+    "country": "Bahrain"
+  },
+  {
+    "count": 9,
+    "country": "Taiwan"
+  },
+  {
+    "count": 9,
+    "country": "Mali"
+  },
+  {
+    "count": 8,
+    "country": "Macedonia"
+  },
+  {
+    "count": 8,
+    "country": "Vietnam"
+  },
+  {
+    "count": 8,
+    "country": "Chad"
+  },
+  {
+    "count": 8,
+    "country": "Guinea-Bissau"
+  },
+  {
+    "count": 8,
+    "country": "Mongolia"
+  },
+  {
+    "count": 8,
+    "country": "Republic of Korea"
+  },
+  {
+    "count": 8,
+    "country": "Morocco"
+  },
+  {
+    "count": 8,
+    "country": "Djibouti"
+  },
+  {
+    "count": 8,
+    "country": "Zimbabwe"
+  },
+  {
+    "count": 8,
+    "country": "Afghanistan"
+  },
+  {
+    "count": 8,
+    "country": "Tunisia"
+  },
+  {
+    "count": 7,
+    "country": "Jordan"
+  },
+  {
+    "count": 7,
+    "country": "Burma"
+  },
+  {
+    "count": 7,
+    "country": "Mozambique"
+  },
+  {
+    "count": 7,
+    "country": "Azerbaijan"
+  },
+  {
+    "count": 7,
+    "country": "Burkina Faso"
+  },
+  {
+    "count": 7,
+    "country": "Cameroon"
+  },
+  {
+    "count": 7,
+    "country": "Sao Tome and Principe"
+  },
+  {
+    "count": 7,
+    "country": "Maldives"
+  },
+  {
+    "count": 7,
+    "country": "Netherlands Antilles"
+  },
+  {
+    "count": 7,
+    "country": "Tajikistan"
+  },
+  {
+    "count": 6,
+    "country": "Guatemala"
+  },
+  {
+    "count": 6,
+    "country": "Malta"
+  },
+  {
+    "count": 6,
+    "country": "Aruba"
+  },
+  {
+    "count": 6,
+    "country": "Rwanda"
+  },
+  {
+    "count": 6,
+    "country": "Suriname"
+  },
+  {
+    "count": 6,
+    "country": "Gambia"
+  },
+  {
+    "count": 6,
+    "country": "Saudi Arabia"
+  },
+  {
+    "count": 6,
+    "country": "Panama"
+  },
+  {
+    "count": 6,
+    "country": "Algeria"
+  },
+  {
+    "count": 6,
+    "country": "South Korea"
+  },
+  {
+    "count": 6,
+    "country": "Oman"
+  },
+  {
+    "count": 6,
+    "country": "Swaziland"
+  },
+  {
+    "count": 6,
+    "country": "Honduras"
+  },
+  {
+    "count": 6,
+    "country": "Benin"
+  },
+  {
+    "count": 6,
+    "country": "Slovenia"
+  },
+  {
+    "count": 6,
+    "country": "Sri Lanka"
+  },
+  {
+    "count": 5,
+    "country": "Malawi"
+  },
+  {
+    "count": 5,
+    "country": "Central African Republic"
+  },
+  {
+    "count": 5,
+    "country": "Cuba"
+  },
+  {
+    "count": 5,
+    "country": "S"
+  },
+  {
+    "count": 5,
+    "country": "Papua New Guinea"
+  },
+  {
+    "count": 5,
+    "country": "Fiji"
+  },
+  {
+    "count": 5,
+    "country": "Syrian Arab Republic"
+  },
+  {
+    "count": 5,
+    "country": "Somali Republic"
+  },
+  {
+    "count": 5,
+    "country": "Netherland"
+  },
+  {
+    "count": 5,
+    "country": "El Salvador"
+  },
+  {
+    "count": 5,
+    "country": "Hong Kong SAR of China"
+  },
+  {
+    "count": 5,
+    "country": "Ethiopia"
+  },
+  {
+    "count": 5,
+    "country": "Republic of the Congo"
+  },
+  {
+    "count": 4,
+    "country": "Qatar"
+  },
+  {
+    "count": 4,
+    "country": "Turks and Caicos Islands"
+  },
+  {
+    "count": 4,
+    "country": "Kuwait"
+  },
+  {
+    "count": 4,
+    "country": "Congo (Kinshasa)"
+  },
+  {
+    "count": 4,
+    "country": "Guyana"
+  },
+  {
+    "count": 4,
+    "country": "Nicaragua"
+  },
+  {
+    "count": 4,
+    "country": "Jamaica"
+  },
+  {
+    "count": 4,
+    "country": "Bosnia and Herzegovina"
+  },
+  {
+    "count": 4,
+    "country": "Niger"
+  },
+  {
+    "count": 4,
+    "country": "Togo"
+  },
+  {
+    "count": 4,
+    "country": "Antigua and Barbuda"
+  },
+  {
+    "count": 4,
+    "country": "Paraguay"
+  },
+  {
+    "count": 4,
+    "country": "Albania"
+  },
+  {
+    "count": 3,
+    "country": "Lao Peoples Democratic Republic"
+  },
+  {
+    "count": 3,
+    "country": "Tonga"
+  },
+  {
+    "count": 3,
+    "country": "Comoros"
+  },
+  {
+    "count": 3,
+    "country": "Solomon Islands"
+  },
+  {
+    "count": 3,
+    "country": "Russian Federation"
+  },
+  {
+    "count": 3,
+    "country": "Turkmenistan"
+  },
+  {
+    "count": 3,
+    "country": "Liberia"
+  },
+  {
+    "count": 3,
+    "country": "Hong Kong"
+  },
+  {
+    "count": 3,
+    "country": "Burundi"
+  },
+  {
+    "count": 3,
+    "country": "Macao"
+  },
+  {
+    "count": 3,
+    "country": "Yemen"
+  },
+  {
+    "count": 3,
+    "country": "Madagascar"
+  },
+  {
+    "count": 3,
+    "country": null
+  },
+  {
+    "count": 3,
+    "country": "Cape Verde"
+  },
+  {
+    "count": 3,
+    "country": "Palau"
+  },
+  {
+    "count": 3,
+    "country": "Mauritius"
+  },
+  {
+    "count": 3,
+    "country": "Myanmar"
+  },
+  {
+    "count": 3,
+    "country": "Belize"
+  },
+  {
+    "count": 2,
+    "country": "Eritrea"
+  },
+  {
+    "count": 2,
+    "country": "Saint Lucia"
+  },
+  {
+    "count": 2,
+    "country": "Kiribati"
+  },
+  {
+    "count": 2,
+    "country": "Cayman Islands"
+  },
+  {
+    "count": 2,
+    "country": "Nauru"
+  },
+  {
+    "count": 2,
+    "country": "Iraq"
+  },
+  {
+    "count": 2,
+    "country": "Cook Islands"
+  },
+  {
+    "count": 2,
+    "country": "Saint Vincent and the Grenadines"
+  },
+  {
+    "count": 2,
+    "country": "Faroe Islands"
+  },
+  {
+    "count": 2,
+    "country": "Montenegro"
+  },
+  {
+    "count": 2,
+    "country": "Trinidad and Tobago"
+  },
+  {
+    "count": 1,
+    "country": "ASTORIA"
+  },
+  {
+    "count": 1,
+    "country": "AEROWEE"
+  },
+  {
+    "count": 1,
+    "country": "AEROPUMA"
+  },
+  {
+    "count": 1,
+    "country": "ALDAWLYH AIR"
+  },
+  {
+    "count": 1,
+    "country": "UNited Kingdom"
+  },
+  {
+    "count": 1,
+    "country": "SWISSBIRD"
+  },
+  {
+    "count": 1,
+    "country": "British Virgin Islands"
+  },
+  {
+    "count": 1,
+    "country": "ATCO"
+  },
+  {
+    "count": 1,
+    "country": "AVEMEX"
+  },
+  {
+    "count": 1,
+    "country": "ALASKA"
+  },
+  {
+    "count": 1,
+    "country": "RENTAXEL"
+  },
+  {
+    "count": 1,
+    "country": "Reunion"
+  },
+  {
+    "count": 1,
+    "country": "UNIFORM OSCAR"
+  },
+  {
+    "count": 1,
+    "country": "Cote d'Ivoire"
+  },
+  {
+    "count": 1,
+    "country": "ARMSTRONG"
+  },
+  {
+    "count": 1,
+    "country": "AZIMUT"
+  },
+  {
+    "count": 1,
+    "country": "South Sudan"
+  },
+  {
+    "count": 1,
+    "country": "Marshall Islands"
+  },
+  {
+    "count": 1,
+    "country": "Puerto Rico"
+  },
+  {
+    "count": 1,
+    "country": "ASUR"
+  },
+  {
+    "count": 1,
+    "country": "AVINOR"
+  },
+  {
+    "count": 1,
+    "country": "AIRFLIGHT"
+  },
+  {
+    "count": 1,
+    "country": "AIR PRINT"
+  },
+  {
+    "count": 1,
+    "country": "Botswana"
+  },
+  {
+    "count": 1,
+    "country": "WATCHDOG"
+  },
+  {
+    "count": 1,
+    "country": "Saint Kitts and Nevis"
+  },
+  {
+    "count": 1,
+    "country": "ALCON"
+  },
+  {
+    "count": 1,
+    "country": "AEROCENTER"
+  },
+  {
+    "count": 1,
+    "country": "ATLANTIC NICARAGUA"
+  },
+  {
+    "count": 1,
+    "country": "Guadeloupe"
+  },
+  {
+    "count": 1,
+    "country": "AEROPERLAS"
+  },
+  {
+    "count": 1,
+    "country": "AIRPORT HELICOPTER"
+  },
+  {
+    "count": 1,
+    "country": "AIR-MAUR"
+  },
+  {
+    "count": 1,
+    "country": "AVIOQUINTANA"
+  },
+  {
+    "count": 1,
+    "country": "AEROVARADERO"
+  },
+  {
+    "count": 1,
+    "country": "AURORA AIR"
+  },
+  {
+    "count": 1,
+    "country": "AEROCESAR"
+  },
+  {
+    "count": 1,
+    "country": "Seychelles"
+  },
+  {
+    "count": 1,
+    "country": "AQUILINE"
+  },
+  {
+    "count": 1,
+    "country": "Congo (Brazzaville)"
+  },
+  {
+    "count": 1,
+    "country": "ODINN"
+  },
+  {
+    "count": 1,
+    "country": "ALAMO"
+  },
+  {
+    "count": 1,
+    "country": "Monaco"
+  },
+  {
+    "count": 1,
+    "country": "LAP"
+  },
+  {
+    "count": 1,
+    "country": "Air S"
+  },
+  {
+    "count": 1,
+    "country": "Canadian Territories"
+  },
+  {
+    "count": 1,
+    "country": "Russia]]"
+  },
+  {
+    "count": 1,
+    "country": "Brunei"
+  },
+  {
+    "count": 1,
+    "country": "ACOM"
+  },
+  {
+    "count": 1,
+    "country": "ALL STAR"
+  },
+  {
+    "count": 1,
+    "country": "VELES"
+  },
+  {
+    "count": 1,
+    "country": "Vanuatu"
+  },
+  {
+    "count": 1,
+    "country": "ALNACIONAL"
+  },
+  {
+    "count": 1,
+    "country": "French Guiana"
+  },
+  {
+    "count": 1,
+    "country": "French Polynesia"
+  },
+  {
+    "count": 1,
+    "country": "AIR FREIGHTER"
+  },
+  {
+    "count": 1,
+    "country": "SCHEFF"
+  },
+  {
+    "count": 1,
+    "country": "DRAGON"
+  },
+  {
+    "count": 1,
+    "country": "Montserrat"
+  },
+  {
+    "count": 1,
+    "country": "AIR CLASS"
+  },
+  {
+    "count": 1,
+    "country": "AIRWAVE"
+  },
+  {
+    "count": 1,
+    "country": "AIREX"
+  },
+  {
+    "count": 1,
+    "country": "ATLANTIS CANADA"
+  },
+  {
+    "count": 1,
+    "country": "American Samoa"
+  },
+  {
+    "count": 1,
+    "country": "Samoa"
+  },
+  {
+    "count": 1,
+    "country": " S.A."
+  },
+  {
+    "count": 1,
+    "country": "ARIZAIR"
+  },
+  {
+    "count": 1,
+    "country": "ALASKA PACIFIC"
+  },
+  {
+    "count": 1,
+    "country": "AIRMAN"
+  },
+  {
+    "count": 1,
+    "country": "Democratic People's Republic of Korea"
+  },
+  {
+    "count": 1,
+    "country": "AVIANCA"
+  },
+  {
+    "count": 1,
+    "country": "AUSA"
+  },
+  {
+    "count": 1,
+    "country": "AEROSOL"
+  },
+  {
+    "count": 1,
+    "country": "APPALACHIAN"
+  },
+  {
+    "count": 1,
+    "country": "ACTIVE AERO"
+  },
+  {
+    "count": 1,
+    "country": "Bhutan"
+  },
+  {
+    "count": 1,
+    "country": "Bermuda"
+  },
+  {
+    "count": 1,
+    "country": "AIRPAC"
+  },
+  {
+    "count": 1,
+    "country": "AIRNAT"
+  },
+  {
+    "count": 1,
+    "country": "ASA PESADA"
+  },
+  {
+    "count": 1,
+    "country": "AUDI AIR"
+  },
+  {
+    "count": 1,
+    "country": "Syria"
+  },
+  {
+    "count": 1,
+    "country": "ANTARES"
+  },
+  {
+    "count": 1,
+    "country": "AEROSUN"
+  },
+  {
+    "count": 1,
+    "country": " Boonville Stage Line"
+  },
+  {
+    "count": 1,
+    "country": "COMPANY AS"
+  }
+]
+PREDICT execution result:
+[
+  {
+    "name": "La Guardia Airport",
+    "city": "New York",
+    "country": "United States",
+    "elevation": 21
+  },
+  {
+    "name": "John F Kennedy International Airport",
+    "city": "New York",
+    "country": "United States",
+    "elevation": 13
+  },
+  {
+    "name": "Indianola Municipal Airport",
+    "city": "New York",
+    "country": "United States",
+    "elevation": 126
+  },
+  {
+    "name": "One Police Plaza Heliport",
+    "city": "New York",
+    "country": "United States",
+    "elevation": 244
+  }
+]
+TARGET result fields: {'country', 'count'}
+PREDICT result fields: {'city', 'name', 'elevation', 'country'}
+Final metrics for db_id flight_4: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 0, 'EVM': 0}
+==================================================
+
+
+
+Processing examples:  72%|███████▏  | 1998/2775 [29:41<10:44,  1.21it/s]
+==================================================
+[DB ID: college_3]
+TARGET QUERY:
+db.Student.aggregate([
+  {
+    $unwind: "$Enrolled_in"
+  },
+  {
+    $lookup: {
+      from: "Gradeconversion",
+      localField: "Enrolled_in.Grade",
+      foreignField: "lettergrade",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      Fname: 1,
+      LName: 1,
+      gradepoint: "$Docs1.gradepoint",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.Student.find({"Fname": {"$regularExpression": {"pattern": "^.*a.*$", "options": ""}}}, {"Fname": 1, "_id": 0})
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['unwind', 'lookup', 'unwind', 'project']
+Extracted Stages from PREDICTION: ['match', 'project']
+TARGET fields: ['Enrolled_in', 'Fname', 'Gradeconversion', 'LName', 'gradepoint', 'lettergrade']
+PREDICT fields: ['Fname']
+TARGET execution result:
+[
+  {
+    "LName": "Apap",
+    "Fname": "Lisa",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Apap",
+    "Fname": "Lisa",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Apap",
+    "Fname": "Lisa",
+    "gradepoint": 2.3
+  },
+  {
+    "LName": "Apap",
+    "Fname": "Lisa",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Apap",
+    "Fname": "Lisa",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Apap",
+    "Fname": "Lisa",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Adams",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Adams",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Adams",
+    "Fname": "David",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Adams",
+    "Fname": "David",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Adams",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Adams",
+    "Fname": "David",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Davis",
+    "Fname": "Steven",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Davis",
+    "Fname": "Steven",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Davis",
+    "Fname": "Steven",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Davis",
+    "Fname": "Steven",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Davis",
+    "Fname": "Steven",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Linda",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Linda",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Linda",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Linda",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Linda",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Linda",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Gompers",
+    "Fname": "Paul",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Gompers",
+    "Fname": "Paul",
+    "gradepoint": 2.3
+  },
+  {
+    "LName": "Gompers",
+    "Fname": "Paul",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Gompers",
+    "Fname": "Paul",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Gompers",
+    "Fname": "Paul",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Norris",
+    "Fname": "Charles",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Susan",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Susan",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Susan",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Susan",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Susan",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Schultz",
+    "Fname": "Andy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Schultz",
+    "Fname": "Andy",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Schultz",
+    "Fname": "Andy",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Schultz",
+    "Fname": "Andy",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Schultz",
+    "Fname": "Andy",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Schultz",
+    "Fname": "Andy",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 0.7
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Schwartz",
+    "Fname": "Mark",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Arthur",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Arthur",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Arthur",
+    "gradepoint": 1.3
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Arthur",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Arthur",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Thornton",
+    "Fname": "Ian",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Thornton",
+    "Fname": "Ian",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Thornton",
+    "Fname": "Ian",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Thornton",
+    "Fname": "Ian",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Thornton",
+    "Fname": "Ian",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Derek",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Derek",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Derek",
+    "gradepoint": 2.3
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Derek",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Derek",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Lee",
+    "Fname": "Derek",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Jones",
+    "Fname": "Shiela",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Jones",
+    "Fname": "Shiela",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Jones",
+    "Fname": "Shiela",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Jones",
+    "Fname": "Shiela",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Jones",
+    "Fname": "Shiela",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Leighton",
+    "Fname": "Michael",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Leighton",
+    "Fname": "Michael",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Leighton",
+    "Fname": "Michael",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Leighton",
+    "Fname": "Michael",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Leighton",
+    "Fname": "Michael",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Leighton",
+    "Fname": "Michael",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Andreou",
+    "Fname": "George",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 1
+  },
+  {
+    "LName": "Woods",
+    "Fname": "Michael",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Nelson",
+    "Fname": "Jandy",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Nelson",
+    "Fname": "Jandy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Nelson",
+    "Fname": "Jandy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Nelson",
+    "Fname": "Jandy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Nelson",
+    "Fname": "Jandy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Prater",
+    "Fname": "Stacy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Wilson",
+    "Fname": "Bruce",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Kumar",
+    "Fname": "Dinesh",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Kim",
+    "Fname": "Tracy",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Kim",
+    "Fname": "Tracy",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Kim",
+    "Fname": "Tracy",
+    "gradepoint": 2.3
+  },
+  {
+    "LName": "Kim",
+    "Fname": "Tracy",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Kim",
+    "Fname": "Tracy",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Kim",
+    "Fname": "Tracy",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Pang",
+    "Fname": "Eric",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Tai",
+    "Fname": "Eric",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Brody",
+    "Fname": "Paul",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Han",
+    "Fname": "Jun",
+    "gradepoint": 1.7
+  },
+  {
+    "LName": "Han",
+    "Fname": "Jun",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Han",
+    "Fname": "Jun",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Han",
+    "Fname": "Jun",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Han",
+    "Fname": "Jun",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Han",
+    "Fname": "Jun",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Rugh",
+    "Fname": "Eric",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Rugh",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Rugh",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Rugh",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Rugh",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Cheng",
+    "Fname": "Lisa",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Sarah",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Sarah",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Sarah",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Smith",
+    "Fname": "Sarah",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Brown",
+    "Fname": "Eric",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Brown",
+    "Fname": "Eric",
+    "gradepoint": 0.7
+  },
+  {
+    "LName": "Brown",
+    "Fname": "Eric",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Brown",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Brown",
+    "Fname": "Eric",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Simms",
+    "Fname": "William",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Simms",
+    "Fname": "William",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Simms",
+    "Fname": "William",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Simms",
+    "Fname": "William",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Simms",
+    "Fname": "William",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Epp",
+    "Fname": "Eric",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Epp",
+    "Fname": "Eric",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Epp",
+    "Fname": "Eric",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Epp",
+    "Fname": "Eric",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Epp",
+    "Fname": "Eric",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Schmidt",
+    "Fname": "Sarah",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Schmidt",
+    "Fname": "Sarah",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Schmidt",
+    "Fname": "Sarah",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Schmidt",
+    "Fname": "Sarah",
+    "gradepoint": 1
+  },
+  {
+    "LName": "Schmidt",
+    "Fname": "Sarah",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Schmidt",
+    "Fname": "Sarah",
+    "gradepoint": 2.7
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 3.7
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 3.3
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Shieber",
+    "Fname": "David",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 4
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 2
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 3
+  },
+  {
+    "LName": "Goldman",
+    "Fname": "Mark",
+    "gradepoint": 3
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id college_3: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+
+Processing examples:  79%|███████▊  | 2181/2775 [32:09<07:55,  1.25it/s]
+==================================================
+[DB ID: school_player]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $unwind: "$player"
+  },
+  {
+    $project: {
+      Team: "$player.Team",
+      Location: "$Location",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school.find({}, {"School_Colors": 1, "_id": 0}).sort( {"Enrollment": -1} ).limit( 1 )
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['unwind', 'project']
+Extracted Stages from PREDICTION: ['project', 'sort', 'limit']
+TARGET fields: ['Location', 'Team', 'player']
+PREDICT fields: ['Enrollment', 'School_Colors']
+TARGET execution result:
+[
+  {
+    "Team": "St. Louis Cardinals",
+    "Location": "Summer Hill"
+  },
+  {
+    "Team": "New York Mets",
+    "Location": "Summer Hill"
+  },
+  {
+    "Team": "San Diego Padres",
+    "Location": "Summer Hill"
+  },
+  {
+    "Team": "Detroit Tigers",
+    "Location": "Bellevue Hill"
+  },
+  {
+    "Team": "Minnesota Twins",
+    "Location": "Waverley"
+  },
+  {
+    "Team": "Tampa Bay Devil Rays",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Kansas City Royals",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Baltimore Orioles",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Cincinnati Reds",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Chicago White Sox",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Washington Nationals",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Houston Astros",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Texas Rangers",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Los Angeles Dodgers",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Milwaukee Brewers",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Toronto Blue Jays",
+    "Location": "Milsons Point"
+  },
+  {
+    "Team": "Pittsburgh Pirates",
+    "Location": "Hornsby"
+  },
+  {
+    "Team": "San Francisco Giants",
+    "Location": "Hornsby"
+  },
+  {
+    "Team": "Florida Marlins",
+    "Location": "Hornsby"
+  },
+  {
+    "Team": "Oakland Athletics",
+    "Location": "Hornsby"
+  },
+  {
+    "Team": "New York Mets",
+    "Location": "Wahroonga"
+  },
+  {
+    "Team": "Chicago Cubs",
+    "Location": "Wahroonga"
+  },
+  {
+    "Team": "Seattle Mariners",
+    "Location": "Wahroonga"
+  }
+]
+PREDICT execution result:
+[
+  {
+    "School_Colors": "Red & Blue"
+  }
+]
+TARGET result fields: {'Location', 'Team'}
+PREDICT result fields: {'School_Colors'}
+Final metrics for db_id school_player: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 0, 'EVM': 0}
+==================================================
+
+
+
+Processing examples:  84%|████████▎ | 2318/2775 [34:02<05:57,  1.28it/s]
+==================================================
+[DB ID: pilot_record]
+TARGET QUERY:
+db.pilot.find({}, { "Position": 1, "Team": 1, "_id": 0 });
+
+PREDICTION QUERY:
+db.pilot.distinct("Position", {"Age": {"$gt": 30}})
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Position', 'Team']
+PREDICT fields: ['Age', 'Position']
+TARGET execution result:
+[
+  {
+    "Position": "Forward Team",
+    "Team": "Virginia Union"
+  },
+  {
+    "Position": "Center Team",
+    "Team": "Fordham"
+  },
+  {
+    "Position": "Center Team",
+    "Team": "Houston"
+  },
+  {
+    "Position": "Forward-Center Team",
+    "Team": "Eau Claire High School"
+  },
+  {
+    "Position": "Center Team",
+    "Team": "Bradley"
+  }
+]
+PREDICT execution result:
+[
+  "Center Team",
+  "Forward-Center Team"
+]
+TARGET result fields: {'Team', 'Position'}
+PREDICT result fields: set()
+Final metrics for db_id pilot_record: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 0, 'EVM': 0}
+==================================================
+
+
+Processing examples:  99%|█████████▊| 2739/2775 [39:39<00:29,  1.22it/s]
+==================================================
+[DB ID: journal_committee]
+TARGET QUERY:
+db.editor.aggregate([
+  {
+    $lookup: {
+      from: "journal",
+      localField: "journal_committee.Journal_ID",
+      foreignField: "Journal_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $match: {
+      "Docs1.Sales": { $gt: 3000 }
+    }
+  },
+  {
+    $project: {
+      Name: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.editor.find({}, {}).count()
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['lookup', 'match', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Journal_ID', 'Name', 'journal']
+PREDICT fields: []
+TARGET execution result:
+[
+  {
+    "Name": "Kamila Porczyk"
+  },
+  {
+    "Name": "Władysław Grzywna"
+  },
+  {
+    "Name": "Grażyna Wolszczak"
+  },
+  {
+    "Name": "Maria Góralczyk"
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id journal_committee: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+Processing examples:  99%|█████████▊| 2740/2775 [39:40<00:28,  1.24it/s]
+==================================================
+[DB ID: e_learning]
+TARGET QUERY:
+db.Students.aggregate([
+  {
+    $unwind: "$Student_Course_Enrolment"
+  },
+  {
+    $unwind: "$Student_Course_Enrolment.Student_Tests_Taken"
+  },
+  {
+    $match: {
+      "Student_Course_Enrolment.Student_Tests_Taken.test_result": "Pass"
+    }
+  },
+  {
+    $project: {
+      date_of_enrolment: "$Student_Course_Enrolment.date_of_enrolment",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.Courses.aggregate([{"$lookup": {"from": "Student_Course_Enrolment", "localField": "course_id", "foreignField": "course_id", "as": "Student_Course_Enrolment"}}, {"$unwind": "$Student_Course_Enrolment"}, {"$group": {"_id": {"course_name": "$course_name"}, "Expr1": {"$sum": 1}}}, {"$project": {"course_name": 1, "_id": 0}}])
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['unwind', 'unwind', 'match', 'project']
+Extracted Stages from PREDICTION: []
+TARGET fields: ['Student_Course_Enrolment', 'date_of_enrolment']
+PREDICT fields: ['Student_Course_Enrolment', 'course_id', 'course_name']
+TARGET execution result:
+[
+  {
+    "date_of_enrolment": "2017-10-10 10:05:03"
+  },
+  {
+    "date_of_enrolment": "2017-09-06 06:27:15"
+  },
+  {
+    "date_of_enrolment": "2017-09-21 07:05:01"
+  },
+  {
+    "date_of_enrolment": "2017-09-21 07:05:01"
+  },
+  {
+    "date_of_enrolment": "2017-10-29 15:39:31"
+  },
+  {
+    "date_of_enrolment": "2017-08-02 17:21:44"
+  },
+  {
+    "date_of_enrolment": "2017-11-13 12:49:33"
+  },
+  {
+    "date_of_enrolment": "2017-10-23 08:23:22"
+  }
+]
+PREDICT execution result:
+[]
+TARGET result fields: set()
+PREDICT result fields: set()
+Final metrics for db_id e_learning: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 1, 'EVM': 1}
+==================================================
+
+
+
+Processing examples: 100%|█████████▉| 2762/2775 [39:58<00:10,  1.27it/s]
+==================================================
+[DB ID: university_basketball]
+TARGET QUERY:
+db.university.aggregate([
+  {
+    $match: {
+      Founded: { $gt: 1850 }
+    }
+  },
+  {
+    $group: {
+      _id: "$Affiliation",
+      sum_Enrollment: { $sum: "$Enrollment" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      Affiliation: "$_id",
+      sum_Enrollment: 1
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.university.find({}, {"School": 1, "Nickname": 1, "_id": 0}).sort( {"Founded": 1} )
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['match', 'group', 'project']
+Extracted Stages from PREDICTION: ['project', 'sort']
+TARGET fields: ['Affiliation', 'Enrollment', 'Founded']
+PREDICT fields: ['Founded', 'Nickname', 'School']
+TARGET execution result:
+[
+  {
+    "sum_Enrollment": 43092,
+    "Affiliation": "Public"
+  },
+  {
+    "sum_Enrollment": 2100,
+    "Affiliation": "Private/Methodist"
+  }
+]
+PREDICT execution result:
+[
+  {
+    "School": "University of Delaware",
+    "Nickname": "Fightin' Blue Hens"
+  },
+  {
+    "School": "Rutgers University",
+    "Nickname": "Scarlet Knights"
+  },
+  {
+    "School": "Lebanon Valley College",
+    "Nickname": "Flying Dutchmen"
+  },
+  {
+    "School": "University of Rhode Island",
+    "Nickname": "Rams"
+  },
+  {
+    "School": "Stony Brook University",
+    "Nickname": "Seawolves"
+  }
+]
+TARGET result fields: {'Affiliation', 'sum_Enrollment'}
+PREDICT result fields: {'School', 'Nickname'}
+Final metrics for db_id university_basketball: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 0, 'EVM': 0}
+==================================================
+
+
+
+Processing examples: 100%|█████████▉| 2774/2775 [40:08<00:00,  1.24it/s]
+==================================================
+[DB ID: voter_2]
+TARGET QUERY:
+db.Student.aggregate([
+  {
+    $group: {
+      _id: "$Advisor",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $match: {
+      count: { $gt: 2 }
+    }
+  },
+  {
+    $project: {
+      Advisor: "$_id",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.Student.find({"Major": 50}, {"LName": 1, "_id": 0})
+Exact Match (EM): False (Exact string match after normalization)
+Extracted Stages from TARGET: ['group', 'match', 'project']
+Extracted Stages from PREDICTION: ['match', 'project']
+TARGET fields: ['Advisor']
+PREDICT fields: ['LName', 'Major']
+TARGET execution result:
+[
+  {
+    "Advisor": 1121
+  },
+  {
+    "Advisor": 8772
+  },
+  {
+    "Advisor": 2311
+  },
+  {
+    "Advisor": 8722
+  },
+  {
+    "Advisor": 2192
+  },
+  {
+    "Advisor": 1148
+  }
+]
+PREDICT execution result:
+[
+  {
+    "LName": "Epp"
+  },
+  {
+    "LName": "Schmidt"
+  }
+]
+TARGET result fields: {'Advisor'}
+PREDICT result fields: {'LName'}
+Final metrics for db_id voter_2: {'EX': False, 'EM': False, 'QSM': False, 'QFC': False, 'EFM': 0, 'EVM': 0}
+==================================================
+
+
+Processing examples: 100%|██████████| 2775/2775 [40:09<00:00,  1.23it/s]
+Processing examples: 100%|██████████| 2775/2775 [40:09<00:00,  1.15it/s]
+Processing examples took 2409.32 seconds
+
+    Exact Match: 0.0
+    Query Stages Match(QSM): 0.05765765765765766
+    Query Fields Coverage(QFC): 0.036036036036036036
+    Execution Accuracy: 0.02882882882882883
+    Execution Fields Match(EFM): 0.745945945945946
+    Execution Value Match(EVM): 0.7333333333333333
+
+
+Total errors: 2695 out of 2775 examples
