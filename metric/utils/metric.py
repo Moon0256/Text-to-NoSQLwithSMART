@@ -8,6 +8,8 @@ from typing import List, Dict, Tuple
 import re
 import time
 from contextlib import contextmanager
+import sys
+from contextlib import redirect_stdout, redirect_stderr
 
 from extract_fields import extract_fields
 from extract_stages import get_query_stages
@@ -256,34 +258,71 @@ class AccuracyCalculator:
 
 #  python ./src/utils/metric.py
 
+# Main version 1 (worked and was commented on 2024-01-15)
+# if __name__ == "__main__":
+#     # File name
+#     file_name = "result1"
+#     # file_name = "test_debug_rag_exec20_gpt"
+#     print(f"File name: {file_name}")
+
+#     # Data path
+#     # predictions_path = f"./TEND/{file_name}.json"
+#     predictions_path = f"../results/{file_name}.json"
+
+#     # Configuration
+#     config = MetricConfig(
+#         cache_size=10000,  # Increase cache size
+#         wrong_examples_path=Path(f'./error_case/{file_name}.json'),
+#     )
+#     calculator = AccuracyCalculator(config)
+    
+#     # Loading data
+#     with open(predictions_path, 'r', encoding='utf-8') as f:
+#         predictions = json.load(f)
+    
+#     # Reconstructing data format
+#     results = [{
+#         "db_id": example['db_id'],
+#         "NLQ": example['nlq'],
+#         "target": example['MQL'],
+#         "prediction": example['MQL_pred'],
+#     } for example in predictions]
+
+#     # Calculation indicators
+#     metric, metric_str = calculator.calculate(results, need_print=True)
+
 if __name__ == "__main__":
     # File name
-    file_name = "sample"
-    # file_name = "test_debug_rag_exec20_gpt"
-    print(f"File name: {file_name}")
-
-    # Data path
-    # predictions_path = f"./TEND/{file_name}.json"
+    file_name = "result1"
     predictions_path = f"../results/{file_name}.json"
 
-    # Configuration
-    config = MetricConfig(
-        cache_size=10000,  # Increase cache size
-        wrong_examples_path=Path(f'./error_case/{file_name}.json'),
-    )
-    calculator = AccuracyCalculator(config)
-    
-    # Loading data
-    with open(predictions_path, 'r', encoding='utf-8') as f:
-        predictions = json.load(f)
-    
-    # Reconstructing data format
-    results = [{
-        "db_id": example['db_id'],
-        "NLQ": example['nlq'],
-        "target": example['MQL'],
-        "prediction": example['MQL_pred'],
-    } for example in predictions]
+    # Open log file (append 'w' to overwrite each run, or 'a' to append)
+    log_path = f"./logs/{file_name}_metrics.log"
+    Path("./logs").mkdir(exist_ok=True)
 
-    # Calculation indicators
-    metric, metric_str = calculator.calculate(results, need_print=True)
+    with open(log_path, "w", encoding="utf-8") as log_file:
+        # Redirect both stdout and stderr to the file
+        with redirect_stdout(log_file), redirect_stderr(log_file):
+            print(f"File name: {file_name}")
+
+            config = MetricConfig(
+                cache_size=10000,
+                wrong_examples_path=Path(f'./error_case/{file_name}.json'),
+            )
+            calculator = AccuracyCalculator(config)
+
+            # Load predictions
+            with open(predictions_path, 'r', encoding='utf-8') as f:
+                predictions = json.load(f)
+
+            results = [{
+                "db_id": example['db_id'],
+                "NLQ": example['nlq'],
+                "target": example['MQL'],
+                "prediction": example['MQL_pred'],
+            } for example in predictions]
+
+            # Run metrics
+            metric, metric_str = calculator.calculate(results, need_print=True)
+
+    print(f"Log saved to {log_path}")
