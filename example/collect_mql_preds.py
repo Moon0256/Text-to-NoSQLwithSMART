@@ -40,7 +40,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-import requests
+import requests # Standard library for HTTP requests: This is the idiomatic way to do GET with query parameters in Python requests. For long queries, use POST with a JSON body (if/when your server supports it).
 
 # ---------------- Defaults (single source of truth) ----------------
 DEFAULT_URL: str = "http://localhost:8082/translate"
@@ -52,7 +52,7 @@ DEFAULT_RETRIES: int = 2           # simple retry loop (on our side)
 # ===================== Input loader =====================
 def load_records(path: Path) -> List[Dict[str, str]]:
     """
-    Read a JSONL file OR a JSON array file and normalize to:
+    Read a JSONL file OR a JSON array file and normalize to: (so trim and stuff done here)
       {"db_id": "<db>", "sql": "<sql>"}
 
     - If the input object has "question", we prefer that; otherwise "sql"; otherwise "ref_sql".
@@ -178,6 +178,7 @@ def run_batch(records: List[Dict[str, str]], server_url: str, method: str,
     and build the output array with {"db_id","sql","mongodb"}.
     """
     out: List[Dict[str, Any]] = []
+    # Loop through each record(which is dict of db_id and sql), fetch MQL, and build output
     for idx, rec in enumerate(records, start=1):
         db = rec["db_id"]
         sql = rec["sql"]
@@ -230,6 +231,7 @@ def main() -> None:
 
     # Load and normalize input records
     records = load_records(in_path)
+    # So, records is now a list of {"db_id", "sql"} dicts
     if not records:
         raise SystemExit("No records found in input.")
 
