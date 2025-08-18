@@ -52,7 +52,7 @@ public class TranslateServer {
             if (connection == null) {
                 System.out.println("Creating new connection for database: " + databaseName);
                 String url = "jdbc:mongo://localhost/"+databaseName+"?schema=example/schema/mongo_"+databaseName+".xml&debug=false";
-                connection = (MongoConnection) DriverManager.getConnection(url);
+                connection = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
                 connections.put(databaseName, connection);
             }
 
@@ -145,14 +145,16 @@ public class TranslateServer {
         }
 
         // Very simple JSON builder (for demo only — replace with Jackson if you want robust handling)
-        private static String toJson(Object body) {
+        private static String toJson(Object body) 
+        {
             if (body instanceof Map<?, ?> map) {
                 StringBuilder sb = new StringBuilder("{");
                 boolean first = true;
                 for (var entry : map.entrySet()) {
                     if (!first) sb.append(",");
                     sb.append("\"").append(entry.getKey()).append("\":\"")
-                      .append(entry.getValue()).append("\"");
+                    .append(entry.getValue().toString().replace("\\", "\\\\").replace("\"", "\\\""))
+                    .append("\"");
                     first = false;
                 }
                 sb.append("}");
