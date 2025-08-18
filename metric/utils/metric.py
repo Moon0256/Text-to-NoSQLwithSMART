@@ -293,7 +293,7 @@ class AccuracyCalculator:
 
 if __name__ == "__main__":
     # File name
-    file_name = "result1"
+    file_name = "sample"
     predictions_path = f"../results/{file_name}.json"
 
     # Open log file (append 'w' to overwrite each run, or 'a' to append)
