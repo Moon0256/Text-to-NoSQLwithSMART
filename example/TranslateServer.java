@@ -52,7 +52,7 @@ public class TranslateServer {
             if (connection == null) {
                 System.out.println("Creating new connection for database: " + databaseName);
                 String url = "jdbc:mongo://localhost/"+databaseName+"?schema=example/schema/mongo_"+databaseName+".xml&debug=false";
-                connection = (MongoConnection) DriverManager.getConnection(url, "admin", "ubco25");
+                connection = (MongoConnection) DriverManager.getConnection(url);
                 connections.put(databaseName, connection);
             }
 

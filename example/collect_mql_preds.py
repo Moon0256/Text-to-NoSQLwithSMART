@@ -111,13 +111,22 @@ def _call_get(url: str, db: str, sql: str, timeout: float, debug: bool) -> Dict[
     if debug:
         print("[DEBUG] GET URL ->", _prepare_url_for_get(url, params))
 
-    r = requests.get(url, params=params, timeout=timeout)
+    
     # Your server always returns JSON; if not, show raw text for debugging.
+    data= {}
     try:
+        r = requests.get(url, params=params, timeout=timeout)
+        print(r)
         data = r.json()
-    except Exception:
+        print(data)
+
+
+    except Exception as e:
         # If response is not valid JSON, surface status + text to help debug
-        raise SystemExit(f"Server returned non-JSON (status={r.status_code}):\n{r.text}")
+        print(e)  # Show first 500 chars
+        #raise SystemExit(f"Server returned non-JSON (status={r.status_code}):\n{r.text}")
+        data["mongo"] = f"ERROR: {e}"  # If we can't parse JSON, return error in "mongo" field
+        # Data is not defined, to fix this
 
     if r.status_code >= 400:
         # Your server includes {"error": "..."} on failures — preserve that.
@@ -156,12 +165,15 @@ def fetch_mql(url: str, method: str, db: str, sql: str,
     last_err: Optional[BaseException] = None
     for attempt in range(retries + 1):
         try:
+            print("hi 1")
             if method == "get":
+                
                 data = _call_get(url, db, sql, timeout, debug)
             else:
                 data = _call_post(url, db, sql, timeout, debug)
+            print("hi 2")
             mongo = data.get("mongo", "")
-            # normalize to string; your server returns a string
+            print("hi 3")# normalize to string; your server returns a string
             return mongo if isinstance(mongo, str) else str(mongo)
         except Exception as e:
             last_err = e
@@ -236,8 +248,8 @@ def main() -> None:
         raise SystemExit("No records found in input.")
 
     # Optional: quick probe to catch wrong URL/port/path early
-    if args.probe:
-        verify_server_reachable(args.url, debug=args.debug)
+    # if args.probe:
+    #     verify_server_reachable(args.url, debug=args.debug)
 
     # Batch translate
     preds = run_batch(records, args.url, args.method.lower(),

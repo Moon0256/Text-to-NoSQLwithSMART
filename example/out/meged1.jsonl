@@ -1,0 +1,1 @@
+{"db_id": "cinema", "sql": "SELECT Name, Openning_year, Capacity FROM cinema"}
