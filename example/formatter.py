@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 """
-Build formatted_results.json with fields (one row per NLQ):
-  - count      : 1-based running index for each (db_id, nlq) pair
-  - db_id      : database identifier (e.g., "school_bus")
-  - nlq        : a single natural-language query from the nl_queries list
-  - SQL        : the gold/reference SQL from testCopy.json (field: ref_sql)
-  - SQL_pred   : the predicted SQL from output.json (field: sql), matched by db_id
-  - MQL        : the gold/reference MongoDB query from testCopy.json (field: MQL)
-  - MQL_pred   : the predicted MongoDB query from output.json (field: mongodb), matched by db_id
+Strict 1:1 join:
+- Zips testCopy_flat.json (gold) with output.json (preds) by position
+- Writes formatted_results.json with: count, db_id, nlq, SQL, SQL_pred, MQL, MQL_pred
 
-Inputs (paths are set below):
-  - ./databaseContents/testCopy.json
-  - ./out/output.json
+Inputs:
+  - ./out/testCopy_flat.json   # each row: {db_id, nlq, SQL, MQL, ...}
+  - ./out/output.json          # each row: {sql, mongodb, ...} (same order & length)
 
 Output:
   - ./out/formatted_results.json
@@ -20,117 +15,50 @@ Output:
 import json
 from pathlib import Path
 
-# ---- Direct paths (edit if your files live elsewhere) ----
-# These Path objects point to where your input files live and where to write output.
-TESTCOPY_PATH = Path("./databaseContents/testCopy.json")
-OUTPUT_PATH   = Path("./out/output.json")
-OUT_PATH      = Path("./out/formatted_results.json")
+TESTCOPY_FLAT_PATH = Path("./databaseContents/testCopy_flat.json")
+OUTPUT_PATH        = Path("./out/output.json")
+OUT_PATH           = Path("./out/formatted_results.json")
 
 
 def load_json_array(p: Path):
-    """
-    1) Open file at path `p`
-    2) Parse JSON into a Python object
-    3) Validate that the top-level is a list (array) because downstream code iterates over it
-    4) Return the list
-    """
-
-    try:
-        with p.open("r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        if not isinstance(data, list):
-            raise ValueError(f"{p} is not a JSON array.")
-        return data
-
-    except FileNotFoundError:
-        raise SystemExit(f"ERROR: File not found: {p}")
-
-    except json.JSONDecodeError as e:
-        raise SystemExit(f"ERROR: Invalid JSON in {p}: {e}")
-
-
-def build_dbid_pred_maps(output_rows):
-    """
-    From output.json rows (each expected to be a dict), build two lookup tables:
-
-      dbid_to_mql_pred[db_id] = mongodb    # predicted MongoDB pipeline string
-      dbid_to_sql_pred[db_id] = sql        # predicted SQL string echoed by server
-
-    Notes:
-    - We strip whitespace from db_id to normalize keys.
-    - We only keep the FIRST non-empty value per db_id to keep behavior stable and simple.
-      (If you want "last one wins", remove the 'if dbid not in mapping' checks.)
-    """
-    dbid_to_mql_pred = {}
-    dbid_to_sql_pred = {}
-
-    for row in output_rows:
-        dbid = str(row.get("db_id", "")).strip()
-        if not dbid:
-            continue
-
-        # Predicted Mongo pipeline from the translator response
-        mongodb = row.get("mongodb")
-        if mongodb and dbid not in dbid_to_mql_pred:
-            dbid_to_mql_pred[dbid] = mongodb
-
-        # Predicted SQL echoed back by the server (or whatever you saved)
-        sql_pred = row.get("sql")
-        if sql_pred and dbid not in dbid_to_sql_pred:
-            dbid_to_sql_pred[dbid] = sql_pred
-
-    return dbid_to_mql_pred, dbid_to_sql_pred
+    with p.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, list):
+        raise SystemExit(f"ERROR: {p} does not contain a top-level JSON array.")
+    return data
 
 
 def main():
-    # Load both input arrays (lists of records).
-    test_rows = load_json_array(TESTCOPY_PATH)
-    output_rows = load_json_array(OUTPUT_PATH)
+    gold_rows = load_json_array(TESTCOPY_FLAT_PATH)   # has db_id, nlq, SQL, MQL
+    pred_rows = load_json_array(OUTPUT_PATH)          # has sql (-> SQL_pred), mongodb (-> MQL_pred)
 
-    # Build quick lookups by db_id for predicted MQL and predicted SQL.
-    dbid_to_mql_pred, dbid_to_sql_pred = build_dbid_pred_maps(output_rows)
+    if len(gold_rows) != len(pred_rows):
+        raise SystemExit(
+            f"ERROR: Requires same length for both test file and prediction (output)."
+            f"Test={len(gold_rows)} vs Preds={len(pred_rows)}."
+        )
 
-    combined = []  # This will accumulate one object per NLQ.
-    count = 1      # 1-based counter for rows in the final output.
+    combined = []
+    for idx, (g, p) in enumerate(zip(gold_rows, pred_rows), start=1):
+        db_id    = str(g.get("db_id", "")).strip()
+        nlq      = g.get("nlq", "")
+        sql_gold = g.get("SQL", "")
+        mql_gold = g.get("MQL", "")
 
-    # Iterate over each record in testCopy.json.
-    # Expected structure (fields used here):
-    #   - "db_id"     : string
-    #   - "nl_queries": list of strings (paraphrases)
-    #   - "ref_sql"   : string (gold SQL)      -> becomes "SQL"
-    #   - "MQL"       : string (gold MongoDB)  -> becomes "MQL"
-    for rec in test_rows:
-        db_id = str(rec.get("db_id", "")).strip()
-        nl_queries = rec.get("nl_queries") or []
+        # predictions from output.json
+        sql_pred = p.get("sql", "") or ""
+        mql_pred = p.get("mongodb", "") or ""
 
-        # Gold/reference SQL and MQL from testCopy.json
-        sql_gold = rec.get("ref_sql", "")  # may be missing; default to ""
-        mql_gold = rec.get("MQL", "")
+        combined.append({
+            "count": idx,
+            "db_id": db_id,
+            "nlq": nlq,
+            "SQL": sql_gold,
+            "SQL_pred": sql_pred,
+            "MQL": mql_gold,
+            "MQL_pred": mql_pred
+        })
 
-        # Predicted SQL/MQL looked up by db_id from output.json
-        sql_pred = dbid_to_sql_pred.get(db_id, "")
-        mql_pred = dbid_to_mql_pred.get(db_id, "")
-
-        # Create one output row PER NLQ so your evaluator can align
-        # specific NLQs with the same gold/predicted SQL/MQL.
-        for nlq in nl_queries:
-            combined.append({
-                "count": count,      # Running index
-                "db_id": db_id,      # e.g., "school_bus"
-                "nlq": nlq,          # natural-language query string
-
-                # NEW fields requested:
-                "SQL": sql_gold,     # gold/reference SQL from testCopy.json.ref_sql
-                "SQL_pred": sql_pred,  # predicted SQL from output.json.sql
-
-                # Existing fields:
-                "MQL": mql_gold,     # gold/reference MQL from testCopy.json.MQL
-                "MQL_pred": mql_pred # predicted MQL from output.json.mongodb
-            })
-            count += 1
-
-    # Write output
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUT_PATH.open("w", encoding="utf-8") as f:
         json.dump(combined, f, ensure_ascii=False, indent=2)
