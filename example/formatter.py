@@ -29,14 +29,12 @@ OUT_PATH      = Path("./out/formatted_results.json")
 
 def load_json_array(p: Path):
     """
-    Open a JSON file expected to contain a top-level array (list).
-    - p: Path to the JSON file.
-    Returns: the parsed Python list.
-    Exits the program with a clear error if the file is missing or invalid.
-
-    Why enforce "array"? Because the script assumes it will iterate over a list
-    of records (objects). If the root is not a list, downstream code would break.
+    1) Open file at path `p`
+    2) Parse JSON into a Python object
+    3) Validate that the top-level is a list (array) because downstream code iterates over it
+    4) Return the list
     """
+
     try:
         with p.open("r", encoding="utf-8") as f:
             data = json.load(f)
@@ -54,18 +52,15 @@ def load_json_array(p: Path):
 
 def build_dbid_pred_maps(output_rows):
     """
-    Build two dictionaries keyed by db_id using rows from output.json:
-      - dbid_to_mql_pred : db_id -> mongodb (predicted MQL string)
-      - dbid_to_sql_pred : db_id -> sql     (predicted SQL string, as echoed by server)
+    From output.json rows (each expected to be a dict), build two lookup tables:
 
-    Behavior:
-      - Trims db_id strings.
-      - Keeps the FIRST non-empty value per db_id encountered (stable and simple).
-        If your output.json has multiple rows per db_id and you prefer
-        "last one wins", change the `if dbid not in mapping` checks below.
+      dbid_to_mql_pred[db_id] = mongodb    # predicted MongoDB pipeline string
+      dbid_to_sql_pred[db_id] = sql        # predicted SQL string echoed by server
 
-    Returns:
-      (dbid_to_mql_pred, dbid_to_sql_pred)
+    Notes:
+    - We strip whitespace from db_id to normalize keys.
+    - We only keep the FIRST non-empty value per db_id to keep behavior stable and simple.
+      (If you want "last one wins", remove the 'if dbid not in mapping' checks.)
     """
     dbid_to_mql_pred = {}
     dbid_to_sql_pred = {}
