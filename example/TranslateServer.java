@@ -130,7 +130,7 @@ public class TranslateServer {
             sendJson(exchange, 200, Map.of(
                     "db", db,
                     "sql", sql,
-                    "mongo", mongo
+                    "mongo", mongo+";"
             ));
         }
 
