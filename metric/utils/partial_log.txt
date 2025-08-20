@@ -1,0 +1,640 @@
+File name: form_res2
+Using MongoDB shell from PATH: /opt/homebrew/bin/mongosh
+Trying to connect to MongoDB: mongodb://localhost:27017
+MongoDB connection test successful!
+
+Processing examples:   0%|          | 0/2775 [00:00<?, ?it/s]
+============================================================
+[DB: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school_bus.aggregate([{"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$lookup": {"from": "driver", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "driver"}}, {"$unwind": "$driver"}, {"$project": {"School": 1, "Name": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['lookup', 'unwind', 'project']
+PREDICT stages: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'driver', 'school']
+TARGET result (preview):   [{"Name": "Henry Genga", "School": "Noelani Elementary School"}, {"Name": "Jason Rojas", "School": "Harvard Law School"}, {"Name": "Douglas McCrory", "School": "Occidental College"}, {"Name": "Minnie Gonzalez", "School": "Punahou School"}, {"Name": "Angel Acre", "School": "State Elementary School Menteng 01"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - Name
+  - School
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school_bus.aggregate([{"$lookup": {"from": "driver", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "driver"}}, {"$unwind": "$driver"}, {"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$project": {"School": 1, "Name": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['lookup', 'unwind', 'project']
+PREDICT stages: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'driver', 'school']
+TARGET result (preview):   [{"Name": "Henry Genga", "School": "Noelani Elementary School"}, {"Name": "Jason Rojas", "School": "Harvard Law School"}, {"Name": "Douglas McCrory", "School": "Occidental College"}, {"Name": "Minnie Gonzalez", "School": "Punahou School"}, {"Name": "Angel Acre", "School": "State Elementary School Menteng 01"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - Name
+  - School
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.driver.aggregate([{"$lookup": {"from": "school_bus", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "school_bus"}}, {"$unwind": "$school_bus"}, {"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$project": {"Name": 1, "School": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['lookup', 'unwind', 'project']
+PREDICT stages: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'school', 'school_bus']
+TARGET result (preview):   [{"Name": "Henry Genga", "School": "Noelani Elementary School"}, {"Name": "Jason Rojas", "School": "Harvard Law School"}, {"Name": "Douglas McCrory", "School": "Occidental College"}, {"Name": "Minnie Gonzalez", "School": "Punahou School"}, {"Name": "Angel Acre", "School": "State Elementary School Menteng 01"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - Name
+  - School
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.driver.aggregate([{"$lookup": {"from": "school_bus", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "school_bus"}}, {"$unwind": "$school_bus"}, {"$lookup": {"from": "school", "localField": "School_ID", "foreignField": "School_ID", "as": "school"}}, {"$unwind": "$school"}, {"$project": {"School": 1, "Name": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['lookup', 'unwind', 'project']
+PREDICT stages: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'school', 'school_bus']
+TARGET result (preview):   [{"Name": "Henry Genga", "School": "Noelani Elementary School"}, {"Name": "Jason Rojas", "School": "Harvard Law School"}, {"Name": "Douglas McCrory", "School": "Occidental College"}, {"Name": "Minnie Gonzalez", "School": "Punahou School"}, {"Name": "Angel Acre", "School": "State Elementary School Menteng 01"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - Name
+  - School
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: school_bus]
+TARGET QUERY:
+db.school.aggregate([
+  {
+    $lookup: {
+      from: "driver",
+      localField: "School_ID",
+      foreignField: "school_bus.School_ID",
+      as: "Docs1"
+    }
+  },
+  {
+    $unwind: "$Docs1"
+  },
+  {
+    $project: {
+      "School": 1,
+      "Name": "$Docs1.Name",
+      "_id": 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.school.aggregate([{"$lookup": {"from": "school_bus", "localField": "School_ID", "foreignField": "School_ID", "as": "school_bus"}}, {"$unwind": "$school_bus"}, {"$lookup": {"from": "driver", "localField": "Driver_ID", "foreignField": "Driver_ID", "as": "driver"}}, {"$unwind": "$driver"}, {"$project": {"Name": 1, "School": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['lookup', 'unwind', 'project']
+PREDICT stages: []
+TARGET fields: ['Name', 'School', 'School_ID', 'driver']
+PREDICT fields: ['Driver_ID', 'Name', 'School', 'School_ID', 'driver', 'school', 'school_bus']
+TARGET result (preview):   [{"Name": "Henry Genga", "School": "Noelani Elementary School"}, {"Name": "Jason Rojas", "School": "Harvard Law School"}, {"Name": "Douglas McCrory", "School": "Occidental College"}, {"Name": "Minnie Gonzalez", "School": "Punahou School"}, {"Name": "Angel Acre", "School": "State Elementary School Menteng 01"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - Name
+  - School
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: cinema]
+TARGET QUERY:
+db.cinema.find({}, { "Name": 1, "Openning_year": 1, "Capacity": 1, "_id": 0 });
+
+PREDICTION QUERY:
+db.cinema.find({}, {"Name": 1, "Openning_year": 1, "Capacity": 1, "_id": 0})
+Exact Match (EM): False
+TARGET stages: ['project']
+PREDICT stages: ['project']
+TARGET fields: ['Capacity', 'Name', 'Openning_year']
+PREDICT fields: ['Capacity', 'Name', 'Openning_year']
+TARGET result (preview):   [{"Capacity": 225, "Name": "Moneypoint", "Openning_year": 2011}, {"Capacity": 325, "Name": "Glenough", "Openning_year": 2010}, {"Capacity": 1100, "Name": "Codling", "Openning_year": 2010}, {"Capacity": 368, "Name": "Carrowleagh", "Openning_year": 2012}, {"Capacity": 305, "Name": "Glenmore", "Openning_year": 2009}, {"Capacity": 208, "Name": "Gortahile", "Openning_year": 2010}, {"Capacity": 203, "Name": "Grouse Lodge", "Openning_year": 2011}, {"Capacity": 908, "Name": "Mount Callan", "Openning_year": 2011}, {"Capacity": 330, "Name": "Oriel", "Openning_year": 2013}, {"Capacity": 364, "Name": "Dublin Array", "Openning_year": 2015}]
+PREDICT result (preview):  [{"Capacity": 225, "Name": "Moneypoint", "Openning_year": 2011}, {"Capacity": 325, "Name": "Glenough", "Openning_year": 2010}, {"Capacity": 1100, "Name": "Codling", "Openning_year": 2010}, {"Capacity": 368, "Name": "Carrowleagh", "Openning_year": 2012}, {"Capacity": 305, "Name": "Glenmore", "Openning_year": 2009}, {"Capacity": 208, "Name": "Gortahile", "Openning_year": 2010}, {"Capacity": 203, "Name": "Grouse Lodge", "Openning_year": 2011}, {"Capacity": 908, "Name": "Mount Callan", "Openning_year": 2011}, {"Capacity": 330, "Name": "Oriel", "Openning_year": 2013}, {"Capacity": 364, "Name": "Dublin Array", "Openning_year": 2015}]
+TARGET field path count:  3
+PREDICT field path count: 3
+Sample values for shared fields (3 shown):
+  Capacity:
+    TARGET samples : ['225', '325', '1100']
+    PREDICT samples: ['225', '325', '1100']
+  Name:
+    TARGET samples : ['"Moneypoint"', '"Glenough"', '"Codling"']
+    PREDICT samples: ['"Moneypoint"', '"Glenough"', '"Codling"']
+  Openning_year:
+    TARGET samples : ['2011', '2010', '2012']
+    PREDICT samples: ['2011', '2010', '2012']
+Final metrics: {'EX': 1, 'EM': 0, 'QSM': 1, 'QFC': 1, 'EFM': 1, 'EVM': 1}
+============================================================
+
+============================================================
+[DB: climbing]
+TARGET QUERY:
+db.mountain.aggregate([
+  {
+    $unwind: "$climber"
+  },
+  {
+    $group: {
+      _id: "$climber.Country",
+      "COUNT": { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Country: "$_id",
+      COUNT: "$COUNT",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.climber.aggregate([{"$group": {"_id": {"Country": "$Country"}, "Expr1": {"$sum": 1}}}, {"$project": {"Country": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['unwind', 'group', 'project']
+PREDICT stages: []
+TARGET fields: ['Country', 'climber']
+PREDICT fields: ['Country']
+TARGET result (preview):   [{"COUNT": 1, "Country": "Switzerland"}, {"COUNT": 3, "Country": "United Kingdom"}, {"COUNT": 6, "Country": "West Germany"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - COUNT
+  - Country
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: climbing]
+TARGET QUERY:
+db.mountain.aggregate([
+  {
+    $unwind: "$climber"
+  },
+  {
+    $group: {
+      _id: "$climber.Country",
+      "COUNT": { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Country: "$_id",
+      COUNT: "$COUNT",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.climber.aggregate([{"$group": {"_id": {"Country": "$Country"}, "Expr1": {"$sum": 1}}}, {"$project": {"Country": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['unwind', 'group', 'project']
+PREDICT stages: []
+TARGET fields: ['Country', 'climber']
+PREDICT fields: ['Country']
+TARGET result (preview):   [{"COUNT": 1, "Country": "Switzerland"}, {"COUNT": 3, "Country": "United Kingdom"}, {"COUNT": 6, "Country": "West Germany"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - COUNT
+  - Country
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: climbing]
+TARGET QUERY:
+db.mountain.aggregate([
+  {
+    $unwind: "$climber"
+  },
+  {
+    $group: {
+      _id: "$climber.Country",
+      "COUNT": { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Country: "$_id",
+      COUNT: "$COUNT",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.climber.aggregate([{"$group": {"_id": {"Country": "$Country"}, "Expr1": {"$sum": 1}}}, {"$project": {"Country": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['unwind', 'group', 'project']
+PREDICT stages: []
+TARGET fields: ['Country', 'climber']
+PREDICT fields: ['Country']
+TARGET result (preview):   [{"COUNT": 1, "Country": "Switzerland"}, {"COUNT": 3, "Country": "United Kingdom"}, {"COUNT": 6, "Country": "West Germany"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - COUNT
+  - Country
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: climbing]
+TARGET QUERY:
+db.mountain.aggregate([
+  {
+    $unwind: "$climber"
+  },
+  {
+    $group: {
+      _id: "$climber.Country",
+      "COUNT": { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      Country: "$_id",
+      COUNT: "$COUNT",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.climber.aggregate([{"$group": {"_id": {"Country": "$Country"}, "Expr1": {"$sum": 1}}}, {"$project": {"Country": 1, "_id": 0}}])
+Exact Match (EM): False
+TARGET stages: ['unwind', 'group', 'project']
+PREDICT stages: []
+TARGET fields: ['Country', 'climber']
+PREDICT fields: ['Country']
+TARGET result (preview):   [{"COUNT": 1, "Country": "Switzerland"}, {"COUNT": 3, "Country": "United Kingdom"}, {"COUNT": 6, "Country": "West Germany"}]
+PREDICT result (preview):  {}
+TARGET field path count:  2
+PREDICT field path count: 0
+Missing in PREDICT (2 shown):
+  - COUNT
+  - Country
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: county_public_safety]
+TARGET QUERY:
+db.county_public_safety.aggregate([
+  {
+    $sort: { Population: -1 }
+  },
+  {
+    $project: {
+      Case_burden: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.county_public_safety.find({}, {"Case_burden": 1, "_id": 0}).sort( {"Population": -1} )
+Exact Match (EM): False
+TARGET stages: ['sort', 'project']
+PREDICT stages: ['project', 'sort']
+TARGET fields: ['Case_burden', 'Population']
+PREDICT fields: ['Case_burden', 'Population']
+TARGET result (preview):   [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+PREDICT result (preview):  [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+TARGET field path count:  1
+PREDICT field path count: 1
+Sample values for shared fields (1 shown):
+  Case_burden:
+    TARGET samples : ['100', '81', '140']
+    PREDICT samples: ['100', '81', '140']
+Final metrics: {'EX': 1, 'EM': 0, 'QSM': 0, 'QFC': 1, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+Processing examples:  35%|███▌      | 976/2775 [01:44<02:39, 11.27it/s]
+============================================================
+[DB: county_public_safety]
+TARGET QUERY:
+db.county_public_safety.aggregate([
+  {
+    $sort: { Population: -1 }
+  },
+  {
+    $project: {
+      Case_burden: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.county_public_safety.find({}, {"Case_burden": 1, "_id": 0}).sort( {"Population": -1} )
+Exact Match (EM): False
+TARGET stages: ['sort', 'project']
+PREDICT stages: ['project', 'sort']
+TARGET fields: ['Case_burden', 'Population']
+PREDICT fields: ['Case_burden', 'Population']
+TARGET result (preview):   [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+PREDICT result (preview):  [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+TARGET field path count:  1
+PREDICT field path count: 1
+Sample values for shared fields (1 shown):
+  Case_burden:
+    TARGET samples : ['100', '81', '140']
+    PREDICT samples: ['100', '81', '140']
+Final metrics: {'EX': 1, 'EM': 0, 'QSM': 0, 'QFC': 1, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: county_public_safety]
+TARGET QUERY:
+db.county_public_safety.aggregate([
+  {
+    $sort: { Population: -1 }
+  },
+  {
+    $project: {
+      Case_burden: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.county_public_safety.find({}, {"Case_burden": 1, "_id": 0}).sort( {"Population": -1} )
+Exact Match (EM): False
+TARGET stages: ['sort', 'project']
+PREDICT stages: ['project', 'sort']
+TARGET fields: ['Case_burden', 'Population']
+PREDICT fields: ['Case_burden', 'Population']
+TARGET result (preview):   [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+PREDICT result (preview):  [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+TARGET field path count:  1
+PREDICT field path count: 1
+Sample values for shared fields (1 shown):
+  Case_burden:
+    TARGET samples : ['100', '81', '140']
+    PREDICT samples: ['100', '81', '140']
+Final metrics: {'EX': 1, 'EM': 0, 'QSM': 0, 'QFC': 1, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+============================================================
+[DB: county_public_safety]
+TARGET QUERY:
+db.county_public_safety.aggregate([
+  {
+    $sort: { Population: -1 }
+  },
+  {
+    $project: {
+      Case_burden: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.county_public_safety.find({}, {"Name": 1, "Population": 1, "Case_burden": 1, "_id": 0}).sort( {"Population": -1} )
+Exact Match (EM): False
+TARGET stages: ['sort', 'project']
+PREDICT stages: ['project', 'sort']
+TARGET fields: ['Case_burden', 'Population']
+PREDICT fields: ['Case_burden', 'Name', 'Population']
+TARGET result (preview):   [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+PREDICT result (preview):  [{"Case_burden": 100, "Name": "Burnaby", "Population": 204320}, {"Case_burden": 81, "Name": "Abbotsford", "Population": 128165}, {"Case_burden": 140, "Name": "Chilliwack", "Population": 73066}, {"Case_burden": 137, "Name": "Campbell River", "Population": 30810}, {"Case_burden": 39, "Name": "Central Saanich", "Population": 16821}, {"Case_burden": 107, "Name": "Castlegar", "Population": 7821}]
+TARGET field path count:  1
+PREDICT field path count: 3
+Extra in PREDICT (2 shown):
+  + Name
+  + Population
+Sample values for shared fields (1 shown):
+  Case_burden:
+    TARGET samples : ['100', '81', '140']
+    PREDICT samples: ['100', '81', '140']
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 0, 'EVM': 0}
+============================================================
+
+
+Processing examples:  35%|███▌      | 979/2775 [01:44<02:52, 10.39it/s]
+============================================================
+[DB: county_public_safety]
+TARGET QUERY:
+db.county_public_safety.aggregate([
+  {
+    $sort: { Population: -1 }
+  },
+  {
+    $project: {
+      Case_burden: 1,
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+db.county_public_safety.find({}, {"Name": 1, "Case_burden": 1, "Population": 1, "_id": 0}).sort( {"Population": -1, "Case_burden": -1} )
+Exact Match (EM): False
+TARGET stages: ['sort', 'project']
+PREDICT stages: ['project', 'sort']
+TARGET fields: ['Case_burden', 'Population']
+PREDICT fields: ['Case_burden', 'Name', 'Population']
+TARGET result (preview):   [{"Case_burden": 100}, {"Case_burden": 81}, {"Case_burden": 140}, {"Case_burden": 137}, {"Case_burden": 39}, {"Case_burden": 107}]
+PREDICT result (preview):  [{"Case_burden": 100, "Name": "Burnaby", "Population": 204320}, {"Case_burden": 81, "Name": "Abbotsford", "Population": 128165}, {"Case_burden": 140, "Name": "Chilliwack", "Population": 73066}, {"Case_burden": 137, "Name": "Campbell River", "Population": 30810}, {"Case_burden": 39, "Name": "Central Saanich", "Population": 16821}, {"Case_burden": 107, "Name": "Castlegar", "Population": 7821}]
+TARGET field path count:  1
+PREDICT field path count: 3
+Extra in PREDICT (2 shown):
+  + Name
+  + Population
+Sample values for shared fields (1 shown):
+  Case_burden:
+    TARGET samples : ['100', '81', '140']
+    PREDICT samples: ['100', '81', '140']
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 0, 'EVM': 0}
+============================================================
+
+
+============================================================
+[DB: voter_2]
+TARGET QUERY:
+db.Student.aggregate([
+  {
+    $group: {
+      _id: "$Major",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $match: {
+      count: { $lt: 3 }
+    }
+  },
+  {
+    $project: {
+      Major: "$_id",
+      _id: 0
+    }
+  }
+]);
+
+PREDICTION QUERY:
+
+Exact Match (EM): False
+TARGET stages: ['group', 'match', 'project']
+PREDICT stages: []
+TARGET fields: ['Major']
+PREDICT fields: []
+TARGET result (preview):   [{"Major": 100}, {"Major": 50}, {"Major": 540}]
+PREDICT result (preview):  {}
+TARGET field path count:  1
+PREDICT field path count: 0
+Missing in PREDICT (1 shown):
+  - Major
+Final metrics: {'EX': 0, 'EM': 0, 'QSM': 0, 'QFC': 0, 'EFM': 1, 'EVM': 1}
+============================================================
+
+
+Processing examples: 100%|██████████| 2775/2775 [06:32<00:00,  7.08it/s]
+Processing examples took 392.12 seconds
+
+    Exact Match (EM): 0.0
+    Query Stages Match (QSM): 0.16036036036036036
+    Query Fields Coverage (QFC): 0.31135135135135134
+    Execution Accuracy (EX): 0.18018018018018017
+    Execution Fields Match (EFM): 0.9055855855855856
+    Execution Value Match (EVM): 0.8972972972972973
+
+
+Total errors: 2275 out of 2775 examples
+
+Timing breakdown (seconds):
+    exec: 390.551
+     qfc: 0.522
+     qsm: 0.063

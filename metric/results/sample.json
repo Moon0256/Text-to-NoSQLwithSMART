@@ -1,23 +1,65 @@
 [
-  {
-    "count": 1,
-    "db_id": "school_bus",
-    "nlq": "Show the school name and driver name for all school buses.",
-    "MQL": "db.school.aggregate([{ \"$lookup\": { \"from\": \"driver\", \"localField\": \"School_ID\", \"foreignField\": \"school_bus.School_ID\", \"as\": \"Docs1\" } }, { \"$unwind\": \"$Docs1\" }, { \"$project\": { \"School\": 1, \"Name\": \"$Docs1.Name\", \"_id\": 0 } }]);",
-    "MQL_pred": "db.school.aggregate([{ $lookup: { from: \"driver\", localField: \"School_ID\", foreignField: \"school_bus.School_ID\", as: \"Docs1\" } }, { $unwind: \"$Docs1\" }, { $project: { School: 1, Name: \"$Docs1.Name\", _id: 0 } }]);"
-  },
-  {
-    "count": 2,
-    "db_id": "school_bus",
-    "nlq": "List all schools (names only).",
-    "MQL": "db.school.find({}, { \"School\": 1, \"_id\": 0 });",
-    "MQL_pred": "db.school.find({}, { School: 1, _id: 0 });"
-  },
+
   {
     "count": 6,
     "db_id": "cinema",
     "nlq": "Show name, opening year, and capacity for each cinema.",
     "MQL": "db.cinema.find({}, { \"Name\": 1, \"Openning_year\": 1, \"Capacity\": 1, \"_id\": 0 });\n",
-    "MQL_pred": "db.cinema.find({}, {\"Name\": 1, \"Openning_year\": 1, \"Capacity\": 1, \"_id\": 0})"
+    "MQL_pred": "db.cinema.find({}, {\"Name\": 1, \"Openning_year\": 1, \"Capacity\": 1, \"_id\": 0});\n "
+  },
+  {
+    "count": 7,
+    "db_id": "college_3",
+    "nlq": "Find the first names of students whose first names contain letter \"a\".",
+    "SQL": "SELECT DISTINCT Fname FROM STUDENT WHERE Fname LIKE '%a%'",
+    "SQL_pred": "SELECT Fname FROM Student WHERE Fname LIKE '%a%'",
+    "MQL": "db.Student.find(\n  {\n    Fname: { $regex: \"a\", $options: \"i\" }\n  },\n  {\n    Fname: 1,\n    _id: 0\n  }\n);\n",
+    "MQL_pred": "db.Student.find({\"Fname\": {\"$regularExpression\": {\"pattern\": \"^.*a.*$\", \"options\": \"\"}}}, {\"Fname\": 1, \"_id\": 0})"
+  },
+  {
+    "count": 8,
+    "db_id": "device",
+    "nlq": "How many devices are there?",
+    "SQL": "SELECT count(*) FROM device",
+    "SQL_pred": "SELECT count(*) FROM device",
+    "MQL": "db.device.aggregate([\n  {\n    $group: {\n      _id: null,\n      count: { $sum: 1 }\n    }\n  },\n  {\n    $project: {\n      _id: 0,\n      count: 1\n    }\n  }\n]);\n",
+    "MQL_pred": "db.device.find({}, {}).count()"
+  },
+  {
+    "count": 9,
+    "db_id": "e_learning",
+    "nlq": "Find the subject ID, subject name, and the corresponding number of available courses for each subject.",
+    "SQL": "SELECT T1.subject_id , T2.subject_name , COUNT(*) FROM Courses AS T1 JOIN Subjects AS T2 ON T1.subject_id = T2.subject_id GROUP BY T1.subject_id",
+    "SQL_pred": "SELECT T1.subject_id, T2.subject_name, COUNT(*) FROM Courses AS T1 JOIN Subjects AS T2 ON T1.subject_id = T2.subject_id GROUP BY T1.subject_id, T2.subject_name",
+    "MQL": "db.Subjects.aggregate([\n  {\n    $project: {\n   _id: 0,\n   subject_id: 1,\n      subject_name: 1,\n      COUNT: { $size: \"$Courses\" }\n    }\n  }\n]);\n",
+    "MQL_pred": "db.Courses.aggregate([{\"$lookup\": {\"from\": \"Subjects\", \"localField\": \"subject_id\", \"foreignField\": \"subject_id\", \"as\": \"Subjects\"}}, {\"$unwind\": \"$Subjects\"}, {\"$group\": {\"_id\": {\"subject_id\": \"$subject_id\", \"subject_name\": \"$subject_name\"}, \"Expr2\": {\"$sum\": 1}}}, {\"$project\": {\"subject_id\": 1, \"subject_name\": 1, \"_id\": 0}}])"
+  },
+  {
+    "count": 10,
+    "db_id": "e_learning",
+    "nlq": "Provide the subject ID, subject name, along with the count of courses present for each subject.",
+    "SQL": "SELECT T1.subject_id , T2.subject_name , COUNT(*) FROM Courses AS T1 JOIN Subjects AS T2 ON T1.subject_id = T2.subject_id GROUP BY T1.subject_id",
+    "SQL_pred": "SELECT Subjects.subject_id, Subjects.subject_name, COUNT(Courses.course_id) FROM Subjects LEFT JOIN Courses ON Subjects.subject_id = Courses.subject_id GROUP BY Subjects.subject_id, Subjects.subject_name",
+    "MQL": "db.Subjects.aggregate([\n  {\n    $project: {\n   _id: 0,\n   subject_id: 1,\n      subject_name: 1,\n      COUNT: { $size: \"$Courses\" }\n    }\n  }\n]);\n",
+    "MQL_pred": "db.Subjects.aggregate([{\"$lookup\": {\"from\": \"Courses\", \"localField\": \"subject_id\", \"foreignField\": \"Courses.subject_id\", \"as\": \"Courses\"}}, {\"$unwind\": \"$Courses\"}, {\"$group\": {\"_id\": {\"subject_id\": \"$subject_id\", \"subject_name\": \"$subject_name\"}, \"Expr2\": {\"$sum\": {\"$cond\": [{\"$gt\": [\"$Courses.course_id\", null]}, 1, 0]}}}}, {\"$project\": {\"subject_id\": 1, \"subject_name\": 1, \"_id\": 0}}])"
+  },
+  {
+    "count": 11,
+    "db_id": "ship_1",
+    "nlq": "List the names of captains arranged from the oldest to the youngest based on their age.",
+    "SQL": "SELECT name FROM captain ORDER BY age DESC",
+    "SQL_pred": "SELECT Name FROM captain ORDER BY age",
+    "MQL": "db.Ship.aggregate([\n  { $unwind: \"$captain\" },\n  { $sort: { \"captain.age\": -1 } },\n  { $project: { _id: 0, Name: \"$captain.Name\" } }\n]);\n",
+    "MQL_pred": "db.captain.find({}, {\"Name\": 1, \"_id\": 0}).sort( {\"age\": 1} )"
+  },
+  {
+    "count": 12,
+    "db_id": "hr_1",
+    "nlq": "display the full name (first and last), hire date, salary, and department number for those employees whose first name does not containing the letter M.",
+    "SQL": "SELECT first_name , last_name , hire_date , salary , department_id FROM employees WHERE first_name NOT LIKE '%M%'",
+    "SQL_pred": "SELECT e.first_name, e.last_name, e.hire_date, e.salary, e.department_id FROM employees e WHERE e.first_name NOT LIKE '%M%'",
+    "MQL": "db.jobs.aggregate([\n  {\n    $unwind: \"$employees\"\n  },\n  {\n    $match: {\n      \"employees.FIRST_NAME\": {\n        $not: {\n          $regex: \"M\",\n          $options: \"i\"\n        }\n      }\n    }\n  },\n  {\n    $project: {\n      FIRST_NAME: \"$employees.FIRST_NAME\",\n      LAST_NAME: \"$employees.LAST_NAME\",\n      HIRE_DATE: \"$employees.HIRE_DATE\",\n      SALARY: \"$employees.SALARY\",\n      DEPARTMENT_ID: \"$employees.DEPARTMENT_ID\",\n      _id: 0\n    }\n  }\n]);\n",
+    "MQL_pred": "db.employees.find({\"first_name\": {\"$not\": {\"$regularExpression\": {\"pattern\": \"^.*M.*$\", \"options\": \"\"}}}}, {\"first_name\": 1, \"last_name\": 1, \"hire_date\": 1, \"salary\": 1, \"department_id\": 1, \"_id\": 0})"
   }
+
 ]
