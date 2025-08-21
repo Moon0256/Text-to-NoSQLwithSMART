@@ -561,7 +561,7 @@ class AccuracyCalculator:
 # python ./src/utils/metrics.py
 if __name__ == "__main__":                                   # Only run when executed as a script (not imported)
     # Choose which dataset to score (adjust to your paths)
-    file_name = "result1"                                     # Base name for input/output paths
+    file_name = "results3"                                     # Base name for input/output paths
     predictions_path = f"../results/{file_name}.json"        # Input results file (formatted JSON rows)
 
     # Set up logging (optional)

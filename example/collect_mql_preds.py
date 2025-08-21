@@ -30,7 +30,7 @@ Run example:
   --url http://localhost:8082/translate \
   --method get \
   --debug \
-  --probe
+ # --probe
 """
 
 from __future__ import annotations
