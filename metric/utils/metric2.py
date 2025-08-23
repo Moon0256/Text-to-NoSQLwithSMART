@@ -28,6 +28,7 @@ from functools import lru_cache         # Memoization decorator for caching expe
 from collections import defaultdict     # Dict subclass with default factory, used for timing buckets
 from contextlib import contextmanager, redirect_stdout, redirect_stderr  # Context managers for timing and log redirection
 
+import argparse
 import demjson3 as demjson              # More lenient JSON parser (handles single quotes / trailing commas, etc.)
 from pymongo import MongoClient         # PyMongo client (native driver, faster than shell for exec)
 from tqdm import tqdm                   # Progress bar for loop visibility
@@ -559,14 +560,33 @@ class AccuracyCalculator:
 
 # Example of running:
 # python ./src/utils/metrics.py
-if __name__ == "__main__":                                   # Only run when executed as a script (not imported)
-    # Choose which dataset to score (adjust to your paths)
-    file_name = "results3"                                     # Base name for input/output paths
-    predictions_path = f"../results/{file_name}.json"        # Input results file (formatted JSON rows)
+if __name__ == "__main__":      
+    # To run individually by having formatted results copied in the results folder                             # Only run when executed as a script (not imported)
+    # # Choose which dataset to score (adjust to your paths)
+    # file_name = "results3"                                     # Base name for input/output paths
+    # predictions_path = f"../results/{file_name}.json"        # Input results file (formatted JSON rows)
 
-    # Set up logging (optional)
+    # # Set up logging (optional)
+    # log_path = f"./logs/{file_name}_metrics.log"             # Where to save the full console output
+    # Path("./logs").mkdir(exist_ok=True)                      # Ensure logs directory exists
+
+    # Changed code for the run_pipeline.sh script:
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--file_name",
+        default="sample",  # default value if none is given
+        help="Base name of results file (without .json) inside ../results/"
+    )
+    args = parser.parse_args()
+
+    file_name = args.file_name                               # Base name for input/output paths
+    predictions_path = f"../results/{file_name}.json"        # Input results file (formatted JSON rows)
+    # End of changed code
+
+    # Set up logging
     log_path = f"./logs/{file_name}_metrics.log"             # Where to save the full console output
-    Path("./logs").mkdir(exist_ok=True)                      # Ensure logs directory exists
+    Path("./logs").mkdir(exist_ok=True)    
 
     with open(log_path, "w", encoding="utf-8") as log_file:  # Open log file for writing
         with redirect_stdout(log_file), redirect_stderr(log_file):  # Redirect both stdout/stderr to file

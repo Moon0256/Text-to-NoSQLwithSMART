@@ -137,7 +137,7 @@
   {
     "db_id": "college_3",
     "sql": "SELECT DName FROM Department WHERE DNO IN (SELECT DNO FROM Member_of GROUP BY DNO ORDER BY COUNT(FacID) ASC LIMIT 1)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: FacID | body={'sql': 'SELECT DName FROM Department WHERE DNO IN (SELECT DNO FROM Member_of GROUP BY DNO ORDER BY COUNT(FacID) ASC LIMIT 1)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: FacID', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: FacID | body={'sql': 'SELECT DName FROM Department WHERE DNO IN (SELECT DNO FROM Member_of GROUP BY DNO ORDER BY COUNT(FacID) ASC LIMIT 1)', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: FacID'}"
   },
   {
     "db_id": "college_3",
@@ -477,27 +477,27 @@
   {
     "db_id": "e_learning",
     "sql": "SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"'}"
   },
   {
     "db_id": "e_learning",
     "sql": "SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"'}"
   },
   {
     "db_id": "e_learning",
     "sql": "SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT T1.login_name FROM Course_Authors_and_Tutors AS T1 JOIN Courses AS T2 ON T1.author_id = T2.author_id WHERE T2.course_name = \"advanced database\"', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"'}"
   },
   {
     "db_id": "e_learning",
     "sql": "SELECT login_name FROM Course_Authors_and_Tutors WHERE author_id = (SELECT author_id FROM Courses WHERE course_name = \"advanced database\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT login_name FROM Course_Authors_and_Tutors WHERE author_id = (SELECT author_id FROM Courses WHERE course_name = \"advanced database\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT login_name FROM Course_Authors_and_Tutors WHERE author_id = (SELECT author_id FROM Courses WHERE course_name = \"advanced database\")', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"'}"
   },
   {
     "db_id": "e_learning",
     "sql": "SELECT t1.personal_name, t1.login_name FROM Course_Authors_and_Tutors AS t1 JOIN Courses AS t2 ON t1.author_id = t2.author_id JOIN Subjects AS t3 ON t2.subject_id = t3.subject_id WHERE t3.subject_name = \"advanced database\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT t1.personal_name, t1.login_name FROM Course_Authors_and_Tutors AS t1 JOIN Courses AS t2 ON t1.author_id = t2.author_id JOIN Subjects AS t3 ON t2.subject_id = t3.subject_id WHERE t3.subject_name = \"advanced database\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\" | body={'sql': 'SELECT t1.personal_name, t1.login_name FROM Course_Authors_and_Tutors AS t1 JOIN Courses AS t2 ON t1.author_id = t2.author_id JOIN Subjects AS t3 ON t2.subject_id = t3.subject_id WHERE t3.subject_name = \"advanced database\"', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"advanced database\"'}"
   },
   {
     "db_id": "flight_1",
@@ -1032,7 +1032,7 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT count(*) FROM (SELECT city FROM airports GROUP BY city HAVING count(*) > 3)",
-    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 222 (char 221)\"}"
+    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 238 (char 237)\"}"
   },
   {
     "db_id": "flight_4",
@@ -1157,7 +1157,7 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"'}"
   },
   {
     "db_id": "wine_1",
@@ -1167,12 +1167,12 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"'}"
   },
   {
     "db_id": "wine_1",
     "sql": "SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT Appelation FROM wine WHERE Year > 2008 AND Appelation NOT IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"'}"
   },
   {
     "db_id": "allergy_1",
@@ -1202,12 +1202,12 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" ORDER BY T1.Allergy",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" ORDER BY T1.Allergy', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" ORDER BY T1.Allergy', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" ORDER BY T1.Allergy;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" ORDER BY T1.Allergy;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" ORDER BY T1.Allergy;', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"'}"
   },
   {
     "db_id": "allergy_1",
@@ -1217,12 +1217,12 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" AND T3.Sex = \"F\" ORDER BY T1.Allergy;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" AND T3.Sex = \"F\" ORDER BY T1.Allergy;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" AND T3.Sex = \"F\" ORDER BY T1.Allergy;', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" AND T3.Sex = \"F\" ORDER BY T1.Allergy;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" AND T3.Sex = \"F\" ORDER BY T1.Allergy;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\" | body={'sql': 'SELECT T1.Allergy, T1.AllergyType FROM Allergy_Type AS T1 JOIN Has_Allergy AS T2 ON T1.Allergy = T2.Allergy JOIN Student AS T3 ON T3.StuID = T2.StuID WHERE T3.Fname = \"Lisa\" AND T3.Sex = \"F\" ORDER BY T1.Allergy;', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Lisa\"'}"
   },
   {
     "db_id": "school_bus",
@@ -1927,7 +1927,7 @@
   {
     "db_id": "hr_1",
     "sql": "SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\" | body={'sql': 'SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\"', 'db': 'hr_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\" | body={'sql': 'SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\")', 'db': 'hr_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\"'}"
   },
   {
     "db_id": "hr_1",
@@ -1942,7 +1942,7 @@
   {
     "db_id": "hr_1",
     "sql": "SELECT T1.FIRST_NAME, T1.LAST_NAME, T1.HIRE_DATE FROM EMPLOYEES AS T1 JOIN DEPARTMENTS AS T2 ON T1.DEPARTMENT_ID = T2.DEPARTMENT_ID WHERE T2.DEPARTMENT_ID = (SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE FIRST_NAME = 'Clara')",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: EMPLOYEES | body={'sql': \"SELECT T1.FIRST_NAME, T1.LAST_NAME, T1.HIRE_DATE FROM EMPLOYEES AS T1 JOIN DEPARTMENTS AS T2 ON T1.DEPARTMENT_ID = T2.DEPARTMENT_ID WHERE T2.DEPARTMENT_ID = (SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE FIRST_NAME = 'Clara')\", 'error': 'java.sql.SQLException: Non-existing table referenced: EMPLOYEES', 'db': 'hr_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: EMPLOYEES | body={'sql': \"SELECT T1.FIRST_NAME, T1.LAST_NAME, T1.HIRE_DATE FROM EMPLOYEES AS T1 JOIN DEPARTMENTS AS T2 ON T1.DEPARTMENT_ID = T2.DEPARTMENT_ID WHERE T2.DEPARTMENT_ID = (SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE FIRST_NAME = 'Clara')\", 'db': 'hr_1', 'error': 'java.sql.SQLException: Non-existing table referenced: EMPLOYEES'}"
   },
   {
     "db_id": "hr_1",
@@ -1977,27 +1977,27 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING COUNT(*) >= 2', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*) >= 2",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*) >= 2', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*) >= 2', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT T1.StuID FROM Has_allergy AS T1 GROUP BY T1.StuID HAVING COUNT(DISTINCT T1.Allergy) >= 2",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT T1.StuID FROM Has_allergy AS T1 GROUP BY T1.StuID HAVING COUNT(DISTINCT T1.Allergy) >= 2', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT T1.StuID FROM Has_allergy AS T1 GROUP BY T1.StuID HAVING COUNT(DISTINCT T1.Allergy) >= 2', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "county_public_safety",
@@ -2652,22 +2652,22 @@
   {
     "db_id": "college_3",
     "sql": "SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\" | body={'sql': 'SELECT COUNT(DISTINCT StuID) FROM Enrolled_in WHERE Grade = \"B\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"B\"'}"
   },
   {
     "db_id": "college_3",
@@ -3017,7 +3017,7 @@
   {
     "db_id": "e_learning",
     "sql": "SELECT course_name FROM Courses WHERE author_id IN (SELECT author_id FROM Course_Authors_and_Tutors WHERE personal_name = \"Julio\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Julio\" | body={'sql': 'SELECT course_name FROM Courses WHERE author_id IN (SELECT author_id FROM Course_Authors_and_Tutors WHERE personal_name = \"Julio\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Julio\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Julio\" | body={'sql': 'SELECT course_name FROM Courses WHERE author_id IN (SELECT author_id FROM Course_Authors_and_Tutors WHERE personal_name = \"Julio\")', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Julio\"'}"
   },
   {
     "db_id": "e_learning",
@@ -3137,7 +3137,7 @@
   {
     "db_id": "flight_1",
     "sql": "SELECT a.name FROM aircraft a JOIN certificate c ON a.aid = c.aid JOIN employee e ON c.eid = e.eid WHERE e.name = \"John Williams\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"John Williams\" | body={'sql': 'SELECT a.name FROM aircraft a JOIN certificate c ON a.aid = c.aid JOIN employee e ON c.eid = e.eid WHERE e.name = \"John Williams\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"John Williams\"', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"John Williams\" | body={'sql': 'SELECT a.name FROM aircraft a JOIN certificate c ON a.aid = c.aid JOIN employee e ON c.eid = e.eid WHERE e.name = \"John Williams\"', 'db': 'flight_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"John Williams\"'}"
   },
   {
     "db_id": "flight_1",
@@ -3227,12 +3227,12 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
@@ -3242,12 +3242,12 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Class FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Type FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Type FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Name, Type FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain)', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "device",
@@ -3297,7 +3297,7 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT MAX(Price) FROM wine WHERE Appelation IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\") AND Year < 2005",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT MAX(Price) FROM wine WHERE Appelation IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\") AND Year < 2005', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\" | body={'sql': 'SELECT MAX(Price) FROM wine WHERE Appelation IN (SELECT Appelation FROM appellations WHERE Area = \"Central Coast\") AND Year < 2005', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Central Coast\"'}"
   },
   {
     "db_id": "wine_1",
@@ -3322,7 +3322,7 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT Grape FROM grapes WHERE Color = \"White\" AND Grape IN (SELECT Grape FROM wine WHERE Score > 90)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"White\" | body={'sql': 'SELECT Grape FROM grapes WHERE Color = \"White\" AND Grape IN (SELECT Grape FROM wine WHERE Score > 90)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"White\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"White\" | body={'sql': 'SELECT Grape FROM grapes WHERE Color = \"White\" AND Grape IN (SELECT Grape FROM wine WHERE Score > 90)', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"White\"'}"
   },
   {
     "db_id": "flight_1",
@@ -3442,7 +3442,7 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT DISTINCT Name FROM wine WHERE Appelation IN (SELECT Appelation FROM appellations WHERE Area = \"North Coast\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"North Coast\" | body={'sql': 'SELECT DISTINCT Name FROM wine WHERE Appelation IN (SELECT Appelation FROM appellations WHERE Area = \"North Coast\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"North Coast\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"North Coast\" | body={'sql': 'SELECT DISTINCT Name FROM wine WHERE Appelation IN (SELECT Appelation FROM appellations WHERE Area = \"North Coast\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"North Coast\"'}"
   },
   {
     "db_id": "wine_1",
@@ -3542,7 +3542,7 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT Color FROM grapes WHERE Grape IN ( SELECT Grape FROM wine GROUP BY Grape HAVING AVG(Price) = ( SELECT MAX(avg_price) FROM ( SELECT AVG(Price) as avg_price FROM wine GROUP BY Grape ) ) )",
-    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 333 (char 332)\"}"
+    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 347 (char 346)\"}"
   },
   {
     "db_id": "wine_1",
@@ -3622,7 +3622,7 @@
   {
     "db_id": "customer_complaints",
     "sql": "SELECT t1.last_name FROM staff AS t1 JOIN complaints AS t2 ON t1.staff_id = t2.staff_id ORDER BY t2.date_complaint_raised ASC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: complaints | body={'sql': 'SELECT t1.last_name FROM staff AS t1 JOIN complaints AS t2 ON t1.staff_id = t2.staff_id ORDER BY t2.date_complaint_raised ASC LIMIT 1', 'error': 'java.sql.SQLException: Non-existing table referenced: complaints', 'db': 'customer_complaints'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: complaints | body={'sql': 'SELECT t1.last_name FROM staff AS t1 JOIN complaints AS t2 ON t1.staff_id = t2.staff_id ORDER BY t2.date_complaint_raised ASC LIMIT 1', 'db': 'customer_complaints', 'error': 'java.sql.SQLException: Non-existing table referenced: complaints'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -3777,7 +3777,7 @@
   {
     "db_id": "cre_Docs_and_Epenses",
     "sql": "SELECT document_id FROM Documents WHERE document_id NOT IN (SELECT document_id FROM Documents_with_expenses)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Documents_with_expenses | body={'sql': 'SELECT document_id FROM Documents WHERE document_id NOT IN (SELECT document_id FROM Documents_with_expenses)', 'error': 'java.sql.SQLException: Non-existing table referenced: Documents_with_expenses', 'db': 'cre_Docs_and_Epenses'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Documents_with_expenses | body={'sql': 'SELECT document_id FROM Documents WHERE document_id NOT IN (SELECT document_id FROM Documents_with_expenses)', 'db': 'cre_Docs_and_Epenses', 'error': 'java.sql.SQLException: Non-existing table referenced: Documents_with_expenses'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -3957,7 +3957,7 @@
   {
     "db_id": "college_3",
     "sql": "SELECT DName FROM Department WHERE Division = \"AS\" UNION SELECT DName FROM Department WHERE Division = \"EN\" AND Building = \"NEB\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"AS\" | body={'sql': 'SELECT DName FROM Department WHERE Division = \"AS\" UNION SELECT DName FROM Department WHERE Division = \"EN\" AND Building = \"NEB\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"AS\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"AS\" | body={'sql': 'SELECT DName FROM Department WHERE Division = \"AS\" UNION SELECT DName FROM Department WHERE Division = \"EN\" AND Building = \"NEB\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"AS\"'}"
   },
   {
     "db_id": "college_3",
@@ -4052,7 +4052,7 @@
   {
     "db_id": "machine_repair",
     "sql": "SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\" | body={'sql': 'SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\"', 'db': 'machine_repair'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\" | body={'sql': 'SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"', 'db': 'machine_repair', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\"'}"
   },
   {
     "db_id": "machine_repair",
@@ -4062,7 +4062,7 @@
   {
     "db_id": "machine_repair",
     "sql": "SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\" | body={'sql': 'SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\"', 'db': 'machine_repair'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\" | body={'sql': 'SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"', 'db': 'machine_repair', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\"'}"
   },
   {
     "db_id": "machine_repair",
@@ -4072,17 +4072,17 @@
   {
     "db_id": "machine_repair",
     "sql": "SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\" | body={'sql': 'SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\"', 'db': 'machine_repair'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\" | body={'sql': 'SELECT Starting_Year FROM technician WHERE Team = \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team = \"CWS\"', 'db': 'machine_repair', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CLE\"'}"
   },
   {
     "db_id": "gas_company",
     "sql": "SELECT company, main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: company_id | body={'sql': 'SELECT company, main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: company_id', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: company_id | body={'sql': 'SELECT company, main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: company_id'}"
   },
   {
     "db_id": "gas_company",
     "sql": "SELECT company, main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: company_id | body={'sql': 'SELECT company, main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: company_id', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: company_id | body={'sql': 'SELECT company, main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: company_id'}"
   },
   {
     "db_id": "gas_company",
@@ -4342,7 +4342,7 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT Main_Industry, COUNT(Company_ID) AS Total_Companies FROM company GROUP BY Main_Industry ORDER BY Market_Value DESC LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Error: Invalid field in ORDER BY clause that is not one of the fields in the query: \"company\".\"Market_Value\" | body={'sql': 'SELECT Main_Industry, COUNT(Company_ID) AS Total_Companies FROM company GROUP BY Main_Industry ORDER BY Market_Value DESC LIMIT 1;', 'error': 'java.sql.SQLException: Error: Invalid field in ORDER BY clause that is not one of the fields in the query: \"company\".\"Market_Value\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Error: Invalid field in ORDER BY clause that is not one of the fields in the query: \"company\".\"Market_Value\" | body={'sql': 'SELECT Main_Industry, COUNT(Company_ID) AS Total_Companies FROM company GROUP BY Main_Industry ORDER BY Market_Value DESC LIMIT 1;', 'db': 'gas_company', 'error': 'java.sql.SQLException: Error: Invalid field in ORDER BY clause that is not one of the fields in the query: \"company\".\"Market_Value\"'}"
   },
   {
     "db_id": "gas_company",
@@ -4352,12 +4352,12 @@
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name , T1.salary FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid = T2.eid GROUP BY T1.eid ORDER BY count(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Certificate | body={'sql': 'SELECT T1.name , T1.salary FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid = T2.eid GROUP BY T1.eid ORDER BY count(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Certificate', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Certificate | body={'sql': 'SELECT T1.name , T1.salary FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid = T2.eid GROUP BY T1.eid ORDER BY count(*) DESC LIMIT 1', 'db': 'flight_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Certificate'}"
   },
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name , T1.salary FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid = T2.eid GROUP BY T1.eid ORDER BY count(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Certificate | body={'sql': 'SELECT T1.name , T1.salary FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid = T2.eid GROUP BY T1.eid ORDER BY count(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Certificate', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Certificate | body={'sql': 'SELECT T1.name , T1.salary FROM Employee AS T1 JOIN Certificate AS T2 ON T1.eid = T2.eid GROUP BY T1.eid ORDER BY count(*) DESC LIMIT 1', 'db': 'flight_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Certificate'}"
   },
   {
     "db_id": "flight_1",
@@ -4397,7 +4397,7 @@
   {
     "db_id": "musical",
     "sql": "SELECT Name FROM actor JOIN musical ON actor.Musical_ID = musical.Musical_ID ORDER BY musical.Year DESC",
-    "mongodb": "ERROR: java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: Name | body={'sql': 'SELECT Name FROM actor JOIN musical ON actor.Musical_ID = musical.Musical_ID ORDER BY musical.Year DESC', 'error': 'java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: Name', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: Name | body={'sql': 'SELECT Name FROM actor JOIN musical ON actor.Musical_ID = musical.Musical_ID ORDER BY musical.Year DESC', 'db': 'musical', 'error': 'java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: Name'}"
   },
   {
     "db_id": "school_player",
@@ -4737,7 +4737,7 @@
   {
     "db_id": "device",
     "sql": "SELECT Location FROM shop WHERE Shop_ID IN (SELECT Shop_ID FROM stock WHERE Device_ID IN (SELECT Device_ID FROM device WHERE Open_Year > 2012)) INTERSECT SELECT Location FROM shop WHERE Shop_ID IN (SELECT Shop_ID FROM stock WHERE Device_ID IN (SELECT Device_ID FROM device WHERE Open_Year < 2008))",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Open_Year | body={'sql': 'SELECT Location FROM shop WHERE Shop_ID IN (SELECT Shop_ID FROM stock WHERE Device_ID IN (SELECT Device_ID FROM device WHERE Open_Year > 2012)) INTERSECT SELECT Location FROM shop WHERE Shop_ID IN (SELECT Shop_ID FROM stock WHERE Device_ID IN (SELECT Device_ID FROM device WHERE Open_Year < 2008))', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Open_Year', 'db': 'device'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Open_Year | body={'sql': 'SELECT Location FROM shop WHERE Shop_ID IN (SELECT Shop_ID FROM stock WHERE Device_ID IN (SELECT Device_ID FROM device WHERE Open_Year > 2012)) INTERSECT SELECT Location FROM shop WHERE Shop_ID IN (SELECT Shop_ID FROM stock WHERE Device_ID IN (SELECT Device_ID FROM device WHERE Open_Year < 2008))', 'db': 'device', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Open_Year'}"
   },
   {
     "db_id": "device",
@@ -4762,7 +4762,7 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT city FROM airports WHERE country = \"United States\" GROUP BY city HAVING COUNT(*) > 3;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"United States\" | body={'sql': 'SELECT city FROM airports WHERE country = \"United States\" GROUP BY city HAVING COUNT(*) > 3;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"United States\"', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"United States\" | body={'sql': 'SELECT city FROM airports WHERE country = \"United States\" GROUP BY city HAVING COUNT(*) > 3;', 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"United States\"'}"
   },
   {
     "db_id": "flight_4",
@@ -4812,7 +4812,7 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT T3.Major FROM Student AS T1 JOIN Major AS T2 ON T1.Major = T2.MajorID GROUP BY T3.Major ORDER BY COUNT(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Major | body={'sql': 'SELECT T3.Major FROM Student AS T1 JOIN Major AS T2 ON T1.Major = T2.MajorID GROUP BY T3.Major ORDER BY COUNT(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Major', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Major | body={'sql': 'SELECT T3.Major FROM Student AS T1 JOIN Major AS T2 ON T1.Major = T2.MajorID GROUP BY T3.Major ORDER BY COUNT(*) DESC LIMIT 1', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Major'}"
   },
   {
     "db_id": "allergy_1",
@@ -5002,22 +5002,22 @@
   {
     "db_id": "college_3",
     "sql": "SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT DName, Room FROM Department WHERE DNO IN (SELECT DNO FROM Course WHERE CName = 'INTRODUCTION TO COMPUTER SCIENCE')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': \"SELECT DName, Room FROM Department WHERE DNO IN (SELECT DNO FROM Course WHERE CName = 'INTRODUCTION TO COMPUTER SCIENCE')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': \"SELECT DName, Room FROM Department WHERE DNO IN (SELECT DNO FROM Course WHERE CName = 'INTRODUCTION TO COMPUTER SCIENCE')\", 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T2.DName, T2.Room FROM Course AS T1 JOIN Department AS T2 ON T1.DNO = T2.DNO WHERE T1.CName = \"INTRODUCTION TO COMPUTER SCIENCE\";', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1'}"
   },
   {
     "db_id": "college_3",
@@ -5142,7 +5142,7 @@
   {
     "db_id": "e_learning",
     "sql": "SELECT address_line_1 FROM Course_Authors_and_Tutors WHERE author_id IN (SELECT author_id FROM Courses WHERE course_name = \"operating system\" OR course_name = \"data structure\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"operating system\" | body={'sql': 'SELECT address_line_1 FROM Course_Authors_and_Tutors WHERE author_id IN (SELECT author_id FROM Courses WHERE course_name = \"operating system\" OR course_name = \"data structure\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"operating system\"', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"operating system\" | body={'sql': 'SELECT address_line_1 FROM Course_Authors_and_Tutors WHERE author_id IN (SELECT author_id FROM Courses WHERE course_name = \"operating system\" OR course_name = \"data structure\")', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"operating system\"'}"
   },
   {
     "db_id": "e_learning",
@@ -5422,7 +5422,7 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT count(*) FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country = 'Italy')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(*) FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country = 'Italy')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(*) FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country = 'Italy')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid'}"
   },
   {
     "db_id": "device",
@@ -5442,12 +5442,12 @@
   {
     "db_id": "device",
     "sql": "SELECT Shop_Name FROM shop JOIN stock ON shop.Shop_ID = stock.Shop_ID GROUP BY shop.Shop_ID ORDER BY sum(Quantity) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Quantity | body={'sql': 'SELECT Shop_Name FROM shop JOIN stock ON shop.Shop_ID = stock.Shop_ID GROUP BY shop.Shop_ID ORDER BY sum(Quantity) DESC LIMIT 1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Quantity', 'db': 'device'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Quantity | body={'sql': 'SELECT Shop_Name FROM shop JOIN stock ON shop.Shop_ID = stock.Shop_ID GROUP BY shop.Shop_ID ORDER BY sum(Quantity) DESC LIMIT 1', 'db': 'device', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Quantity'}"
   },
   {
     "db_id": "device",
     "sql": "SELECT Shop_Name FROM shop JOIN stock ON shop.Shop_ID = stock.Shop_ID GROUP BY shop.Shop_ID ORDER BY SUM(stock.Quantity) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Field: stock.Quantity is not found in table reference: stock | body={'sql': 'SELECT Shop_Name FROM shop JOIN stock ON shop.Shop_ID = stock.Shop_ID GROUP BY shop.Shop_ID ORDER BY SUM(stock.Quantity) DESC LIMIT 1', 'error': 'java.sql.SQLException: Field: stock.Quantity is not found in table reference: stock', 'db': 'device'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: stock.Quantity is not found in table reference: stock | body={'sql': 'SELECT Shop_Name FROM shop JOIN stock ON shop.Shop_ID = stock.Shop_ID GROUP BY shop.Shop_ID ORDER BY SUM(stock.Quantity) DESC LIMIT 1', 'db': 'device', 'error': 'java.sql.SQLException: Field: stock.Quantity is not found in table reference: stock'}"
   },
   {
     "db_id": "e_learning",
@@ -5547,7 +5547,7 @@
   {
     "db_id": "school_bus",
     "sql": "SELECT max(years_working) - min(years_working) AS range_years_working, avg(years_working) AS avg_years_working FROM school_bus",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: years_working | body={'sql': 'SELECT max(years_working) - min(years_working) AS range_years_working, avg(years_working) AS avg_years_working FROM school_bus', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: years_working', 'db': 'school_bus'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: years_working | body={'sql': 'SELECT max(years_working) - min(years_working) AS range_years_working, avg(years_working) AS avg_years_working FROM school_bus', 'db': 'school_bus', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: years_working'}"
   },
   {
     "db_id": "school_bus",
@@ -5557,7 +5557,7 @@
   {
     "db_id": "school_bus",
     "sql": "SELECT Name, Type FROM school WHERE School_ID NOT IN (SELECT School_ID FROM school_bus)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Name | body={'sql': 'SELECT Name, Type FROM school WHERE School_ID NOT IN (SELECT School_ID FROM school_bus)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Name', 'db': 'school_bus'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Name | body={'sql': 'SELECT Name, Type FROM school WHERE School_ID NOT IN (SELECT School_ID FROM school_bus)', 'db': 'school_bus', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Name'}"
   },
   {
     "db_id": "school_bus",
@@ -5572,7 +5572,7 @@
   {
     "db_id": "school_bus",
     "sql": "SELECT Name, Type FROM school WHERE School_ID NOT IN (SELECT School_ID FROM school_bus)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Name | body={'sql': 'SELECT Name, Type FROM school WHERE School_ID NOT IN (SELECT School_ID FROM school_bus)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Name', 'db': 'school_bus'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Name | body={'sql': 'SELECT Name, Type FROM school WHERE School_ID NOT IN (SELECT School_ID FROM school_bus)', 'db': 'school_bus', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Name'}"
   },
   {
     "db_id": "allergy_1",
@@ -5612,17 +5612,17 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid'}"
   },
   {
     "db_id": "voter_2",
@@ -5752,17 +5752,17 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Midshipman' INTERSECT SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Lieutenant'",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Midshipman' INTERSECT SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Lieutenant'\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Midshipman' INTERSECT SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Lieutenant'\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Midshipman' INTERSECT SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Lieutenant'",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Midshipman' INTERSECT SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Lieutenant'\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Midshipman' INTERSECT SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID WHERE t2.Rank = 'Lieutenant'\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T1.Ship_ID = T2.Ship_ID WHERE T1.Rank = 'Midshipman' INTERSECT SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T1.Ship_ID = T2.Ship_ID WHERE T1.Rank = 'Lieutenant'",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T1.Ship_ID = T2.Ship_ID WHERE T1.Rank = 'Midshipman' INTERSECT SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T1.Ship_ID = T2.Ship_ID WHERE T1.Rank = 'Lieutenant'\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T1.Ship_ID = T2.Ship_ID WHERE T1.Rank = 'Midshipman' INTERSECT SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T1.Ship_ID = T2.Ship_ID WHERE T1.Rank = 'Lieutenant'\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
@@ -5772,7 +5772,7 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T2.Ship_ID = T1.Ship_ID WHERE T1.Rank = 'Midshipman' INTERSECT SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T2.Ship_ID = T1.Ship_ID WHERE T1.Rank = 'Lieutenant'",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T2.Ship_ID = T1.Ship_ID WHERE T1.Rank = 'Midshipman' INTERSECT SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T2.Ship_ID = T1.Ship_ID WHERE T1.Rank = 'Lieutenant'\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T2.Ship_ID = T1.Ship_ID WHERE T1.Rank = 'Midshipman' INTERSECT SELECT T2.Name FROM Ship AS T2 JOIN Captain AS T1 ON T2.Ship_ID = T1.Ship_ID WHERE T1.Rank = 'Lieutenant'\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "flight_4",
@@ -5887,7 +5887,7 @@
   {
     "db_id": "musical",
     "sql": "SELECT T1.Name FROM musical AS T1 JOIN actor AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"Bob Fosse\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Bob Fosse\" | body={'sql': 'SELECT T1.Name FROM musical AS T1 JOIN actor AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"Bob Fosse\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Bob Fosse\"', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Bob Fosse\" | body={'sql': 'SELECT T1.Name FROM musical AS T1 JOIN actor AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"Bob Fosse\"', 'db': 'musical', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Bob Fosse\"'}"
   },
   {
     "db_id": "musical",
@@ -5902,12 +5902,12 @@
   {
     "db_id": "county_public_safety",
     "sql": "SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"', 'db': 'county_public_safety'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'db': 'county_public_safety', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"'}"
   },
   {
     "db_id": "county_public_safety",
     "sql": "SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"', 'db': 'county_public_safety'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'db': 'county_public_safety', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"'}"
   },
   {
     "db_id": "county_public_safety",
@@ -5917,12 +5917,12 @@
   {
     "db_id": "county_public_safety",
     "sql": "SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"', 'db': 'county_public_safety'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'db': 'county_public_safety', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"'}"
   },
   {
     "db_id": "county_public_safety",
     "sql": "SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"', 'db': 'county_public_safety'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\" | body={'sql': 'SELECT Police_force FROM county_public_safety WHERE Location = \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE Location = \"West\"', 'db': 'county_public_safety', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"East\"'}"
   },
   {
     "db_id": "voter_2",
@@ -5932,12 +5932,12 @@
   {
     "db_id": "voter_2",
     "sql": "SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\" | body={'sql': 'SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\"', 'db': 'voter_2'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\" | body={'sql': 'SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1', 'db': 'voter_2', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\"'}"
   },
   {
     "db_id": "voter_2",
     "sql": "SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\" | body={'sql': 'SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\"', 'db': 'voter_2'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\" | body={'sql': 'SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1;', 'db': 'voter_2', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\"'}"
   },
   {
     "db_id": "voter_2",
@@ -5947,7 +5947,7 @@
   {
     "db_id": "voter_2",
     "sql": "SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\" | body={'sql': 'SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\"', 'db': 'voter_2'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\" | body={'sql': 'SELECT Major FROM Student WHERE Sex = \"F\" GROUP BY Major ORDER BY COUNT(*) DESC LIMIT 1', 'db': 'voter_2', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"F\"'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -6027,7 +6027,7 @@
   {
     "db_id": "hr_1",
     "sql": "SELECT employee_id, first_name, last_name, job_title FROM employees WHERE salary > (SELECT MAX(salary) FROM employees WHERE job_title = 'PU_MAN')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: job_title | body={'sql': \"SELECT employee_id, first_name, last_name, job_title FROM employees WHERE salary > (SELECT MAX(salary) FROM employees WHERE job_title = 'PU_MAN')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: job_title', 'db': 'hr_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: job_title | body={'sql': \"SELECT employee_id, first_name, last_name, job_title FROM employees WHERE salary > (SELECT MAX(salary) FROM employees WHERE job_title = 'PU_MAN')\", 'db': 'hr_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: job_title'}"
   },
   {
     "db_id": "hr_1",
@@ -6237,17 +6237,17 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT gas_station.Manager_Name FROM gas_station JOIN station_company ON gas_station.Station_ID = station_company.Station_ID JOIN company ON station_company.Company_ID = company.Company_ID WHERE company.Company = \"ExxonMobil\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\" | body={'sql': 'SELECT gas_station.Manager_Name FROM gas_station JOIN station_company ON gas_station.Station_ID = station_company.Station_ID JOIN company ON station_company.Company_ID = company.Company_ID WHERE company.Company = \"ExxonMobil\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\" | body={'sql': 'SELECT gas_station.Manager_Name FROM gas_station JOIN station_company ON gas_station.Station_ID = station_company.Station_ID JOIN company ON station_company.Company_ID = company.Company_ID WHERE company.Company = \"ExxonMobil\"', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\"'}"
   },
   {
     "db_id": "gas_company",
     "sql": "SELECT Manager_Name FROM gas_station JOIN station_company ON gas_station.Station_ID = station_company.Station_ID JOIN company ON station_company.Company_ID = company.Company_ID WHERE company.Company = \"ExxonMobil\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\" | body={'sql': 'SELECT Manager_Name FROM gas_station JOIN station_company ON gas_station.Station_ID = station_company.Station_ID JOIN company ON station_company.Company_ID = company.Company_ID WHERE company.Company = \"ExxonMobil\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\" | body={'sql': 'SELECT Manager_Name FROM gas_station JOIN station_company ON gas_station.Station_ID = station_company.Station_ID JOIN company ON station_company.Company_ID = company.Company_ID WHERE company.Company = \"ExxonMobil\"', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\"'}"
   },
   {
     "db_id": "gas_company",
     "sql": "SELECT T2.Manager_Name FROM gas_station AS T1 JOIN station_company AS T2 ON T1.Station_ID = T2.Station_ID JOIN company AS T3 ON T2.Company_ID = T3.Company_ID WHERE T3.Company = \"ExxonMobil\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\" | body={'sql': 'SELECT T2.Manager_Name FROM gas_station AS T1 JOIN station_company AS T2 ON T1.Station_ID = T2.Station_ID JOIN company AS T3 ON T2.Company_ID = T3.Company_ID WHERE T3.Company = \"ExxonMobil\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\" | body={'sql': 'SELECT T2.Manager_Name FROM gas_station AS T1 JOIN station_company AS T2 ON T1.Station_ID = T2.Station_ID JOIN company AS T3 ON T2.Company_ID = T3.Company_ID WHERE T3.Company = \"ExxonMobil\"', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"ExxonMobil\"'}"
   },
   {
     "db_id": "voter_2",
@@ -6612,7 +6612,7 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT T2.Fname, T2.LName FROM Student AS T1 JOIN Faculty AS T2 ON T1.Advisor = T2.FacID GROUP BY T1.Advisor ORDER BY COUNT(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Faculty | body={'sql': 'SELECT T2.Fname, T2.LName FROM Student AS T1 JOIN Faculty AS T2 ON T1.Advisor = T2.FacID GROUP BY T1.Advisor ORDER BY COUNT(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Faculty', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Faculty | body={'sql': 'SELECT T2.Fname, T2.LName FROM Student AS T1 JOIN Faculty AS T2 ON T1.Advisor = T2.FacID GROUP BY T1.Advisor ORDER BY COUNT(*) DESC LIMIT 1', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Faculty'}"
   },
   {
     "db_id": "allergy_1",
@@ -6672,7 +6672,7 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT Manager_Name FROM gas_station WHERE Station_ID IN ( SELECT Station_ID FROM station_company WHERE Rank_of_the_Year > 2000 GROUP BY Station_ID ORDER BY count(*) DESC LIMIT 1 )",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Rank_of_the_Year | body={'sql': 'SELECT Manager_Name FROM gas_station WHERE Station_ID IN ( SELECT Station_ID FROM station_company WHERE Rank_of_the_Year > 2000 GROUP BY Station_ID ORDER BY count(*) DESC LIMIT 1 )', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Rank_of_the_Year', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Rank_of_the_Year | body={'sql': 'SELECT Manager_Name FROM gas_station WHERE Station_ID IN ( SELECT Station_ID FROM station_company WHERE Rank_of_the_Year > 2000 GROUP BY Station_ID ORDER BY count(*) DESC LIMIT 1 )', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Rank_of_the_Year'}"
   },
   {
     "db_id": "customer_complaints",
@@ -7052,12 +7052,12 @@
   {
     "db_id": "college_3",
     "sql": "SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"'}"
   },
   {
     "db_id": "college_3",
@@ -7067,12 +7067,12 @@
   {
     "db_id": "college_3",
     "sql": "SELECT Fname FROM Faculty WHERE Rank = 'Professor' ORDER BY Fname;",
-    "mongodb": "ERROR: java.sql.SQLException: ClassCastException when changing type.  Value: Professor Current type: 12 New type: 4 | body={'sql': \"SELECT Fname FROM Faculty WHERE Rank = 'Professor' ORDER BY Fname;\", 'error': 'java.sql.SQLException: ClassCastException when changing type.  Value: Professor Current type: 12 New type: 4', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: ClassCastException when changing type.  Value: Professor Current type: 12 New type: 4 | body={'sql': \"SELECT Fname FROM Faculty WHERE Rank = 'Professor' ORDER BY Fname;\", 'db': 'college_3', 'error': 'java.sql.SQLException: ClassCastException when changing type.  Value: Professor Current type: 12 New type: 4'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Fname FROM Faculty WHERE Rank = \"Professor\" ORDER BY Fname;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"'}"
   },
   {
     "db_id": "e_learning",
@@ -7162,7 +7162,7 @@
   {
     "db_id": "college_3",
     "sql": "SELECT max(T2.gradepoint) , min(T2.gradepoint) FROM ENROLLED_IN AS T1 JOIN GRADECONVERSION AS T2 JOIN STUDENT AS T3 ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID WHERE T3.city_code = \"NYC\"",
-    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 346 (char 345)\"}"
+    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 363 (char 362)\"}"
   },
   {
     "db_id": "college_3",
@@ -7227,27 +7227,27 @@
   {
     "db_id": "musical",
     "sql": "SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'db': 'musical', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"'}"
   },
   {
     "db_id": "musical",
     "sql": "SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'db': 'musical', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"'}"
   },
   {
     "db_id": "musical",
     "sql": "SELECT Name FROM actor WHERE Musical_ID IN (SELECT Musical_ID FROM musical WHERE Name = \"The Phantom of the Opera\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT Name FROM actor WHERE Musical_ID IN (SELECT Musical_ID FROM musical WHERE Name = \"The Phantom of the Opera\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT Name FROM actor WHERE Musical_ID IN (SELECT Musical_ID FROM musical WHERE Name = \"The Phantom of the Opera\")', 'db': 'musical', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"'}"
   },
   {
     "db_id": "musical",
     "sql": "SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'db': 'musical', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"'}"
   },
   {
     "db_id": "musical",
     "sql": "SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"', 'db': 'musical'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\" | body={'sql': 'SELECT T1.Name FROM actor AS T1 JOIN musical AS T2 ON T1.Musical_ID = T2.Musical_ID WHERE T2.Name = \"The Phantom of the Opera\"', 'db': 'musical', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"The Phantom of the Opera\"'}"
   },
   {
     "db_id": "pilot_record",
@@ -7472,7 +7472,7 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT Headquarters FROM company WHERE Company_ID IN ( SELECT Company_ID FROM station_company WHERE Company_ID IN ( SELECT Company_ID FROM company WHERE Main_Industry = 'Banking' ) AND Company_ID IN ( SELECT Company_ID FROM company WHERE Main_Industry = 'Oil and gas' ) )",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\" | body={'sql': \"SELECT Headquarters FROM company WHERE Company_ID IN ( SELECT Company_ID FROM station_company WHERE Company_ID IN ( SELECT Company_ID FROM company WHERE Main_Industry = 'Banking' ) AND Company_ID IN ( SELECT Company_ID FROM company WHERE Main_Industry = 'Oil and gas' ) )\", 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\" | body={'sql': \"SELECT Headquarters FROM company WHERE Company_ID IN ( SELECT Company_ID FROM station_company WHERE Company_ID IN ( SELECT Company_ID FROM company WHERE Main_Industry = 'Banking' ) AND Company_ID IN ( SELECT Company_ID FROM company WHERE Main_Industry = 'Oil and gas' ) )\", 'db': 'gas_company', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\"'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -7502,7 +7502,7 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
@@ -7577,27 +7577,27 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': \"SELECT Name, Flag FROM Ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM Captain WHERE Rank = 'Midshipman')\", 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "wine_1",
@@ -7677,7 +7677,7 @@
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\" INTERSECT SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Airbus A340-300\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\" INTERSECT SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Airbus A340-300\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\" INTERSECT SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Airbus A340-300\"', 'db': 'flight_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"'}"
   },
   {
     "db_id": "flight_1",
@@ -7697,7 +7697,7 @@
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\" INTERSECT SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Airbus A340-300\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\" INTERSECT SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Airbus A340-300\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\" INTERSECT SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Airbus A340-300\"', 'db': 'flight_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"'}"
   },
   {
     "db_id": "gas_company",
@@ -7887,7 +7887,7 @@
   {
     "db_id": "hr_1",
     "sql": "SELECT DEPARTMENT_ID, SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING COUNT(*) >= 2;",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: EMPLOYEES | body={'sql': 'SELECT DEPARTMENT_ID, SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING COUNT(*) >= 2;', 'error': 'java.sql.SQLException: Non-existing table referenced: EMPLOYEES', 'db': 'hr_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: EMPLOYEES | body={'sql': 'SELECT DEPARTMENT_ID, SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING COUNT(*) >= 2;', 'db': 'hr_1', 'error': 'java.sql.SQLException: Non-existing table referenced: EMPLOYEES'}"
   },
   {
     "db_id": "hr_1",
@@ -8042,7 +8042,7 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT C.Name AS Captain_Name, C.Class AS Captain_Classification, C.Rank AS Captain_Rank, S.Name AS Ship_Name FROM Captain AS C JOIN Ship AS S ON C.Ship_ID = S.Ship_ID;",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT C.Name AS Captain_Name, C.Class AS Captain_Classification, C.Rank AS Captain_Rank, S.Name AS Ship_Name FROM Captain AS C JOIN Ship AS S ON C.Ship_ID = S.Ship_ID;', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT C.Name AS Captain_Name, C.Class AS Captain_Classification, C.Rank AS Captain_Rank, S.Name AS Ship_Name FROM Captain AS C JOIN Ship AS S ON C.Ship_ID = S.Ship_ID;', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
@@ -8082,7 +8082,7 @@
   {
     "db_id": "college_3",
     "sql": "SELECT CName FROM Course WHERE Credits = 3 UNION SELECT CName FROM Course WHERE Credits = 1 AND Hours = '4'",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': \"SELECT CName FROM Course WHERE Credits = 3 UNION SELECT CName FROM Course WHERE Credits = 1 AND Hours = '4'\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': \"SELECT CName FROM Course WHERE Credits = 3 UNION SELECT CName FROM Course WHERE Credits = 1 AND Hours = '4'\", 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName'}"
   },
   {
     "db_id": "college_3",
@@ -8102,27 +8102,27 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid WHERE T1.name = 'American Airlines'",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid WHERE T1.name = 'American Airlines'\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid WHERE T1.name = 'American Airlines'\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid WHERE T1.name = 'American Airlines'",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid WHERE T1.name = 'American Airlines'\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid WHERE T1.name = 'American Airlines'\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT COUNT(DISTINCT dst_apid) FROM routes WHERE alid = (SELECT alid FROM airlines WHERE name = 'American Airlines')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT COUNT(DISTINCT dst_apid) FROM routes WHERE alid = (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT COUNT(DISTINCT dst_apid) FROM routes WHERE alid = (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT count(DISTINCT dst_apid) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(DISTINCT dst_apid) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT count(DISTINCT dst_apid) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT COUNT(DISTINCT dst_apid) FROM airlines AS a JOIN routes AS r ON a.alid = r.alid WHERE a.name = 'American Airlines';",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT COUNT(DISTINCT dst_apid) FROM airlines AS a JOIN routes AS r ON a.alid = r.alid WHERE a.name = 'American Airlines';\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid | body={'sql': \"SELECT COUNT(DISTINCT dst_apid) FROM airlines AS a JOIN routes AS r ON a.alid = r.alid WHERE a.name = 'American Airlines';\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: dst_apid'}"
   },
   {
     "db_id": "school_bus",
@@ -8307,7 +8307,7 @@
   {
     "db_id": "school_player",
     "sql": "SELECT LOCATION FROM school WHERE School_ID NOT IN (SELECT School_ID FROM Player)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Player | body={'sql': 'SELECT LOCATION FROM school WHERE School_ID NOT IN (SELECT School_ID FROM Player)', 'error': 'java.sql.SQLException: Non-existing table referenced: Player', 'db': 'school_player'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Player | body={'sql': 'SELECT LOCATION FROM school WHERE School_ID NOT IN (SELECT School_ID FROM Player)', 'db': 'school_player', 'error': 'java.sql.SQLException: Non-existing table referenced: Player'}"
   },
   {
     "db_id": "school_player",
@@ -8452,7 +8452,7 @@
   {
     "db_id": "cre_Docs_and_Epenses",
     "sql": "SELECT document_id FROM Documents WHERE document_type_code = \"CV\" AND document_id NOT IN (SELECT document_id FROM Documents_with_Expenses)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\" | body={'sql': 'SELECT document_id FROM Documents WHERE document_type_code = \"CV\" AND document_id NOT IN (SELECT document_id FROM Documents_with_Expenses)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\"', 'db': 'cre_Docs_and_Epenses'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\" | body={'sql': 'SELECT document_id FROM Documents WHERE document_type_code = \"CV\" AND document_id NOT IN (SELECT document_id FROM Documents_with_Expenses)', 'db': 'cre_Docs_and_Epenses', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\"'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -8462,7 +8462,7 @@
   {
     "db_id": "cre_Docs_and_Epenses",
     "sql": "SELECT document_id FROM Documents WHERE document_type_code = \"CV\" AND document_id NOT IN (SELECT document_id FROM Documents_with_expenses)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\" | body={'sql': 'SELECT document_id FROM Documents WHERE document_type_code = \"CV\" AND document_id NOT IN (SELECT document_id FROM Documents_with_expenses)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\"', 'db': 'cre_Docs_and_Epenses'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\" | body={'sql': 'SELECT document_id FROM Documents WHERE document_type_code = \"CV\" AND document_id NOT IN (SELECT document_id FROM Documents_with_expenses)', 'db': 'cre_Docs_and_Epenses', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"CV\"'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -9537,17 +9537,17 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\" | body={'sql': 'SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\" | body={'sql': 'SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\"'}"
   },
   {
     "db_id": "wine_1",
     "sql": "SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\" | body={'sql': 'SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\" | body={'sql': 'SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\"'}"
   },
   {
     "db_id": "wine_1",
     "sql": "SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\" | body={'sql': 'SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\" | body={'sql': 'SELECT Name FROM wine WHERE Price < 50 AND Appelation IN (SELECT Appelation FROM appellations WHERE County = \"Monterey\")', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Monterey\"'}"
   },
   {
     "db_id": "allergy_1",
@@ -9602,12 +9602,12 @@
   {
     "db_id": "hr_1",
     "sql": "SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\") AND first_name != \"Clara\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\" | body={'sql': 'SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\") AND first_name != \"Clara\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\"', 'db': 'hr_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\" | body={'sql': 'SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\") AND first_name != \"Clara\"', 'db': 'hr_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\"'}"
   },
   {
     "db_id": "hr_1",
     "sql": "SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\") AND first_name != \"Clara\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\" | body={'sql': 'SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\") AND first_name != \"Clara\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\"', 'db': 'hr_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\" | body={'sql': 'SELECT first_name, last_name, hire_date FROM employees WHERE department_id = (SELECT department_id FROM employees WHERE first_name = \"Clara\") AND first_name != \"Clara\"', 'db': 'hr_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Clara\"'}"
   },
   {
     "db_id": "hr_1",
@@ -9742,7 +9742,7 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines') AND dst_apid IN (SELECT apid FROM airports WHERE country = 'Italy')",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines') AND dst_apid IN (SELECT apid FROM airports WHERE country = 'Italy')\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: alid | body={'sql': \"SELECT count(*) FROM routes WHERE alid IN (SELECT alid FROM airlines WHERE name = 'American Airlines') AND dst_apid IN (SELECT apid FROM airports WHERE country = 'Italy')\", 'db': 'flight_4', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: alid'}"
   },
   {
     "db_id": "flight_4",
@@ -10202,12 +10202,12 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = 'food' OR T2.AllergyType = 'animal')",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\" | body={'sql': \"SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = 'food' OR T2.AllergyType = 'animal')\", 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\" | body={'sql': \"SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = 'food' OR T2.AllergyType = 'animal')\", 'db': 'allergy_1', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\"'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = \"food\" OR T2.AllergyType = \"animal\")",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"food\" | body={'sql': 'SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = \"food\" OR T2.AllergyType = \"animal\")', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"food\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"food\" | body={'sql': 'SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = \"food\" OR T2.AllergyType = \"animal\")', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"food\"'}"
   },
   {
     "db_id": "allergy_1",
@@ -10217,7 +10217,7 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = 'food' OR T2.AllergyType = 'animal')",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\" | body={'sql': \"SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = 'food' OR T2.AllergyType = 'animal')\", 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\"', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\" | body={'sql': \"SELECT count(*) FROM Student WHERE Age > 18 AND StuID NOT IN (SELECT StuID FROM Has_Allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy = T2.Allergy WHERE T2.AllergyType = 'food' OR T2.AllergyType = 'animal')\", 'db': 'allergy_1', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"Student\".\"StuID\"'}"
   },
   {
     "db_id": "allergy_1",
@@ -10302,12 +10302,12 @@
   {
     "db_id": "customer_complaints",
     "sql": "SELECT DISTINCT t1.product_name FROM Products AS t1 JOIN Complaints AS t2 ON t1.product_id = t2.product_id JOIN Customers AS t3 ON t2.customer_id = t3.customer_id GROUP BY t3.customer_id ORDER BY COUNT(*) LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*) | body={'sql': 'SELECT DISTINCT t1.product_name FROM Products AS t1 JOIN Complaints AS t2 ON t1.product_id = t2.product_id JOIN Customers AS t3 ON t2.customer_id = t3.customer_id GROUP BY t3.customer_id ORDER BY COUNT(*) LIMIT 1;', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*)', 'db': 'customer_complaints'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*) | body={'sql': 'SELECT DISTINCT t1.product_name FROM Products AS t1 JOIN Complaints AS t2 ON t1.product_id = t2.product_id JOIN Customers AS t3 ON t2.customer_id = t3.customer_id GROUP BY t3.customer_id ORDER BY COUNT(*) LIMIT 1;', 'db': 'customer_complaints', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*)'}"
   },
   {
     "db_id": "customer_complaints",
     "sql": "SELECT DISTINCT p.product_name FROM Products p JOIN Complaints c ON p.product_id = c.product_id JOIN Customers cu ON c.customer_id = cu.customer_id GROUP BY cu.customer_id ORDER BY COUNT(*) LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*) | body={'sql': 'SELECT DISTINCT p.product_name FROM Products p JOIN Complaints c ON p.product_id = c.product_id JOIN Customers cu ON c.customer_id = cu.customer_id GROUP BY cu.customer_id ORDER BY COUNT(*) LIMIT 1;', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*)', 'db': 'customer_complaints'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*) | body={'sql': 'SELECT DISTINCT p.product_name FROM Products p JOIN Complaints c ON p.product_id = c.product_id JOIN Customers cu ON c.customer_id = cu.customer_id GROUP BY cu.customer_id ORDER BY COUNT(*) LIMIT 1;', 'db': 'customer_complaints', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*)'}"
   },
   {
     "db_id": "customer_complaints",
@@ -10322,7 +10322,7 @@
   {
     "db_id": "customer_complaints",
     "sql": "SELECT DISTINCT p.product_name FROM Products p JOIN Complaints c ON p.product_id = c.product_id JOIN Customers cust ON c.customer_id = cust.customer_id GROUP BY cust.customer_id ORDER BY COUNT(*) LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*) | body={'sql': 'SELECT DISTINCT p.product_name FROM Products p JOIN Complaints c ON p.product_id = c.product_id JOIN Customers cust ON c.customer_id = cust.customer_id GROUP BY cust.customer_id ORDER BY COUNT(*) LIMIT 1;', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*)', 'db': 'customer_complaints'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*) | body={'sql': 'SELECT DISTINCT p.product_name FROM Products p JOIN Complaints c ON p.product_id = c.product_id JOIN Customers cust ON c.customer_id = cust.customer_id GROUP BY cust.customer_id ORDER BY COUNT(*) LIMIT 1;', 'db': 'customer_complaints', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: COUNT(*)'}"
   },
   {
     "db_id": "wine_1",
@@ -10337,7 +10337,7 @@
   {
     "db_id": "wine_1",
     "sql": "SELECT Name FROM wine WHERE Grape IN (SELECT Grape FROM grapes WHERE Color = \"red\") AND Price > 50",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"red\" | body={'sql': 'SELECT Name FROM wine WHERE Grape IN (SELECT Grape FROM grapes WHERE Color = \"red\") AND Price > 50', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"red\"', 'db': 'wine_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"red\" | body={'sql': 'SELECT Name FROM wine WHERE Grape IN (SELECT Grape FROM grapes WHERE Color = \"red\") AND Price > 50', 'db': 'wine_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"red\"'}"
   },
   {
     "db_id": "wine_1",
@@ -10477,12 +10477,12 @@
   {
     "db_id": "allergy_1",
     "sql": "SELECT StuID FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy)', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy)', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
     "sql": "SELECT StuID FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy)', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy', 'db': 'allergy_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Has_allergy | body={'sql': 'SELECT StuID FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy)', 'db': 'allergy_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Has_allergy'}"
   },
   {
     "db_id": "allergy_1",
@@ -10662,7 +10662,7 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT Headquarters FROM company WHERE Company_ID NOT IN (SELECT Company_ID FROM station_company WHERE Company_ID IN (SELECT Company_ID FROM company WHERE Main_Industry = 'Banking'))",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\" | body={'sql': \"SELECT Headquarters FROM company WHERE Company_ID NOT IN (SELECT Company_ID FROM station_company WHERE Company_ID IN (SELECT Company_ID FROM company WHERE Main_Industry = 'Banking'))\", 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\" | body={'sql': \"SELECT Headquarters FROM company WHERE Company_ID NOT IN (SELECT Company_ID FROM station_company WHERE Company_ID IN (SELECT Company_ID FROM company WHERE Main_Industry = 'Banking'))\", 'db': 'gas_company', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\"'}"
   },
   {
     "db_id": "gas_company",
@@ -10672,7 +10672,7 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT Headquarters FROM company WHERE Company_ID NOT IN (SELECT Company_ID FROM station_company WHERE Company_ID IN (SELECT Company_ID FROM company WHERE Main_Industry = 'Banking'))",
-    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\" | body={'sql': \"SELECT Headquarters FROM company WHERE Company_ID NOT IN (SELECT Company_ID FROM station_company WHERE Company_ID IN (SELECT Company_ID FROM company WHERE Main_Industry = 'Banking'))\", 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\" | body={'sql': \"SELECT Headquarters FROM company WHERE Company_ID NOT IN (SELECT Company_ID FROM station_company WHERE Company_ID IN (SELECT Company_ID FROM company WHERE Main_Industry = 'Banking'))\", 'db': 'gas_company', 'error': 'java.sql.SQLException: Check SELECT clause. Unable to find in field list attribute: \"company\".\"Company_ID\"'}"
   },
   {
     "db_id": "flight_4",
@@ -10702,7 +10702,7 @@
   {
     "db_id": "voter_1",
     "sql": "SELECT DISTINCT state, created FROM VOTES",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: state | body={'sql': 'SELECT DISTINCT state, created FROM VOTES', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: state', 'db': 'voter_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: state | body={'sql': 'SELECT DISTINCT state, created FROM VOTES', 'db': 'voter_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: state'}"
   },
   {
     "db_id": "voter_1",
@@ -10767,7 +10767,7 @@
   {
     "db_id": "school_bus",
     "sql": "SELECT Name FROM driver WHERE Driver_ID IN (SELECT Driver_ID FROM school_bus ORDER BY Years_Working DESC LIMIT 1)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Years_Working | body={'sql': 'SELECT Name FROM driver WHERE Driver_ID IN (SELECT Driver_ID FROM school_bus ORDER BY Years_Working DESC LIMIT 1)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Years_Working', 'db': 'school_bus'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: Years_Working | body={'sql': 'SELECT Name FROM driver WHERE Driver_ID IN (SELECT Driver_ID FROM school_bus ORDER BY Years_Working DESC LIMIT 1)', 'db': 'school_bus', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: Years_Working'}"
   },
   {
     "db_id": "school_bus",
@@ -10877,7 +10877,7 @@
   {
     "db_id": "cre_Docs_and_Epenses",
     "sql": "SELECT count(*) FROM Documents WHERE document_id NOT IN ( SELECT document_id FROM Documents_with_expenses )",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Documents_with_expenses | body={'sql': 'SELECT count(*) FROM Documents WHERE document_id NOT IN ( SELECT document_id FROM Documents_with_expenses )', 'error': 'java.sql.SQLException: Non-existing table referenced: Documents_with_expenses', 'db': 'cre_Docs_and_Epenses'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Documents_with_expenses | body={'sql': 'SELECT count(*) FROM Documents WHERE document_id NOT IN ( SELECT document_id FROM Documents_with_expenses )', 'db': 'cre_Docs_and_Epenses', 'error': 'java.sql.SQLException: Non-existing table referenced: Documents_with_expenses'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -10892,7 +10892,7 @@
   {
     "db_id": "cre_Docs_and_Epenses",
     "sql": "SELECT count(*) FROM Documents WHERE document_id NOT IN (SELECT document_id FROM Documents_with_expenses)",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Documents_with_expenses | body={'sql': 'SELECT count(*) FROM Documents WHERE document_id NOT IN (SELECT document_id FROM Documents_with_expenses)', 'error': 'java.sql.SQLException: Non-existing table referenced: Documents_with_expenses', 'db': 'cre_Docs_and_Epenses'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Documents_with_expenses | body={'sql': 'SELECT count(*) FROM Documents WHERE document_id NOT IN (SELECT document_id FROM Documents_with_expenses)', 'db': 'cre_Docs_and_Epenses', 'error': 'java.sql.SQLException: Non-existing table referenced: Documents_with_expenses'}"
   },
   {
     "db_id": "cre_Docs_and_Epenses",
@@ -10937,7 +10937,7 @@
   {
     "db_id": "e_learning",
     "sql": "SELECT course_name FROM Courses JOIN Student_Course_Enrolment ON Courses.course_id = Student_Course_Enrolment.course_id GROUP BY course_name ORDER BY COUNT(DISTINCT Student_Course_Enrolment.student_id) DESC LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: course_name | body={'sql': 'SELECT course_name FROM Courses JOIN Student_Course_Enrolment ON Courses.course_id = Student_Course_Enrolment.course_id GROUP BY course_name ORDER BY COUNT(DISTINCT Student_Course_Enrolment.student_id) DESC LIMIT 1;', 'error': 'java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: course_name', 'db': 'e_learning'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: course_name | body={'sql': 'SELECT course_name FROM Courses JOIN Student_Course_Enrolment ON Courses.course_id = Student_Course_Enrolment.course_id GROUP BY course_name ORDER BY COUNT(DISTINCT Student_Course_Enrolment.student_id) DESC LIMIT 1;', 'db': 'e_learning', 'error': 'java.sql.SQLException: Field is ambiguous. Multiple possible table references for the query field: course_name'}"
   },
   {
     "db_id": "e_learning",
@@ -11277,27 +11277,27 @@
   {
     "db_id": "college_3",
     "sql": "SELECT CName FROM Course JOIN Enrolled_in ON Course.CID = Enrolled_in.CID GROUP BY Course.CID HAVING COUNT(*) >= 5;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course JOIN Enrolled_in ON Course.CID = Enrolled_in.CID GROUP BY Course.CID HAVING COUNT(*) >= 5;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course JOIN Enrolled_in ON Course.CID = Enrolled_in.CID GROUP BY Course.CID HAVING COUNT(*) >= 5;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT CName FROM Course JOIN Enrolled_in ON Course.CID = Enrolled_in.CID GROUP BY Course.CID HAVING COUNT(*) >= 5;",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course JOIN Enrolled_in ON Course.CID = Enrolled_in.CID GROUP BY Course.CID HAVING COUNT(*) >= 5;', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course JOIN Enrolled_in ON Course.CID = Enrolled_in.CID GROUP BY Course.CID HAVING COUNT(*) >= 5;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT CName FROM Course WHERE CID IN (SELECT CID FROM Enrolled_in GROUP BY CID HAVING COUNT(*) >= 5)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course WHERE CID IN (SELECT CID FROM Enrolled_in GROUP BY CID HAVING COUNT(*) >= 5)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course WHERE CID IN (SELECT CID FROM Enrolled_in GROUP BY CID HAVING COUNT(*) >= 5)', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT CName FROM Course WHERE CID IN (SELECT CID FROM Enrolled_in GROUP BY CID HAVING COUNT(StuID) >= 5)",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course WHERE CID IN (SELECT CID FROM Enrolled_in GROUP BY CID HAVING COUNT(StuID) >= 5)', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: CName | body={'sql': 'SELECT CName FROM Course WHERE CID IN (SELECT CID FROM Enrolled_in GROUP BY CID HAVING COUNT(StuID) >= 5)', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: CName'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT T1.CName FROM Course AS T1 JOIN Enrolled_in AS T2 ON T1.CID = T2.CID GROUP BY T2.CID HAVING COUNT(*) >= 5",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T1.CName FROM Course AS T1 JOIN Enrolled_in AS T2 ON T1.CID = T2.CID GROUP BY T2.CID HAVING COUNT(*) >= 5', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.CName is not found in table reference: T1 | body={'sql': 'SELECT T1.CName FROM Course AS T1 JOIN Enrolled_in AS T2 ON T1.CID = T2.CID GROUP BY T2.CID HAVING COUNT(*) >= 5', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.CName is not found in table reference: T1'}"
   },
   {
     "db_id": "allergy_1",
@@ -11327,12 +11327,12 @@
   {
     "db_id": "college_3",
     "sql": "SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"'}"
   },
   {
     "db_id": "college_3",
@@ -11342,7 +11342,7 @@
   {
     "db_id": "college_3",
     "sql": "SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\" | body={'sql': 'SELECT Room FROM Faculty WHERE Rank = \"Professor\" AND Building = \"NEB\"', 'db': 'college_3', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Professor\"'}"
   },
   {
     "db_id": "college_3",
@@ -11452,17 +11452,17 @@
   {
     "db_id": "ship_1",
     "sql": "SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID GROUP BY t2.Ship_ID HAVING COUNT(*) > 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID GROUP BY t2.Ship_ID HAVING COUNT(*) > 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID GROUP BY t2.Ship_ID HAVING COUNT(*) > 1', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID GROUP BY t1.Ship_ID HAVING COUNT(*) > 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID GROUP BY t1.Ship_ID HAVING COUNT(*) > 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT t1.Name FROM Ship AS t1 JOIN Captain AS t2 ON t1.Ship_ID = t2.Ship_ID GROUP BY t1.Ship_ID HAVING COUNT(*) > 1', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
     "sql": "SELECT Ship.Name FROM Ship JOIN Captain ON Ship.Ship_ID = Captain.Ship_ID GROUP BY Ship.Ship_ID HAVING COUNT(*) > 1",
-    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Ship.Name FROM Ship JOIN Captain ON Ship.Ship_ID = Captain.Ship_ID GROUP BY Ship.Ship_ID HAVING COUNT(*) > 1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain', 'db': 'ship_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Non-existing table referenced: Captain | body={'sql': 'SELECT Ship.Name FROM Ship JOIN Captain ON Ship.Ship_ID = Captain.Ship_ID GROUP BY Ship.Ship_ID HAVING COUNT(*) > 1', 'db': 'ship_1', 'error': 'java.sql.SQLException: Non-existing table referenced: Captain'}"
   },
   {
     "db_id": "ship_1",
@@ -11562,7 +11562,7 @@
   {
     "db_id": "gas_company",
     "sql": "SELECT t1.Headquarters FROM company AS t1 JOIN station_company AS t2 ON t1.Company_ID = t2.Company_ID WHERE t1.Main_Industry = \"Banking\" GROUP BY t1.Headquarters HAVING count(*) >= 2",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Banking\" | body={'sql': 'SELECT t1.Headquarters FROM company AS t1 JOIN station_company AS t2 ON t1.Company_ID = t2.Company_ID WHERE t1.Main_Industry = \"Banking\" GROUP BY t1.Headquarters HAVING count(*) >= 2', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Banking\"', 'db': 'gas_company'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Banking\" | body={'sql': 'SELECT t1.Headquarters FROM company AS t1 JOIN station_company AS t2 ON t1.Company_ID = t2.Company_ID WHERE t1.Main_Industry = \"Banking\" GROUP BY t1.Headquarters HAVING count(*) >= 2', 'db': 'gas_company', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Banking\"'}"
   },
   {
     "db_id": "gas_company",
@@ -12507,12 +12507,12 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT T1.name, T2.alid FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid GROUP BY T2.alid ORDER BY COUNT(*) DESC LIMIT 10;",
-    "mongodb": "ERROR: java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\" | body={'sql': 'SELECT T1.name, T2.alid FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid GROUP BY T2.alid ORDER BY COUNT(*) DESC LIMIT 10;', 'error': 'java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\"', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\" | body={'sql': 'SELECT T1.name, T2.alid FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid GROUP BY T2.alid ORDER BY COUNT(*) DESC LIMIT 10;', 'db': 'flight_4', 'error': 'java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\"'}"
   },
   {
     "db_id": "flight_4",
     "sql": "SELECT T2.name FROM airlines AS T2 JOIN routes AS T1 ON T2.alid = T1.alid GROUP BY T1.alid ORDER BY COUNT(*) DESC LIMIT 10;",
-    "mongodb": "ERROR: java.sql.SQLException: Error building join predicate.  Cannot find field: T2.\"alid\" | body={'sql': 'SELECT T2.name FROM airlines AS T2 JOIN routes AS T1 ON T2.alid = T1.alid GROUP BY T1.alid ORDER BY COUNT(*) DESC LIMIT 10;', 'error': 'java.sql.SQLException: Error building join predicate.  Cannot find field: T2.\"alid\"', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Error building join predicate.  Cannot find field: T2.\"alid\" | body={'sql': 'SELECT T2.name FROM airlines AS T2 JOIN routes AS T1 ON T2.alid = T1.alid GROUP BY T1.alid ORDER BY COUNT(*) DESC LIMIT 10;', 'db': 'flight_4', 'error': 'java.sql.SQLException: Error building join predicate.  Cannot find field: T2.\"alid\"'}"
   },
   {
     "db_id": "flight_4",
@@ -12702,7 +12702,7 @@
   {
     "db_id": "college_3",
     "sql": "SELECT avg(T2.gradepoint) FROM ENROLLED_IN AS T1 JOIN GRADECONVERSION AS T2 JOIN STUDENT AS T3 ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID WHERE T3.LName = \"Smith\"",
-    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 323 (char 322)\"}"
+    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 340 (char 339)\"}"
   },
   {
     "db_id": "college_3",
@@ -12802,12 +12802,12 @@
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"', 'db': 'flight_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"'}"
   },
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"', 'db': 'flight_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"'}"
   },
   {
     "db_id": "flight_1",
@@ -12817,7 +12817,7 @@
   {
     "db_id": "flight_1",
     "sql": "SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"', 'db': 'flight_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\" | body={'sql': 'SELECT T1.name FROM employee AS T1 JOIN certificate AS T2 ON T1.eid = T2.eid JOIN aircraft AS T3 ON T3.aid = T2.aid WHERE T3.name = \"Boeing 737-800\"', 'db': 'flight_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: \"Boeing 737-800\"'}"
   },
   {
     "db_id": "flight_1",
@@ -12852,7 +12852,7 @@
   {
     "db_id": "flight_4",
     "sql": "SELECT T1.name FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1;",
-    "mongodb": "ERROR: java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\" | body={'sql': 'SELECT T1.name FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1;', 'error': 'java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\"', 'db': 'flight_4'}"
+    "mongodb": "ERROR: java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\" | body={'sql': 'SELECT T1.name FROM airlines AS T1 JOIN routes AS T2 ON T1.alid = T2.alid GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1;', 'db': 'flight_4', 'error': 'java.sql.SQLException: Error building join predicate.  Cannot find field: T1.\"alid\"'}"
   },
   {
     "db_id": "flight_4",
@@ -13027,17 +13027,17 @@
   {
     "db_id": "voter_1",
     "sql": "SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Kelly Clauss'",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.area_code is not found in table reference: T1 | body={'sql': \"SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Kelly Clauss'\", 'error': 'java.sql.SQLException: Field: T1.area_code is not found in table reference: T1', 'db': 'voter_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.area_code is not found in table reference: T1 | body={'sql': \"SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Kelly Clauss'\", 'db': 'voter_1', 'error': 'java.sql.SQLException: Field: T1.area_code is not found in table reference: T1'}"
   },
   {
     "db_id": "voter_1",
     "sql": "SELECT area_code FROM VOTES AS V1 JOIN CONTESTANTS AS C1 JOIN VOTES AS V2 JOIN CONTESTANTS AS C2 ON V1.contestant_number = C1.contestant_number AND V2.contestant_number = C2.contestant_number WHERE C1.contestant_name = 'Tabatha Gehling' AND C2.contestant_name = 'Kelly Clauss'",
-    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 425 (char 424)\"}"
+    "mongodb": "ERROR: HTTP 500 | body={'mongo': \"ERROR: Invalid control character '\\\\n' at: line 1 column 440 (char 439)\"}"
   },
   {
     "db_id": "voter_1",
     "sql": "SELECT area_code FROM VOTES AS V JOIN CONTESTANTS AS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Tabatha Gehling' INTERSECT SELECT area_code FROM VOTES AS V JOIN CONTESTANTS AS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Kelly Clauss'",
-    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: area_code | body={'sql': \"SELECT area_code FROM VOTES AS V JOIN CONTESTANTS AS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Tabatha Gehling' INTERSECT SELECT area_code FROM VOTES AS V JOIN CONTESTANTS AS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Kelly Clauss'\", 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: area_code', 'db': 'voter_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field is not a valid field based on tables in the query: area_code | body={'sql': \"SELECT area_code FROM VOTES AS V JOIN CONTESTANTS AS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Tabatha Gehling' INTERSECT SELECT area_code FROM VOTES AS V JOIN CONTESTANTS AS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Kelly Clauss'\", 'db': 'voter_1', 'error': 'java.sql.SQLException: Field is not a valid field based on tables in the query: area_code'}"
   },
   {
     "db_id": "voter_1",
@@ -13047,7 +13047,7 @@
   {
     "db_id": "voter_1",
     "sql": "SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Kelly Clauss'",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.area_code is not found in table reference: T1 | body={'sql': \"SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Kelly Clauss'\", 'error': 'java.sql.SQLException: Field: T1.area_code is not found in table reference: T1', 'db': 'voter_1'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.area_code is not found in table reference: T1 | body={'sql': \"SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T1.area_code FROM VOTES AS T1 JOIN CONTESTANTS AS T2 ON T1.contestant_number = T2.contestant_number WHERE T2.contestant_name = 'Kelly Clauss'\", 'db': 'voter_1', 'error': 'java.sql.SQLException: Field: T1.area_code is not found in table reference: T1'}"
   },
   {
     "db_id": "climbing",
@@ -13177,27 +13177,27 @@
   {
     "db_id": "college_3",
     "sql": "SELECT T2.Fname , T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3;",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname , T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3;', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname , T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT T2.Fname , T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY count(*) DESC LIMIT 3",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname , T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY count(*) DESC LIMIT 3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname , T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY count(*) DESC LIMIT 3', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT T2.Fname, T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname, T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname, T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT Fname, Lname FROM Faculty JOIN Course ON Faculty.FacID = Course.Instructor GROUP BY Faculty.FacID ORDER BY COUNT(Course.CID) DESC LIMIT 3;",
-    "mongodb": "ERROR: java.sql.SQLException: Field: Course.Instructor is not found in table reference: Course | body={'sql': 'SELECT Fname, Lname FROM Faculty JOIN Course ON Faculty.FacID = Course.Instructor GROUP BY Faculty.FacID ORDER BY COUNT(Course.CID) DESC LIMIT 3;', 'error': 'java.sql.SQLException: Field: Course.Instructor is not found in table reference: Course', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: Course.Instructor is not found in table reference: Course | body={'sql': 'SELECT Fname, Lname FROM Faculty JOIN Course ON Faculty.FacID = Course.Instructor GROUP BY Faculty.FacID ORDER BY COUNT(Course.CID) DESC LIMIT 3;', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: Course.Instructor is not found in table reference: Course'}"
   },
   {
     "db_id": "college_3",
     "sql": "SELECT T2.Fname, T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3",
-    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname, T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1', 'db': 'college_3'}"
+    "mongodb": "ERROR: java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1 | body={'sql': 'SELECT T2.Fname, T2.Lname FROM Course AS T1 JOIN Faculty AS T2 ON T1.Instructor = T2.FacID GROUP BY T1.Instructor ORDER BY COUNT(*) DESC LIMIT 3', 'db': 'college_3', 'error': 'java.sql.SQLException: Field: T1.Instructor is not found in table reference: T1'}"
   },
   {
     "db_id": "allergy_1",
